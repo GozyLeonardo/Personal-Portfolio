@@ -1,0 +1,64 @@
+---
+description: "Core conventions for lawrencenwuzor.com — read this before touching anything"
+alwaysApply: true
+---
+
+# lawrencenwuzor.com — Core Rules
+
+## Identity
+
+This is the personal portfolio and empire front of Lawrence Nwuzor, a software engineer and builder from Lagos, Nigeria. The site is the foundation of a $500T empire. Treat it as such. Do not add anything generic, template-like, or aesthetically lazy.
+
+## Tech Stack (DO NOT SUBSTITUTE)
+
+- Next.js 15 — App Router ONLY. Never suggest Pages Router.
+- React 19
+- TypeScript — strict mode. No exceptions.
+- Tailwind CSS v4 — CSS-first @theme. NO tailwind.config.js.
+- Motion v12 — import from "motion/react". NOT "framer-motion".
+- Fonts: Ojuju (display), Space Grotesk (headlines), Inter (body), IBM Plex Mono (code/labels)
+- Deployment: Vercel. No Docker. No custom server.
+- Package manager: npm
+
+## Architecture Rules — ENFORCE ALWAYS
+
+1. Server Components are the default. Never add "use client" unless the component uses: useState, useEffect, useRef, browser APIs, event handlers, or imports from motion/react.
+2. params, searchParams, cookies(), headers(), draftMode() are Promises in Next 15. Server: `const { slug } = await params;`. Client: `const { slug } = React.use(params);`
+3. fetch() is NOT cached by default in Next 15. Add `{ cache: "force-cache" }` or `export const revalidate = N` explicitly.
+4. Never put "use client" at the top of layout.tsx or page.tsx.
+5. Server Actions must start with "use server". Always validate inputs.
+
+## Brand Tokens — COSMIC AFRICAN SOUL (CANONICAL)
+
+Use CSS variables. Never hardcode hex.
+
+- `var(--color-foundation)` `#080808` — Foundation Black, the cosmic field
+- `var(--color-solar-gold)` `#C47A00` — human / founder / agency
+- `var(--color-electric-teal)` `#00BFA6` — system / product / infrastructure
+- `var(--color-warm-off-white)` `#F2EDE4` — soul surface, body text
+- `var(--color-surface)` `#0F0F10` — surfaces, cards
+- `var(--color-line)` `#1F1E1B` — borders, hairlines
+- `var(--color-mute)` `#8A8581` — secondary text
+
+## Code Quality — NON-NEGOTIABLE
+
+- Never use `any`. Use `unknown` + type guards.
+- Named exports only. No default exports for components (page.tsx and layout.tsx are the exception per Next.js conventions).
+- Component files: PascalCase. Utilities: kebab-case.
+- Event handlers prefixed with "handle" (handleClick, handleSubmit).
+- Use `cn()` from `@/lib/utils` for conditional Tailwind classes.
+- No inline styles. Ever.
+- No TODO comments in committed code.
+- All images must use `next/image` with explicit width/height or fill.
+- All interactive elements must have accessible labels.
+
+## Forbidden Patterns
+
+- Pages Router (getServerSideProps, _app.tsx, _document.tsx)
+- import from "framer-motion" — use "motion/react"
+- tailwind.config.js — use globals.css @theme
+- "use client" on layout.tsx or page.tsx
+- Hardcoded hex colors — use CSS variables
+- Lorem ipsum or placeholder text in any committed file
+- Fetching in useEffect when a Server Component would work
+- Using #F5A623 or #00D4C8 (the OLD palette from the Portfolio Build Guide — these are OVERRIDDEN by COSMIC AFRICAN SOUL)

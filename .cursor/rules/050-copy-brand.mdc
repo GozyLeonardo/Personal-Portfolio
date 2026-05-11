@@ -1,0 +1,54 @@
+---
+description: "Brand voice and copy rules for lawrencenwuzor.com"
+alwaysApply: true
+---
+
+# Copy & Brand Voice Rules
+
+## Identity
+
+- Name: Lawrence Chigozie Nwuzor (@GozyLeonardo)
+- Location: Lagos, Nigeria
+- Tagline: "Building what shouldn't work from where it shouldn't."
+- Stack tags: engineer · lagos · open for freelance
+- Design philosophy: COSMIC AFRICAN SOUL
+
+## Voice Rules (inherits from `components/voices/founder-direct.md` v1.2.0)
+
+- First person throughout the site ("I build..." not "Lawrence builds...").
+- Third person ONLY on /press page (for journalists to copy-paste).
+- Tone: direct, compressed, precise. Zero filler. Civilizational scale.
+- Voice rhythm: diagnose the brutal truth, state the elevation. Two-clause compression. Triadic stacks.
+- Specifics carry weight: dates, places, dollar figures, named verbs.
+- Spiritual register grounded, not preachy. Use sparingly. Once per piece max.
+
+## Banned Words (zero-tolerance)
+
+utilize, leverage, delve, synergy, holistic, ecosystem (as metaphor), "in today's fast-paced", "game-changer", "unlock potential", "hustle", "grind", "passionate about", "I love", "amazing", "absolutely!", "let's dive in", "in conclusion", "at the end of the day", "moving forward", "thought leader", "circle back", "FYI", "loop back", "ping me", "deep dive", "actionable insights", "10x", "Saw your post", "Big fan of your work", "Hope this finds you well"
+
+## Banned Narrative Moves
+
+Sympathy plea · hedging · victim framing · performative humility ("I'm humbled to share…") · hype escalation · generic motivational closing · "I'm just sharing my thoughts" disclaimers · apologizing for length, opinion, or tone.
+
+## Copy Prohibitions
+
+- No lorem ipsum. Ever.
+- No placeholder copy like "Your Name Here" or "Description goes here".
+- No generic CTA copy: "Click Here", "Learn More", "Get Started".
+- Approved CTAs: "Let's work.", "Follow the build →", "Tell me what your work demands", "Send the intro.", "Return home →"
+
+## Africanfuturist Vocabulary (use with discipline — once or twice per page max)
+
+- *chi* — personal destiny / spirit-double
+- *ala* — earth as moral foundation
+- *ndichie* — still-active ancestral council
+- "the line" / "the ground itself remembered" / "small act of return"
+- *Africanfuturist* (not Afrofuturist) when describing the design
+- "civilizational" / "continuation, not catch-up"
+
+## The Four Directions (reference exactly)
+
+- Direction 01: Personal Operating System — for people who are genuinely lost.
+- Direction 02: Trust Infrastructure — for African digital commerce.
+- Direction 03: Coordination OS — for African communities and organizations.
+- Direction 04: Direction Engine — for young Africans without a clear path.

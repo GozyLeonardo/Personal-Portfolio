@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* ========================================================================
+   COSMIC AFRICAN SOUL — Design Token System
+   Source: COSMIC-AFRICAN-SOUL Design Philosophy Manifesto (May 2026)
+   Status: Canonical. Do not substitute.
+   ======================================================================== */
+
+@theme {
+  /* --- COLOR — 90% black · 8% gold · 2% teal --- */
+  --color-foundation: #080808;     /* Cosmic field. Architecture. */
+  --color-surface: #0F0F10;        /* One step up from foundation, for cards. */
+  --color-surface-2: #161617;      /* Hover / elevated surface. */
+  --color-solar-gold: #C47A00;     /* Human / founder / agency moments. */
+  --color-solar-gold-soft: #E0A040; /* Hover / accent depth. */
+  --color-electric-teal: #00BFA6;  /* System / product / infrastructure. */
+  --color-warm-off-white: #F2EDE4; /* Soul surface. Reading. Narrative. */
+  --color-mute: #8A8581;           /* Secondary text — earth-warm grey. */
+  --color-line: #1F1E1B;           /* Borders. Hairlines. */
+
+  /* --- TYPE STACK --- */
+  /* Display uses Ojuju (Lagos foundry — Africanfuturist signature) with
+     Space Grotesk fallback. Loaded as next/font in layout.tsx. */
+  --font-display: var(--font-ojuju), "Space Grotesk", system-ui, sans-serif;
+  --font-headline: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --font-glyph: "Akagu", serif;    /* Neo-Nsibidi ornament face */
+
+  /* --- TYPE SCALE --- */
+  --text-mono-xs: 0.75rem;   /* 12px — terminal labels */
+  --text-body: 1rem;          /* 16px */
+  --text-lead: 1.125rem;      /* 18px */
+  --text-h3: 1.5rem;          /* 24px */
+  --text-h2: 2rem;            /* 32px */
+  --text-h1: 3rem;            /* 48px */
+  --text-display: 4.5rem;     /* 72px — hero */
+  --text-display-xl: 6rem;    /* 96px — hero, desktop */
+
+  /* --- RADIUS --- */
+  --radius-tight: 4px;
+  --radius-soft: 12px;
+  --radius-circle: 9999px;
+
+  /* --- ANIMATION --- */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-micro: 180ms;
+  --duration-medium: 600ms;
+  --duration-heavy: 1200ms;
+}
+
+/* ========================================================================
+   BASE
+   ======================================================================== */
+
+html {
+  background: var(--color-foundation);
+  color: var(--color-warm-off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  /*
+   * Layered background:
+   * 1. Solar Gold corona above the fold (radial gradient)
+   * 2. Vibranium triangle tessellation — equilateral triangles alternating up/down,
+   *    Solar Gold lines at 3% effective opacity. Reads as texture, never as decoration.
+   *    Inspired by Wakandan vibranium-weave / Black Panther suit pattern.
+   * 3. Foundation Black base.
+   */
+  background-image:
+    radial-gradient(
+      ellipse 1200px 800px at 50% -200px,
+      color-mix(in oklab, var(--color-solar-gold) 8%, transparent) 0%,
+      transparent 60%
+    ),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='21'%3E%3Cpath d='M 0 0 H 24 M 0 21 H 24 M 0 21 L 12 0 M 12 21 L 24 0 M 0 0 L 12 21 M 12 0 L 24 21' stroke='%23C47A00' stroke-width='0.5' opacity='0.14' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+  background-color: var(--color-foundation);
+  min-height: 100dvh;
+}
+
+::selection {
+  background: var(--color-solar-gold);
+  color: var(--color-foundation);
+}
+
+/* Display + headline rhythm */
+h1, h2, h3, h4 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "ss01" on;
+}
+
+/* Africanfuturist signature: thin gold underline rule */
+hr.uli-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in oklab, var(--color-solar-gold) 60%, transparent) 50%,
+    transparent 100%
+  );
+  margin: 4rem 0;
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
