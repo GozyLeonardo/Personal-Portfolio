@@ -45,3 +45,7 @@ next-env.d.ts
 
 # session memory
 .remember/
+
+# design specs / brainstorming docs
+.docs
+docs/
