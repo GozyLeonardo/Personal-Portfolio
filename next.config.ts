@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   images: {
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.hashnode.com" },
+      { protocol: "https", hostname: "**.hashnode.com" },
+    ],
   },
 };
 
