@@ -42,3 +42,6 @@ next-env.d.ts
 .idea
 .vscode/*
 !.vscode/extensions.json
+
+# session memory
+.remember/
