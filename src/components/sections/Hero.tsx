@@ -3,35 +3,33 @@ import { SolarGoldButton } from "@/components/ui/SolarGoldButton";
 import { GhostButton } from "@/components/ui/GhostButton";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { TelemetryStrip } from "@/components/ui/TelemetryStrip";
+import { IgboUkwuGrid } from "@/components/ui/IgboUkwuGrid";
+import { AnimatedHairline } from "@/components/motion/AnimatedHairline";
 
 export function Hero() {
   return (
     <section className="relative min-h-[85vh] flex items-center pt-32 pb-24 px-6 md:px-10 overflow-hidden">
-      {/* Two thin gold hairlines — the only frame. Manuscript page register. */}
-      <div
-        className="absolute top-24 left-6 right-6 md:left-10 md:right-10 h-px pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, transparent 0%, color-mix(in oklab, var(--color-solar-gold) 50%, transparent) 25%, color-mix(in oklab, var(--color-solar-gold) 50%, transparent) 75%, transparent 100%)",
-        }}
-        aria-hidden="true"
+      {/* Igbo-Ukwu interlacing circle grid — background texture */}
+      <IgboUkwuGrid className="absolute inset-0 opacity-[0.04] pointer-events-none z-0" />
+
+      {/* Animated gold hairlines */}
+      <AnimatedHairline
+        className="absolute top-24 left-6 right-6 md:left-10 md:right-10 pointer-events-none z-10"
+        delay={0}
       />
-      <div
-        className="absolute bottom-12 left-6 right-6 md:left-10 md:right-10 h-px pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, transparent 0%, color-mix(in oklab, var(--color-solar-gold) 50%, transparent) 25%, color-mix(in oklab, var(--color-solar-gold) 50%, transparent) 75%, transparent 100%)",
-        }}
-        aria-hidden="true"
+      <AnimatedHairline
+        className="absolute bottom-12 left-6 right-6 md:left-10 md:right-10 pointer-events-none z-10"
+        delay={0.3}
       />
 
-      <div className="mx-auto max-w-6xl w-full relative">
+      <div className="mx-auto max-w-6xl w-full relative z-10">
         <TelemetryStrip
           className="mb-12"
           align="start"
           readouts={[
             { label: "Station", value: "Lagos · NG", status: "lock" },
             { label: "Bearing", value: "035°", status: "live" },
+            { label: "Chi", value: "Intact", status: "lock" },
           ]}
         />
 
