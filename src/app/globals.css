@@ -239,3 +239,12 @@ hr.uli-rule {
   width: 100%;
   height: auto;
 }
+
+/* ─── Status dot pulse animation ─────────────────────────────────────── */
+@keyframes ping-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.5); }
+}
+.animate-ping-dot {
+  animation: ping-dot 2s ease-in-out infinite;
+}
