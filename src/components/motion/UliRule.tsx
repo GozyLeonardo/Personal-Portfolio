@@ -1,21 +1,19 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useAnimation, useInView, useReducedMotion } from "motion/react";
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 
 export function UliRule({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-  const controls = useAnimation();
+  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const [ambient, setAmbient] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reduceMotion || !isInView) return;
-    void (async () => {
-      await controls.start("reveal");
-      controls.start("ambient");
-    })();
-  }, [isInView, reduceMotion, controls]);
+    if (reduceMotion || !isInView || ambient) return;
+    const t = setTimeout(() => setAmbient(true), 1550);
+    return () => clearTimeout(t);
+  }, [isInView, reduceMotion, ambient]);
 
   if (reduceMotion) {
     return <hr className={`uli-rule${className ? ` ${className}` : ""}`} />;
@@ -27,17 +25,14 @@ export function UliRule({ className }: { className?: string }) {
       role="separator"
       aria-hidden="true"
       initial={{ scaleX: 0 }}
-      animate={controls}
-      variants={{
-        reveal: {
-          scaleX: 1,
-          transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
-        },
-        ambient: {
-          opacity: [1, 0.55, 1],
-          transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-        },
-      }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true, margin: "0px" }}
+      animate={ambient ? { scaleX: 1, opacity: [1, 0.55, 1] } : undefined}
+      transition={
+        ambient
+          ? { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          : { duration: 1.4, ease: [0.22, 1, 0.36, 1] }
+      }
       style={{
         originX: 0,
         height: "1px",
