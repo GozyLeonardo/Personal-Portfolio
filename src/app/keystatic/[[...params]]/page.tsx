@@ -1,2 +1,6 @@
 export const dynamic = "force-dynamic";
-export { KeystaticApp as default } from "@keystatic/next/app";
+
+import { makePage } from "@keystatic/next/ui/app";
+import config from "../../../../keystatic.config";
+
+export default makePage(config);
