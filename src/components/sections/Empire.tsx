@@ -98,7 +98,7 @@ export function Empire() {
                   </div>
 
                   <div className="flex items-start gap-6">
-                    <NsibidiGlyph variant={d.glyph} size={32} color="teal" />
+                    <NsibidiGlyph variant={d.glyph} size={32} color="teal" animate />
                     <div className="flex-1">
                       <h3 className="font-display text-2xl text-[color:var(--color-warm-off-white)]">
                         {d.title}

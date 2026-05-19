@@ -97,7 +97,7 @@ export function Projects() {
                     </span>
                   </div>
 
-                  <NsibidiGlyph variant={v.glyph} size={24} color="gold" />
+                  <NsibidiGlyph variant={v.glyph} size={24} color="gold" animate />
 
                   <h3 className="mt-5 font-display text-2xl text-[color:var(--color-warm-off-white)] group-hover:text-[color:var(--color-solar-gold)] transition-colors">
                     {v.name}

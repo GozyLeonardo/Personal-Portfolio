@@ -41,7 +41,7 @@ export function Footer() {
           {linkGroups.map((group) => (
             <div key={group.title}>
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-solar-gold)] mb-4 flex items-center gap-2">
-                <NsibidiGlyph variant="dot" size={10} />
+                <NsibidiGlyph variant="dot" size={10} animate />
                 {group.title}
               </p>
               <ul className="space-y-2.5">

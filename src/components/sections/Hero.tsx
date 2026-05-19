@@ -38,7 +38,7 @@ export function Hero() {
         <div className="grid md:grid-cols-[1fr_auto] gap-16 items-center">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-solar-gold)] flex items-center gap-2 mb-8">
-              <NsibidiGlyph variant="cross" size={14} />
+              <NsibidiGlyph variant="cross" size={14} animate />
               Engineer · Lagos · The line carries
             </p>
 

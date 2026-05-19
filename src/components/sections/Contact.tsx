@@ -48,7 +48,7 @@ export function Contact() {
             {channels.map((c) => (
               <li key={c.label}>
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-electric-teal)] flex items-center justify-center gap-2 mb-2">
-                  <NsibidiGlyph variant="dot" size={8} color="teal" />
+                  <NsibidiGlyph variant="dot" size={8} color="teal" animate />
                   {c.label}
                 </p>
                 <a
