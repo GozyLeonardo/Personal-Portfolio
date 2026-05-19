@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, IBM_Plex_Mono, Ojuju } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Nav } from "@/components/layout/Nav";
-import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 // Africanfuturist signature face — Lagos type foundry, by Yvonne van der Wijst
@@ -105,11 +101,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
+        {children}
       </body>
     </html>
   );
