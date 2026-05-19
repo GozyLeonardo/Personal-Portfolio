@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionReveal } from "@/components/motion/SectionReveal";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { SectionIndex } from "@/components/ui/SectionIndex";
+import { GhostGlyph } from "@/components/ui/GhostGlyph";
 
 const ventures = [
   {
@@ -59,6 +60,7 @@ export function Projects() {
     <section id="projects" className="py-24 md:py-32 px-6 md:px-10">
       <div className="mx-auto max-w-6xl">
         <SectionReveal>
+          <NsibidiGlyph variant="cross" size={16} animate />
           <SectionIndex current={3} total={6} label="Ventures" bearing="072°" />
           <h2 className="mt-6 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
             Three ventures.{" "}
@@ -71,10 +73,10 @@ export function Projects() {
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           {ventures.map((v, idx) => {
-            const dotColor =
-              v.statusKind === "live"
-                ? "var(--color-electric-teal)"
-                : "var(--color-solar-gold)";
+            const isLive = v.statusKind === "live";
+            const dotColor = isLive
+              ? "var(--color-electric-teal)"
+              : "var(--color-solar-gold)";
 
             return (
               <SectionReveal key={v.slug} delay={idx * 0.08}>
@@ -82,15 +84,22 @@ export function Projects() {
                   href={v.href as never}
                   target={v.external ? "_blank" : undefined}
                   rel={v.external ? "noopener noreferrer" : undefined}
-                  className="block h-full p-8 rounded-[var(--radius-soft)] bg-[color:var(--color-surface)] border border-[color:var(--color-line)] hover:border-[color:var(--color-solar-gold)] transition-all duration-[var(--duration-medium)] ease-[var(--ease-out-quint)] group"
+                  className="relative overflow-hidden block h-full p-8 rounded-[var(--radius-soft)] bg-[color:var(--color-surface)] border border-[color:var(--color-line)] hover:border-[color:var(--color-solar-gold)] transition-all duration-[var(--duration-medium)] ease-[var(--ease-out-quint)] group"
                 >
+                  {/* Ghost glyph background ornament — opacity via Tailwind so group-hover works */}
+                  <GhostGlyph
+                    variant={v.glyph}
+                    size={80}
+                    className="absolute right-4 bottom-4 group-hover:opacity-[0.15] transition-opacity duration-500"
+                  />
+
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-solar-gold)]">
                       {v.code} / 003
                     </span>
                     <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-mute)]">
                       <span
-                        className="inline-block w-1.5 h-1.5 rounded-full"
+                        className={`inline-block w-1.5 h-1.5 rounded-full${isLive ? " animate-ping-dot" : ""}`}
                         style={{ background: dotColor }}
                       />
                       {v.status}
@@ -117,8 +126,15 @@ export function Projects() {
                     <dt className="text-[color:var(--color-mute)]">Year</dt>
                     <dd className="text-[color:var(--color-warm-off-white)]">{v.year}</dd>
                     <dt className="text-[color:var(--color-mute)]">Stack</dt>
-                    <dd className="text-[color:var(--color-warm-off-white)]">
-                      {v.stack.join(" · ")}
+                    <dd className="flex flex-wrap gap-1.5 mt-1">
+                      {v.stack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="font-mono text-[10px] px-2 py-0.5 border border-[color:var(--color-line)] rounded text-[color:var(--color-mute)]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </dd>
                   </dl>
                 </Link>

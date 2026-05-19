@@ -1,10 +1,28 @@
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 import { SectionReveal } from "@/components/motion/SectionReveal";
 import { UliCurveDivider } from "@/components/ui/UliCurveDivider";
+import { GhostGlyph } from "@/components/ui/GhostGlyph";
 
 export function About() {
   return (
-    <section id="about" className="py-24 md:py-32 px-6 md:px-10">
+    <section id="about" className="relative overflow-hidden py-24 md:py-32 px-6 md:px-10">
+      {/* Vertical Uli stroke — left edge */}
+      <div
+        className="absolute top-0 bottom-0 left-0 md:left-10 w-px pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, var(--color-solar-gold) 15%, var(--color-solar-gold) 85%, transparent)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Large ghost interlace glyph — right float */}
+      <GhostGlyph
+        variant="interlace"
+        size={120}
+        className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 opacity-[0.06]"
+      />
+
       <div className="mx-auto max-w-3xl">
         <SectionReveal>
           <TerminalLabel>About</TerminalLabel>
@@ -37,7 +55,7 @@ export function About() {
               Spiritually grounded. Technically unassailable. Built to outlast
               me.
             </p>
-            <p className="text-[color:var(--color-solar-gold)] font-display text-xl md:text-2xl">
+            <p className="text-[color:var(--color-solar-gold)] font-display text-2xl md:text-3xl">
               Every line of code I write is a small act of return.
             </p>
           </div>

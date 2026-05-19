@@ -1,5 +1,6 @@
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 import { SectionReveal } from "@/components/motion/SectionReveal";
+import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 
 const stack = {
   frontend: ["Next.js 15", "React 19", "TypeScript", "Tailwind v4", "Motion"],
@@ -17,7 +18,10 @@ const principles = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 md:px-10 bg-[color:var(--color-surface)]/40 border-y border-[color:var(--color-line)]">
+    <section
+      id="skills"
+      className="py-24 md:py-32 px-6 md:px-10 bg-[color:var(--color-surface)]/40 border-y border-[color:var(--color-line)]"
+    >
       <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-16">
         <SectionReveal>
           <TerminalLabel>Stack</TerminalLabel>
@@ -28,14 +32,15 @@ export function Skills() {
           <div className="mt-10 space-y-8">
             {Object.entries(stack).map(([category, items]) => (
               <div key={category}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-electric-teal)] mb-3">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-electric-teal)] mb-3 flex items-center gap-2">
                   {category}
+                  <NsibidiGlyph variant="wave" size={12} color="teal" animate />
                 </p>
-                <ul className="flex flex-wrap gap-x-4 gap-y-2">
+                <ul className="flex flex-wrap gap-2">
                   {items.map((item) => (
                     <li
                       key={item}
-                      className="font-mono text-sm text-[color:var(--color-warm-off-white)]"
+                      className="font-mono text-xs px-2.5 py-1 border border-[color:var(--color-line)] rounded text-[color:var(--color-warm-off-white)] bg-[color:var(--color-surface)]"
                     >
                       {item}
                     </li>
@@ -56,9 +61,10 @@ export function Skills() {
             {principles.map((principle, idx) => (
               <li
                 key={principle}
-                className="flex gap-4 text-base text-[color:var(--color-warm-off-white)]"
+                className="flex items-start gap-3 text-base text-[color:var(--color-warm-off-white)]"
               >
-                <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-0.5">
+                <NsibidiGlyph variant="dot" size={8} color="gold" animate />
+                <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-0.5 flex-shrink-0">
                   0{idx + 1}
                 </span>
                 <span>{principle}</span>

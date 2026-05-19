@@ -1,6 +1,7 @@
 import { SectionReveal } from "@/components/motion/SectionReveal";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { SectionIndex } from "@/components/ui/SectionIndex";
+import { FourDirectionsIcon } from "@/components/ui/FourDirectionsIcon";
 
 const directions = [
   {
@@ -8,8 +9,7 @@ const directions = [
     code: "CONSUMER",
     title: "Personal Operating System",
     audience: "For those whose chi has been confused.",
-    body:
-      "A direction engine. Not productivity. Direction — the question that comes before the task list. What does your chi require of you? That question, answered honestly.",
+    body: "The question before the question. What the compass reveals when the noise clears. Built for those whose chi is intact but misdirected.",
     role: "Founder · Design · Engineering",
     year: "2026 — In build",
     status: "Private build",
@@ -21,8 +21,7 @@ const directions = [
     code: "FINTECH",
     title: "Trust Infrastructure",
     audience: "Structural solutions for African commerce.",
-    body:
-      "The verification and trust layer beneath African transactions. Ala holds what we build on her. The infrastructure must remember that.",
+    body: "Ala does not forget what she holds. Neither does this. The ground beneath the exchange, remembered.",
     role: "Founder · Engineering",
     year: "Mapped",
     status: "Mapped",
@@ -34,8 +33,7 @@ const directions = [
     code: "CIVIC",
     title: "Coordination OS",
     audience: "For informal African communities.",
-    body:
-      "How groups hold a direction together. Ndichie knew this. We forgot. We are remembering. Coordination is the missing layer beneath every African institution that almost worked.",
+    body: "The ndichie held a village together without a board meeting. That memory is not lost. We are remembering.",
     role: "Founder · Operations",
     year: "Mapped",
     status: "Mapped",
@@ -47,8 +45,7 @@ const directions = [
     code: "TOOLS",
     title: "Direction Engine",
     audience: "Navigation for people without a clear path.",
-    body:
-      "A system that asks the right questions and surfaces the right next step. Not advice — direction. The line that runs under every life, made visible.",
+    body: "Not advice. Direction. The line that runs under every life, made visible to those who stop long enough to read it.",
     role: "Founder · Design",
     year: "Mapped",
     status: "Mapped",
@@ -63,34 +60,48 @@ export function Empire() {
       <div className="mx-auto max-w-6xl">
         <SectionReveal>
           <SectionIndex current={5} total={6} label="Empire" bearing="180°" />
-          <h2 className="mt-6 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
+          <FourDirectionsIcon size={48} className="mt-6 opacity-60" />
+          <h2 className="mt-4 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
             Four directions.{" "}
             <span className="text-[color:var(--color-solar-gold)]">One line.</span>
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[58ch]">
-            The empire is not a company. It is a portfolio of systems that share
-            one thesis — Africa is a continuation, not a catch-up. What was
-            buried still moves.
+            Four directions. One thesis. The work does not announce itself — it
+            moves beneath the surface, the way things that last always do.
           </p>
         </SectionReveal>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           {directions.map((d, idx) => {
-            const dotColor =
-              d.statusKind === "lock"
-                ? "var(--color-solar-gold)"
-                : "var(--color-mute)";
+            const isPrivate = d.statusKind === "lock";
+            const dotColor = isPrivate
+              ? "var(--color-solar-gold)"
+              : "var(--color-mute)";
+            const hoverBorder = isPrivate
+              ? "hover:border-[color:var(--color-solar-gold)]"
+              : "hover:border-[color:var(--color-electric-teal)]";
 
             return (
               <SectionReveal key={d.n} delay={idx * 0.06}>
-                <div className="h-full p-8 rounded-[var(--radius-soft)] border border-[color:var(--color-line)] bg-[color:var(--color-surface)]/60 hover:bg-[color:var(--color-surface)] hover:border-[color:var(--color-electric-teal)] transition-all duration-[var(--duration-medium)] ease-[var(--ease-out-quint)]">
+                <div
+                  className={`relative overflow-hidden h-full p-8 rounded-[var(--radius-soft)] border border-[color:var(--color-line)] bg-[color:var(--color-surface)]/60 hover:bg-[color:var(--color-surface)] ${hoverBorder} transition-all duration-[var(--duration-medium)] ease-[var(--ease-out-quint)]`}
+                >
+                  {/* Ghost folio number */}
+                  <span
+                    className="absolute -bottom-4 -right-4 font-display leading-none text-[color:var(--color-warm-off-white)] opacity-[0.03] pointer-events-none select-none"
+                    style={{ fontSize: "120px" }}
+                    aria-hidden="true"
+                  >
+                    {d.n}
+                  </span>
+
                   <div className="flex items-center justify-between mb-6 gap-4">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-electric-teal)]">
-                      Dir {d.n} / 04 · {d.code}
+                    <span className="font-mono text-[9px] uppercase tracking-[0.22em] px-2 py-0.5 border border-[color:var(--color-solar-gold)] text-[color:var(--color-solar-gold)] rounded">
+                      {d.code}
                     </span>
                     <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-mute)]">
                       <span
-                        className="inline-block w-1.5 h-1.5 rounded-full"
+                        className={`inline-block w-1.5 h-1.5 rounded-full${isPrivate ? " animate-ping-dot" : ""}`}
                         style={{ background: dotColor }}
                       />
                       {d.status}
