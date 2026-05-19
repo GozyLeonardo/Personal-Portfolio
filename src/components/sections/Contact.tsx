@@ -66,7 +66,7 @@ export function Contact() {
             {channels.map((c) => (
               <li key={c.label}>
                 <Link
-                  href={c.href}
+                  href={c.href as never}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={
                     c.href.startsWith("http") ? "noopener noreferrer" : undefined
