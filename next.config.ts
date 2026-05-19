@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  transpilePackages: ["@keystatic/core", "@keystatic/next", "@keystar/ui"],
 };
 
 export default nextConfig;
