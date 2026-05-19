@@ -133,3 +133,109 @@ hr.uli-rule {
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── MDX prose body ─────────────────────────────────────────────────── */
+.prose-content {
+  color: var(--color-warm-off-white);
+  line-height: 1.75;
+  font-size: 1.0625rem;
+}
+
+.prose-content h1,
+.prose-content h2,
+.prose-content h3,
+.prose-content h4 {
+  font-family: var(--font-display);
+  color: var(--color-warm-off-white);
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.prose-content h2 { font-size: 1.75rem; }
+.prose-content h3 { font-size: 1.375rem; }
+
+.prose-content p {
+  color: var(--color-mute);
+  margin-bottom: 1.25em;
+}
+
+.prose-content a {
+  color: var(--color-solar-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-content a:hover {
+  color: var(--color-solar-gold-soft);
+}
+
+.prose-content strong {
+  color: var(--color-warm-off-white);
+  font-weight: 600;
+}
+
+.prose-content em {
+  color: var(--color-warm-off-white);
+  font-style: italic;
+}
+
+.prose-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-surface);
+  color: var(--color-electric-teal);
+  padding: 0.125em 0.375em;
+  border-radius: 3px;
+  border: 1px solid var(--color-line);
+}
+
+.prose-content pre {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  padding: 1.25em;
+  overflow-x: auto;
+  margin-bottom: 1.5em;
+}
+
+.prose-content pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: 0.875em;
+}
+
+.prose-content blockquote {
+  border-left: 3px solid var(--color-solar-gold);
+  padding-left: 1.25em;
+  margin-left: 0;
+  margin-right: 0;
+  color: var(--color-mute);
+  font-style: italic;
+}
+
+.prose-content ul,
+.prose-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+  color: var(--color-mute);
+}
+
+.prose-content li {
+  margin-bottom: 0.375em;
+}
+
+.prose-content hr {
+  border: 0;
+  height: 1px;
+  background: var(--color-line);
+  margin: 2.5em 0;
+}
+
+.prose-content img {
+  border-radius: 6px;
+  width: 100%;
+  height: auto;
+}
