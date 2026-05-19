@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, type ReactNode } from "react";
 import { motion, useAnimation, useInView, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -46,7 +46,7 @@ export function NsibidiGlyph({
 
   // Static render — no animate prop or reduced motion
   if (!animate || reduceMotion) {
-    const paths: Record<string, React.ReactNode> = {
+    const paths: Record<string, ReactNode> = {
       dot: <circle cx={12} cy={12} r={4} fill={stroke} />,
       cross: (
         <>
@@ -118,6 +118,7 @@ export function NsibidiGlyph({
         height={size}
         className={svgClass}
         aria-hidden="true"
+        initial={{ rotate: 0 }}
         animate={controls}
         variants={{
           reveal: { rotate: 0 },
@@ -167,6 +168,7 @@ export function NsibidiGlyph({
         height={size}
         className={svgClass}
         aria-hidden="true"
+        initial={{ rotate: 0 }}
         animate={controls}
         variants={{
           reveal: { rotate: 0 },
@@ -201,6 +203,7 @@ export function NsibidiGlyph({
         height={size}
         className={svgClass}
         aria-hidden="true"
+        initial={{ x: 0 }}
         animate={controls}
         variants={{
           reveal: { x: 0 },
@@ -226,7 +229,7 @@ export function NsibidiGlyph({
 
   // interlace — circles stagger in, then counter-rotate
   return (
-    <motion.svg ref={svgRef} viewBox="0 0 24 24" width={size} height={size} className={svgClass} aria-hidden="true">
+    <motion.svg ref={svgRef} viewBox="0 0 24 24" width={size} height={size} className={svgClass} aria-hidden="true" animate={controls}>
       <motion.circle
         cx={9} cy={12} r={5} fill="none" stroke={stroke} strokeWidth={1.2}
         initial={{ opacity: 0 }}
