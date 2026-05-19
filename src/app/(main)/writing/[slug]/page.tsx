@@ -90,7 +90,7 @@ export default async function PostPage({
         </h1>
 
         <p className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-mute)] flex items-center gap-3">
-          <NsibidiGlyph variant="cross" size={12} />
+          <NsibidiGlyph variant="cross" size={12} animate />
           {new Date(post.publishedAt).toLocaleDateString("en-GB", {
             day: "numeric",
             month: "long",

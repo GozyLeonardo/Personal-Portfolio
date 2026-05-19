@@ -4,6 +4,7 @@ import Image from "next/image";
 import { getAllPosts, getAllSeries } from "@/lib/keystatic";
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
+import { UliRule } from "@/components/motion/UliRule";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -109,7 +110,7 @@ export default async function WritingPage() {
                   )}
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <p className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-solar-gold)] flex items-center gap-2">
-                      <NsibidiGlyph variant="cross" size={12} />
+                      <NsibidiGlyph variant="cross" size={12} animate />
                       {new Date(post.publishedAt).toLocaleDateString("en-GB", {
                         day: "numeric",
                         month: "long",
@@ -129,7 +130,7 @@ export default async function WritingPage() {
                     {post.excerpt}
                   </p>
                 </Link>
-                {i < posts.length - 1 && <hr className="uli-rule" />}
+                {i < posts.length - 1 && <UliRule />}
               </div>
             ))
           )}
