@@ -20,6 +20,7 @@ export function NsibidiGlyph({
   animate = false,
 }: NsibidiGlyphProps) {
   const reduceMotion = useReducedMotion();
+  // Observe the SVG wrapper — a real DOM element, reliably tracked by IntersectionObserver
   const svgRef = useRef<SVGSVGElement>(null);
   const isInView = useInView(svgRef, { once: true, margin: "0px" });
   const [ambient, setAmbient] = useState(false);
@@ -34,7 +35,6 @@ export function NsibidiGlyph({
   const ceremonial = color !== "teal";
   const revealDuration = ceremonial ? 1.2 : 0.5;
 
-  // Start ambient loop after reveal completes
   useEffect(() => {
     if (!animate || reduceMotion || !isInView || ambient) return;
     const t = setTimeout(() => setAmbient(true), (revealDuration + 0.15) * 1000);
@@ -43,7 +43,6 @@ export function NsibidiGlyph({
 
   const svgClass = cn("inline-block shrink-0", className);
 
-  // Static render — no animate prop or reduced motion
   if (!animate || reduceMotion) {
     const paths: Record<string, ReactNode> = {
       dot: <circle cx={12} cy={12} r={4} fill={stroke} />,
@@ -57,19 +56,13 @@ export function NsibidiGlyph({
       spiral: (
         <path
           d="M 12 12 m -6 0 a 6 6 0 1 1 12 0 a 4 4 0 1 1 -8 0 a 2 2 0 1 1 4 0"
-          fill="none"
-          stroke={stroke}
-          strokeWidth={1.5}
-          strokeLinecap="round"
+          fill="none" stroke={stroke} strokeWidth={1.5} strokeLinecap="round"
         />
       ),
       wave: (
         <path
           d="M 3 12 Q 7.5 6, 12 12 T 21 12"
-          fill="none"
-          stroke={stroke}
-          strokeWidth={1.5}
-          strokeLinecap="round"
+          fill="none" stroke={stroke} strokeWidth={1.5} strokeLinecap="round"
         />
       ),
       interlace: (
@@ -91,15 +84,16 @@ export function NsibidiGlyph({
     return (
       <svg ref={svgRef} viewBox="0 0 24 24" width={size} height={size} className={svgClass} aria-hidden="true">
         <motion.circle
-          cx={12}
-          cy={12}
-          r={4}
-          fill={stroke}
+          cx={12} cy={12} r={4} fill={stroke}
           style={{ originX: "12px", originY: "12px" }}
           initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, margin: "0px" }}
-          animate={ambient ? { scale: 1, opacity: [1, 0.55, 1] } : undefined}
+          animate={
+            ambient
+              ? { scale: 1, opacity: [1, 0.55, 1] }
+              : isInView
+                ? { scale: 1 }
+                : { scale: 0 }
+          }
           transition={
             ambient
               ? { duration: 3, repeat: Infinity, ease: "easeInOut" }
@@ -115,11 +109,7 @@ export function NsibidiGlyph({
     return (
       <motion.svg
         ref={svgRef}
-        viewBox="0 0 24 24"
-        width={size}
-        height={size}
-        className={svgClass}
-        aria-hidden="true"
+        viewBox="0 0 24 24" width={size} height={size} className={svgClass} aria-hidden="true"
         style={{ originX: "12px", originY: "12px" }}
         animate={ambient ? { rotate: 360 } : { rotate: 0 }}
         transition={ambient ? { duration: 20, repeat: Infinity, ease: "linear" } : {}}
@@ -127,23 +117,20 @@ export function NsibidiGlyph({
         <motion.line
           x1={4} y1={12} x2={20} y2={12} stroke={stroke} strokeWidth={1.5}
           initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, margin: "0px" }}
+          animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
           transition={{ duration: revealDuration, ease: "easeOut" }}
         />
         <motion.line
           x1={12} y1={4} x2={12} y2={20} stroke={stroke} strokeWidth={1.5}
           initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, margin: "0px" }}
+          animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
           transition={{ duration: revealDuration, ease: "easeOut", delay: 0.2 }}
         />
         <motion.circle
           cx={12} cy={12} r={2} fill={stroke}
           style={{ originX: "12px", originY: "12px" }}
           initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, margin: "0px" }}
+          animate={isInView ? { scale: 1 } : { scale: 0 }}
           transition={{ duration: 0.3, ease: "easeOut", delay: revealDuration * 0.7 }}
         />
       </motion.svg>
@@ -155,24 +142,16 @@ export function NsibidiGlyph({
     return (
       <motion.svg
         ref={svgRef}
-        viewBox="0 0 24 24"
-        width={size}
-        height={size}
-        className={svgClass}
-        aria-hidden="true"
+        viewBox="0 0 24 24" width={size} height={size} className={svgClass} aria-hidden="true"
         style={{ originX: "12px", originY: "12px" }}
         animate={ambient ? { rotate: 360 } : { rotate: 0 }}
         transition={ambient ? { duration: 12, repeat: Infinity, ease: "linear" } : {}}
       >
         <motion.path
           d="M 12 12 m -6 0 a 6 6 0 1 1 12 0 a 4 4 0 1 1 -8 0 a 2 2 0 1 1 4 0"
-          fill="none"
-          stroke={stroke}
-          strokeWidth={1.5}
-          strokeLinecap="round"
+          fill="none" stroke={stroke} strokeWidth={1.5} strokeLinecap="round"
           initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, margin: "0px" }}
+          animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
           transition={{ duration: revealDuration, ease: "easeOut" }}
         />
       </motion.svg>
@@ -184,23 +163,15 @@ export function NsibidiGlyph({
     return (
       <motion.svg
         ref={svgRef}
-        viewBox="0 0 24 24"
-        width={size}
-        height={size}
-        className={svgClass}
-        aria-hidden="true"
+        viewBox="0 0 24 24" width={size} height={size} className={svgClass} aria-hidden="true"
         animate={ambient ? { x: [0, -2, 2, 0] } : { x: 0 }}
         transition={ambient ? { duration: 3, repeat: Infinity, ease: "easeInOut" } : {}}
       >
         <motion.path
           d="M 3 12 Q 7.5 6, 12 12 T 21 12"
-          fill="none"
-          stroke={stroke}
-          strokeWidth={1.5}
-          strokeLinecap="round"
+          fill="none" stroke={stroke} strokeWidth={1.5} strokeLinecap="round"
           initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, margin: "0px" }}
+          animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
           transition={{ duration: revealDuration, ease: "easeOut" }}
         />
       </motion.svg>
@@ -214,9 +185,13 @@ export function NsibidiGlyph({
         cx={9} cy={12} r={5} fill="none" stroke={stroke} strokeWidth={1.2}
         style={{ originX: "9px", originY: "12px" }}
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "0px" }}
-        animate={ambient ? { opacity: 1, rotate: 360 } : undefined}
+        animate={
+          ambient
+            ? { opacity: 1, rotate: 360 }
+            : isInView
+              ? { opacity: 1 }
+              : { opacity: 0 }
+        }
         transition={
           ambient
             ? { duration: 16, repeat: Infinity, ease: "linear" }
@@ -227,9 +202,13 @@ export function NsibidiGlyph({
         cx={15} cy={12} r={5} fill="none" stroke={stroke} strokeWidth={1.2}
         style={{ originX: "15px", originY: "12px" }}
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "0px" }}
-        animate={ambient ? { opacity: 1, rotate: -360 } : undefined}
+        animate={
+          ambient
+            ? { opacity: 1, rotate: -360 }
+            : isInView
+              ? { opacity: 1 }
+              : { opacity: 0 }
+        }
         transition={
           ambient
             ? { duration: 16, repeat: Infinity, ease: "linear" }
