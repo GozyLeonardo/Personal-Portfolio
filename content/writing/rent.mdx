@@ -1,0 +1,120 @@
+---
+title: Rent
+publishedAt: 2026-05-24
+excerpt: >-
+  I connected Hashnode to my site. It worked. Then they wanted monthly rent for
+  the right to host my own words on my own domain. I built my own blog engine
+  instead.
+coverImage: /images/writing/rent/coverImage.jpg
+status: published
+series: the-long-becoming
+seriesOrder: 2
+---
+
+The site was live. lawrencenwuzor.com — the front door to everything I am building. I had spent weeks on it. Not just code — architecture. A design system called Cosmic African Soul: Foundation Black as the canvas, the colour of deep space, the material of the universe. Solar Gold for the moments that carry weight. Electric Teal as punctuation — one accent per composition, like a single breath held before a sentence lands.
+
+Nsibidi-inspired glyphs mark each section. Uli body-painting curves divide the prose. Igbo-Ukwu interlacing circles pattern the background geometry. Every visual element is drawn from the same heritage — Igbo cosmology, rendered through modern engineering. Not decoration. Load-bearing structure.
+
+The site worked. It felt like mine. Then it needed a blog.
+
+---
+
+I chose Hashnode. Not because I was loyal to it — because it was fast. I had writing to publish and a platform that offered a GraphQL API. So I built the connection: a typed client, hourly revalidation, posts pulling into my writing page. The integration was clean. I could see the post titles rendering on my site, sitting inside my design system, and I thought — good. This works.
+
+Then I clicked one.
+
+The reader leaves my site. They land on lawrencenwuzor.hashnode.dev. White background. Default typography. Sans-serif heading in a font I did not choose. No Foundation Black. No solar gold. No Nsibidi glyphs watching from the margins. The entire reading experience I had spent weeks building — the dark canvas, the curves, the geometry — erased in one redirect.
+
+<Frame src="/images/writing/rent/the-disconnect.jpg" alt="Two contrasting digital environments — one dark and intentional with golden geometric lines, the other bright white and empty — separated by a sharp vertical divide" caption="The reading experience belonged to someone else." gold />
+
+I sat with that for a moment. It was not a technical failure. The code was correct. The API returned what I asked for. But the result was a lie. My site presented these posts as part of its world — and then sent the reader to a different world entirely. Two design languages. Two domains. Two experiences. The seam was invisible from the index page and violent on click.
+
+---
+
+This is what renting looks like. You furnish your corner, but the building is not yours. The hallways do not match your walls. The front door has someone else's name on it. The landlord's aesthetic overrides yours the moment a visitor steps past the threshold.
+
+The SEO was split too. Every blog visitor Google indexed was building Hashnode's domain authority, not mine. Two domains, same content, competing for attention. The exact structural leak I had been diagnosing for other people's sites. I was living inside my own audit finding — the kind I write about in the post that tells you where your revenue leaks are.
+
+I noticed the irony. It was not funny.
+
+There was a fix. Hashnode supports custom domain mapping — my blog could live on lawrencenwuzor.com, inside my design system, under my roof. The posts would render on my domain. The SEO would compound on one authority. The reading experience would be continuous.
+
+They wanted a monthly subscription for it.
+
+---
+
+I am not here to argue pricing. Hashnode is a business. They built a good platform. They can charge what they charge.
+
+But something in me recoiled. Not at the number — at the structure.
+
+Monthly rent. On my own words. Published on a platform I do not control, styled in a design language I did not choose, hosted on infrastructure I cannot touch. And to bring those words home — to put them on the domain I already own, inside the design system I already built — I would need to keep paying. Every month. Indefinitely. For permission to own what was already mine.
+
+<Verdict>
+
+That felt outrageous. Not the money. The principle. I am building infrastructure for a continent — and I cannot own my own blog without a subscription?
+
+</Verdict>
+
+The anger arrived fast and it was clean. Not bitter — directional. The kind that does not scatter. It told me exactly where the constraint was. And the constraint told me exactly what to build.
+
+I closed the Hashnode tab. I opened my editor.
+
+---
+
+I sat down that evening and worked.
+
+First thing: ripped out the Hashnode integration. Every line. The GraphQL client, the CDN image configs, the remote patterns in the Next.js config, the subdomain references in the writing page. Gone. I did not archive it. I did not comment it out in case I changed my mind. I deleted it. The decision was already made — the code just needed to catch up.
+
+Then I built.
+
+Installed Keystatic — a git-based CMS that stores content as MDX files in my own repository. No external database. No API dependency. No third-party hosting. My words live in the same codebase as my site, committed to the same git repo, deployed through the same pipeline. When I write a post, it is a file I own. When I publish, it is a commit I push. When it goes live, it goes live on my domain, inside my design, under my name.
+
+Restructured the entire Next.js application into route groups so the CMS admin panel could operate without interfering with the public pages. This was not trivial — it meant moving every existing page into a grouped layout and isolating the CMS routes in their own namespace. The kind of refactor that breaks things if you rush it. I did not rush it.
+
+Built an MDX rendering pipeline with custom components. Not generic blog components — components that carry the design language:
+
+Verdict callouts with solar-gold left borders — for the line in a piece that carries the most weight. Frame elements for images, with optional gold rings and captions. A Chi marker for inline emphasis that glows the same gold as the headlines. A series system backed by YAML metadata, so I could write in chapters — the same chapters you are reading now.
+
+<Frame src="/images/writing/rent/the-build.jpg" alt="Dark hands assembling a golden wireframe tower structure with teal light glowing at its core" caption="A few hours. No subscription. No landlord." gold />
+
+Then the reading experience. Foundation Black canvas. Ojuju display type — a typeface from a Lagos foundry, because even the letters should know where they come from. Nsibidi glyphs at the section markers. Uli curves between the paragraphs. The same design language as the homepage, the projects page, the about section. Because the blog is not a separate building. It is a room in my house, and every room carries the same architecture.
+
+A few focused hours. That is all it took. No subscription. No landlord. No platform dependency. Every word lives in my git repository, deploys through my Vercel pipeline, renders inside my Cosmic African Soul design system. I own the floor, the walls, the roof, and the key.
+
+---
+
+There is a pattern here and I want to name it, because I think it matters for anyone building from where I am building.
+
+The default path for a creator in Lagos — or Nairobi, or Accra, or anywhere the infrastructure was not built for you — is to rent. Rent your blog on Medium or Hashnode. Rent your storefront on Shopify. Rent your audience on Instagram. Rent your distribution on someone else's algorithm. The tools are good. The platforms are convenient. The price is reasonable. And the trade-off is invisible until it is not.
+
+The trade-off is this: you do not own the relationship between your work and the person receiving it. Someone else controls the reading experience, the design language, the domain authority, the data, the terms of service, the pricing changes, the algorithm shifts. You are building on rented land. And rented land has a landlord, and landlords have interests that are not yours.
+
+I am not saying never use platforms. I am saying know what you are trading. And know the moment when the trade stops making sense — when the cost of renting exceeds the cost of building, not in money, but in sovereignty.
+
+For me, that moment was a custom domain paywall on a blog platform. A small thing. A few dollars a month. But the principle underneath it was not small. It was the same principle I had been circling for years without naming it clearly:
+
+<Verdict>
+
+If you do not own the infrastructure, you do not own the outcome. You are renting someone else's future and calling it yours.
+
+</Verdict>
+
+---
+
+Part 1 of this series — the one where I stood still in a current at seventeen — ended with my mother. She held everything together while I was learning to hold myself. She gave me the entire floor I was standing on.
+
+This is the next part of that sentence.
+
+At some point you have to build your own floor. Not because the one you were given was not enough — because the person you are becoming needs a foundation you laid with your own hands. The material has to be yours. The architecture has to be yours. The decisions about who enters and what it costs and how the hallways look — those have to be yours.
+
+I refused the rent. Not because I could not afford it. Because I could not afford what paying it would mean — that I had accepted someone else's floor beneath my feet when I was perfectly capable of pouring my own.
+
+The blog was the first time I saw this clearly. It will not be the last.
+
+---
+
+Three posts published since that evening. You are reading the fourth — on the blog I built. The one with the dark canvas and the gold accents and the Uli curves between the sections. The one that belongs to no platform, pays rent to no one, and carries the same design language as the front door.
+
+The anger was useful. It always is — when it is clean. When it does not scatter into bitterness but narrows into a blueprint. When it shows you exactly where the wall is and exactly how thick. And then you sit down, and you build through it.
+
+<Chi>I am still building.</Chi>
