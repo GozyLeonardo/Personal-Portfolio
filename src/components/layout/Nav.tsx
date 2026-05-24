@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/projects", label: "Projects" },
+  { href: "/services", label: "Services" },
   { href: "/writing", label: "Writing" },
   { href: "/now", label: "Now" },
   { href: "/empire", label: "Empire" },
@@ -56,7 +57,7 @@ export function Nav() {
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/services"
             className={cn(
               "ml-2 px-4 py-2 rounded-[var(--radius-tight)]",
               "font-mono text-xs uppercase tracking-[0.14em]",
