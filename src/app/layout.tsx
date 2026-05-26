@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, IBM_Plex_Mono, Ojuju } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { PostHogProvider } from "./posthog-provider";
 import "./globals.css";
 
-// Africanfuturist signature face — Lagos type foundry, by Yvonne van der Wijst
-// and Olamide Akande. Used for hero headlines and section H2s per the COSMIC
-// AFRICAN SOUL manifesto.
 const ojuju = Ojuju({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -101,7 +101,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
