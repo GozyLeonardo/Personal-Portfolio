@@ -5,11 +5,12 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Block Keystatic admin routes in production
+  // Redirect to homepage — silent, no information disclosure
   if (
     process.env.NODE_ENV === "production" &&
     (pathname.startsWith("/keystatic") || pathname.startsWith("/api/keystatic"))
   ) {
-    return NextResponse.rewrite(new URL("/not-found", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
