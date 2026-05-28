@@ -27,10 +27,10 @@ const ventures = [
     name: "SQC Community",
     tagline: "Peer infrastructure.",
     summary:
-      "Nigerian builders moving from zero to first paying client. Held in WhatsApp because that is where the line moves now.",
+      "Nigerian builders moving from zero to first paying client. Held on WhatsApp because that is where the line moves.",
     role: "Founder · Operations",
-    year: "2025 — Now",
-    stack: ["Community", "Operations", "Content"],
+    year: "2025 — Active",
+    stack: ["Community", "WhatsApp", "Operations"],
     status: "Active",
     statusKind: "live" as const,
     href: "/projects/sqc" as const,
@@ -38,20 +38,36 @@ const ventures = [
     glyph: "interlace" as const,
   },
   {
-    slug: "empire-os",
+    slug: "chi",
     code: "003",
-    name: "Empire OS",
-    tagline: "Direction engine for the lost.",
+    name: "Chi",
+    tagline: "Life management via WhatsApp.",
     summary:
-      "Faith-grounded operating system for young Africans whose chi has been confused by colonial cartography. Built the way ndichie built — for those who come after.",
-    role: "Founder · Design · Engineering",
+      "For people who feel lost. A WhatsApp-native AI system that meets you where you are and holds the line when you cannot. The first product under The Signal.",
+    role: "Founder · Architecture · Engineering",
     year: "2026 — In build",
-    stack: ["Next.js", "Supabase", "AI"],
-    status: "Private build",
+    stack: ["Python", "LangGraph", "Supabase", "WhatsApp API"],
+    status: "In build",
     statusKind: "lock" as const,
-    href: "/projects/empire-os" as const,
+    href: "/projects/chi" as const,
     external: false,
     glyph: "wave" as const,
+  },
+  {
+    slug: "lead-engine",
+    code: "004",
+    name: "The 7-Day Lead Engine",
+    tagline: "Production-grade sites. One week.",
+    summary:
+      "Fixed-price, production-grade websites shipped in 7 days for founders who need a site that works as hard as they do.",
+    role: "Founder · Engineering · Delivery",
+    year: "2026 — Live",
+    stack: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    status: "Live",
+    statusKind: "live" as const,
+    href: "/services" as const,
+    external: false,
+    glyph: "cross" as const,
   },
 ];
 
@@ -63,7 +79,7 @@ export function Projects() {
           <NsibidiGlyph variant="cross" size={16} animate />
           <SectionIndex current={3} total={6} label="Ventures" bearing="072°" />
           <h2 className="mt-6 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
-            Three ventures.{" "}
+            Four ventures.{" "}
             <span className="text-[color:var(--color-solar-gold)]">One line.</span>
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[52ch]">
@@ -71,7 +87,7 @@ export function Projects() {
           </p>
         </SectionReveal>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           {ventures.map((v, idx) => {
             const isLive = v.statusKind === "live";
             const dotColor = isLive
@@ -95,7 +111,7 @@ export function Projects() {
 
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-solar-gold)]">
-                      {v.code} / 003
+                      {v.code} / 004
                     </span>
                     <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-mute)]">
                       <span

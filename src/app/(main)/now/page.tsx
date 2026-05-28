@@ -19,26 +19,35 @@ export default function NowPage() {
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">01</span>
             <span>
-              Shipping <strong>lawrencenwuzor.com</strong> — the front of the empire.
-              Foundation Black, Solar Gold, every line of code a small return.
+              Building <strong>Chi</strong> — a WhatsApp-native AI system for
+              people who feel lost. The first product under The Signal. Architecture
+              locked, build in progress.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">02</span>
             <span>
-              Holding the <strong>SQC community</strong> on WhatsApp — Nigerian
-              builders moving from zero to first paying client. Quietly. The work
-              speaks.
+              Running <strong>The 7-Day Lead Engine</strong> — production-grade
+              websites shipped in 7 days for founders. Taking clients now.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">03</span>
             <span>
-              Preparing for a civic role I&apos;ll name when it&apos;s time.
+              Holding the <strong>SQC community</strong> on WhatsApp — Nigerian
+              builders moving from zero to first paying client. The work speaks.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">04</span>
+            <span>
+              Writing and publishing — articles on building from Nigeria, AI
+              orchestration, and what infrastructure actually means when the
+              ground shifts.
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">05</span>
             <span>
               Daily — <strong>A Course in Miracles</strong>. Deep blocks. Running.
               The body and the spirit are infrastructure.
@@ -47,7 +56,7 @@ export default function NowPage() {
         </ul>
 
         <p className="mt-16 text-sm text-[color:var(--color-mute)] italic">
-          Last updated when the work asks me to.
+          Last updated May 2026.
         </p>
       </div>
     </section>

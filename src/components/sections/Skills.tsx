@@ -3,10 +3,10 @@ import { SectionReveal } from "@/components/motion/SectionReveal";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 
 const stack = {
-  frontend: ["Next.js 15", "React 19", "TypeScript", "Tailwind v4", "Motion"],
-  backend: ["Supabase", "PostgreSQL", "Edge Functions", "REST + tRPC"],
-  ops: ["Vercel", "GitHub Actions", "Cloudflare", "Resend"],
-  ai: ["Claude", "OpenAI", "n8n", "Custom prompt arsenal"],
+  frontend: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Motion", "Keystatic"],
+  backend: ["Supabase", "PostgreSQL", "Python", "LangGraph", "REST"],
+  ops: ["Vercel", "GitHub Actions", "Cloudflare", "Resend", "Cloudinary"],
+  ai: ["Claude", "n8n", "WhatsApp Business API", "Custom prompt arsenal"],
 };
 
 const principles = [

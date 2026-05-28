@@ -37,7 +37,7 @@ export function Hero() {
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-solar-gold)] flex items-center gap-2 mb-8">
               <NsibidiGlyph variant="cross" size={14} animate />
-              Engineer · Lagos · The line carries
+              AI Orchestrator · Lagos · The line carries
             </p>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-[color:var(--color-warm-off-white)]">
@@ -52,9 +52,9 @@ export function Hero() {
             </p>
 
             <p className="mt-6 text-base text-[color:var(--color-mute)] max-w-[54ch]">
-              Software engineer and builder from Lagos. I make full-stack
-              systems for founders whose work carries chi. Every line of code,
-              a small act of return.
+              I build platform-layer infrastructure for Africa — AI systems,
+              production-grade sites, and the tools that hold communities
+              together. Every line of code, a small act of return.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">

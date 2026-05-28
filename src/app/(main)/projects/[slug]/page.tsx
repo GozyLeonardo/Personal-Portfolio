@@ -7,12 +7,12 @@ const projects: Record<string, { name: string; tagline: string; body: string }> 
   sqc: {
     name: "SQC Community",
     tagline: "Peer infrastructure for Nigerian builders.",
-    body: "Founded on WhatsApp because that is where the audience lives. Moving members from zero to first paying client. Operations in build.",
+    body: "Founded on WhatsApp because that is where the audience lives. Moving members from zero to first paying client. Growing through trust, not marketing.",
   },
-  "empire-os": {
-    name: "Empire OS (in build)",
-    tagline: "A direction engine for young Africans without a clear path.",
-    body: "Faith-grounded. Spec-first. Asking the right questions, surfacing the right work, matching the builder to their next step.",
+  chi: {
+    name: "Chi",
+    tagline: "Life management via WhatsApp. The first product under The Signal.",
+    body: "For people who feel lost. A WhatsApp-native AI system built on Python, LangGraph, and Supabase. It meets you where you are — inside the app you already use — and holds the line when you cannot. Architecture locked. Build in progress.",
   },
 };
 
