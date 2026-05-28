@@ -49,3 +49,4 @@ next-env.d.ts
 # design specs / brainstorming docs
 .docs
 docs/
+.claude/

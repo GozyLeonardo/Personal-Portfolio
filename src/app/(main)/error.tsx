@@ -12,7 +12,7 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
+    // Error logged server-side only — removed console.error for security
   }, [error]);
 
   return (
