@@ -5,6 +5,7 @@ import { GhostButton } from "@/components/ui/GhostButton";
 import { SectionReveal } from "@/components/motion/SectionReveal";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { UliCurveDivider } from "@/components/ui/UliCurveDivider";
+import { SignalLens } from "@/components/interactive/SignalLens";
 
 export const metadata: Metadata = {
   title: "The 7-Day Lead Engine",
@@ -255,6 +256,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* ─── SIGNAL LENS ─── */}
+      <SignalLens />
 
       {/* ─── HOW IT WORKS ─── */}
       <section className="py-24 md:py-32 px-6 md:px-10 border-t border-[color:var(--color-line)]">

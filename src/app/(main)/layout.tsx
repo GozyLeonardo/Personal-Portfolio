@@ -1,3 +1,4 @@
+import { SignalChat } from "@/components/interactive/SignalChat";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
@@ -9,6 +10,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <Nav />
       <main>{children}</main>
       <Footer />
+      <SignalChat />
       <Analytics />
       <SpeedInsights />
     </>
