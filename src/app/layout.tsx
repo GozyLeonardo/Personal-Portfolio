@@ -33,6 +33,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lawrencenwuzor.com"),
+  alternates: { canonical: "./" },
   title: {
     default: "Lawrence Nwuzor — Building what shouldn't work from where it shouldn't",
     template: "%s | Lawrence Nwuzor",
