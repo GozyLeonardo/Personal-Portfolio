@@ -21,28 +21,20 @@ function MenuIcon({ open }: { open: boolean }) {
       <motion.line
         x1={4} x2={20}
         stroke="currentColor" strokeWidth={1.5} strokeLinecap="round"
-        animate={{
-          y1: open ? 12 : 7,
-          y2: open ? 12 : 7,
-          rotate: open ? 45 : 0,
-        }}
+        animate={{ y1: open ? 12 : 7, y2: open ? 12 : 7, rotate: open ? 45 : 0 }}
         style={{ originX: "12px", originY: "12px" }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       />
       <motion.line
         x1={4} x2={20} y1={12} y2={12}
         stroke="currentColor" strokeWidth={1.5} strokeLinecap="round"
-        animate={{ opacity: open ? 0 : 1, x1: open ? 12 : 4 }}
+        animate={{ opacity: open ? 0 : 1 }}
         transition={{ duration: 0.2 }}
       />
       <motion.line
         x1={4} x2={20}
         stroke="currentColor" strokeWidth={1.5} strokeLinecap="round"
-        animate={{
-          y1: open ? 12 : 17,
-          y2: open ? 12 : 17,
-          rotate: open ? -45 : 0,
-        }}
+        animate={{ y1: open ? 12 : 17, y2: open ? 12 : 17, rotate: open ? -45 : 0 }}
         style={{ originX: "12px", originY: "12px" }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       />
@@ -88,15 +80,14 @@ export function Nav() {
         )}
       >
         <div className="mx-auto max-w-6xl px-6 lg:px-10 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group relative">
+          <Link href="/" className="flex items-center gap-3 group">
             <OrbitalMark size={32} />
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-warm-off-white)] hidden sm:block">
               Lawrence Nwuzor
             </span>
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -156,7 +147,7 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile fullscreen overlay */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -166,97 +157,65 @@ export function Nav() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 lg:hidden"
           >
-            {/* Background */}
             <div className="absolute inset-0 bg-[color:var(--color-foundation)]/95 backdrop-blur-xl" />
 
-            {/* Content */}
             <div className="relative h-full flex flex-col justify-center px-8 sm:px-12">
-              {/* Nav links */}
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-1">
                 {navLinks.map((link, i) => {
                   const isActive = pathname === link.href;
                   return (
                     <motion.div
                       key={link.href}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
+                      exit={{ opacity: 0, y: -8 }}
                       transition={{
-                        delay: 0.05 + i * 0.06,
-                        duration: 0.4,
+                        delay: 0.05 + i * 0.05,
+                        duration: 0.35,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
                       <Link
                         href={link.href as never}
                         className={cn(
-                          "group flex items-center gap-4 py-3",
+                          "block py-3",
+                          "font-mono text-sm uppercase tracking-[0.14em]",
                           "transition-colors duration-[var(--duration-micro)]",
+                          isActive
+                            ? "text-[color:var(--color-solar-gold)]"
+                            : "text-[color:var(--color-mute)] hover:text-[color:var(--color-warm-off-white)]",
                         )}
                       >
-                        <span
-                          className={cn(
-                            "font-mono text-[10px] uppercase tracking-[0.2em] w-8 tabular-nums",
-                            isActive
-                              ? "text-[color:var(--color-solar-gold)]"
-                              : "text-[color:var(--color-mute)]/50",
-                          )}
-                        >
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span
-                          className={cn(
-                            "font-headline text-2xl sm:text-3xl tracking-tight",
-                            isActive
-                              ? "text-[color:var(--color-warm-off-white)]"
-                              : "text-[color:var(--color-mute)] group-hover:text-[color:var(--color-warm-off-white)]",
-                            "transition-colors duration-[var(--duration-micro)]",
-                          )}
-                        >
-                          {link.label}
-                        </span>
-                        {isActive && (
-                          <motion.span
-                            layoutId="mobile-dot"
-                            className="w-1.5 h-1.5 rounded-full bg-[color:var(--color-solar-gold)]"
-                            transition={{ duration: 0.3 }}
-                          />
-                        )}
+                        {link.label}
                       </Link>
                     </motion.div>
                   );
                 })}
               </nav>
 
-              {/* Divider */}
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
-                transition={{ delay: 0.4, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="my-8 h-px bg-gradient-to-r from-transparent via-[var(--color-solar-gold)]/40 to-transparent origin-left"
+                transition={{ delay: 0.35, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="my-6 h-px bg-gradient-to-r from-[var(--color-solar-gold)]/40 via-[var(--color-solar-gold)]/20 to-transparent origin-left"
               />
 
-              {/* CTA */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.45, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.4, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Link
                   href="/services"
                   className={cn(
-                    "inline-flex items-center gap-3 px-6 py-3.5 rounded-[var(--radius-tight)]",
+                    "inline-block px-5 py-3 rounded-[var(--radius-tight)]",
                     "font-mono text-sm uppercase tracking-[0.14em]",
                     "border border-[color:var(--color-solar-gold)] text-[color:var(--color-solar-gold)]",
                     "transition-all duration-300",
                     "hover:bg-[color:var(--color-solar-gold)] hover:text-[color:var(--color-foundation)]",
-                    "hover:shadow-[0_0_30px_rgba(196,122,0,0.2)]",
                   )}
                 >
-                  <span>Let&apos;s work</span>
-                  <svg width={16} height={16} viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  Let&apos;s work
                 </Link>
               </motion.div>
             </div>
