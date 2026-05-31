@@ -1,0 +1,79 @@
+---
+title: 'I Gave Away My Best Sales Tool'
+publishedAt: 2026-05-31
+excerpt: 'Signal Lens diagnoses any website in ten seconds — performance, security, SEO, mobile. I built it. Then I made it free. Here is why.'
+coverImage: '/images/writing/i-gave-away-my-best-sales-tool/coverImage.jpg'
+status: published
+---
+
+The hardest part of selling a website is not the build. It is the conversation before the build.
+
+A business owner knows something is off. Traffic comes in, nobody calls. The site loads — eventually. The WhatsApp button sits at the bottom of a page nobody scrolls to. They feel the problem. They cannot name it.
+
+And I cannot name it for them — not without looking first.
+
+So I built a tool that looks.
+
+## What Signal Lens does
+
+Go to [lawrencenwuzor.com/services](https://lawrencenwuzor.com/services). Scroll past the pricing section to Signal Lens. Paste any URL.
+
+In ten seconds, you get a full diagnostic — five scores rendered as animated rings, Core Web Vitals broken down to the millisecond, every missing security header named, every SEO gap surfaced, every issue ranked by severity.
+
+Critical issues in red. Warnings in gold. Informational notes in teal. No ambiguity. No jargon without explanation.
+
+At the bottom, a verdict — which tier of service would fix what the tool found, and a single button to start the conversation.
+
+## How it works under the hood
+
+Two data sources run in parallel. Google's PageSpeed Insights API handles the heavy analysis — Lighthouse scores for performance, SEO, accessibility, and best practices. Core Web Vitals come from the same pass: First Contentful Paint, Largest Contentful Paint, Cumulative Layout Shift, Total Blocking Time.
+
+Simultaneously, a direct fetch hits the URL from the server side. This is where the security analysis lives — HTTPS status, HSTS headers, Content Security Policy, X-Content-Type-Options, referrer policy. The same fetch parses the raw HTML for SEO signals: title tags, meta descriptions, Open Graph images, viewport configuration, canonical URLs, structured data.
+
+Both streams resolve. The results merge. An issue generator scans every data point against thresholds I set — thresholds based on what actually costs businesses traffic in Nigeria and across Africa, not theoretical benchmarks from Mountain View.
+
+The verdict engine counts critical and warning issues, weighs the performance score, and recommends a tier. Not a sales pitch — a diagnosis.
+
+## Why I made it free
+
+The conventional move is to gate this behind a form. Collect the email. Nurture the lead. Schedule the call. Run the audit yourself. Present the findings on a slide deck. Bill for the consultation.
+
+I find that approach dishonest.
+
+If the diagnosis takes ten seconds, why am I pretending it takes a meeting? If the data is public — PageSpeed is free, security headers are visible to anyone with curl — why am I packaging publicly available information as premium insight?
+
+The insight is not the data. The insight is knowing what to do about it.
+
+Signal Lens tells you your site loads in 6.2 seconds on mobile, that you are missing HSTS, that you have no Open Graph image so every WhatsApp share renders as a blank box. That is not a secret. That is a mirror.
+
+The value I sell is not the mirror. It is the rebuild. The architecture that makes the scores turn green. The seven days between diagnosis and a site that actually converts.
+
+Giving away the diagnostic does not reduce my leverage. It increases it. A prospect who has already seen their own scores does not need convincing. They need a builder.
+
+<Verdict>
+
+The best sales tool is not a pitch. It is proof that you understand the problem better than the person living with it.
+
+</Verdict>
+
+## The technical choices that matter
+
+I could have used a third-party audit API and white-labeled the results. I chose to write the analysis logic myself for a reason — I needed control over what counts as a problem.
+
+Most audit tools flag missing CSP headers as critical. For a five-page portfolio site in Lagos, that is noise. A missing viewport tag — that is critical, because 80% of Nigerian web traffic is mobile and a site without viewport configuration is unreadable on every one of those phones.
+
+The thresholds are opinionated. They reflect what I have seen break real businesses, not what a generic checklist says matters.
+
+The frontend is equally deliberate. Framer Motion handles the score ring animations — each ring draws from zero to its final value with staggered timing. Issue cards slide in sequentially. The loading state pulses a Nsibidi glyph while the analysis runs. Every interaction is designed to feel like the tool is working, because it is.
+
+No loading spinner. No progress bar counting to a fake 100%. A symbol that breathes while two API calls resolve in parallel.
+
+## Go break it
+
+The tool is live. It works on any public URL. Paste your site. Paste a competitor's site. Paste the site of the agency that charged you three million naira and delivered a WordPress template.
+
+[lawrencenwuzor.com/services](https://lawrencenwuzor.com/services)
+
+If the scores come back green — your site is solid. If they come back red — now you know exactly where the money is leaking.
+
+Either way, the mirror does not lie.
