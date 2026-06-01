@@ -7,7 +7,7 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, tool } = await req.json();
+    const { email, tool, source } = await req.json();
     if (!email || typeof email !== "string" || !EMAIL_RE.test(email.trim())) {
       return NextResponse.json({ error: "Enter a valid email." }, { status: 400 });
     }
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
           fields: {
             Email: email.trim(),
             Tool: typeof tool === "string" ? tool : "",
-            Source: "Signal Tools",
+            Source: typeof source === "string" && source ? source : "Signal Tools",
             Captured: new Date().toISOString(),
           },
         }),

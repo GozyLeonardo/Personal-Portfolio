@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { OrbitalMark } from "@/components/ui/OrbitalMark";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
+import { EmailCapture } from "@/components/ui/EmailCapture";
 
 const linkGroups = [
   {
@@ -27,6 +28,9 @@ export function Footer() {
   return (
     <footer className="mt-32 border-t border-[color:var(--color-line)]">
       <div className="mx-auto max-w-6xl px-6 md:px-10 py-16">
+        <div className="mb-14 pb-14 border-b border-[color:var(--color-line)]">
+          <EmailCapture />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
             <OrbitalMark size={48} />
