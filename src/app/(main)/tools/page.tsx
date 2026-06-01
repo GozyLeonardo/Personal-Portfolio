@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AI_TOOLS_ENABLED } from "@/lib/tools-config";
 
 export const metadata: Metadata = {
   title: "Tools",
@@ -16,6 +17,7 @@ const tools = [
       "Enter a prospect's website. Get 3 personalized opening lines with pain-point hooks in seconds.",
     badge: "3 FREE RUNS",
     icon: "✉",
+    aiPending: true,
   },
   {
     href: "/tools/testimonial" as const,
@@ -25,6 +27,7 @@ const tools = [
       "Turn WhatsApp screenshots and customer reviews into polished, shareable testimonial cards.",
     badge: "FREE",
     icon: "★",
+    aiPending: false,
   },
   {
     href: "/tools/mockup" as const,
@@ -34,6 +37,7 @@ const tools = [
       "Upload a screenshot, pick a device frame. Get a clean mockup in seconds.",
     badge: "FREE",
     icon: "▢",
+    aiPending: false,
   },
   {
     href: "/tools/repurpose" as const,
@@ -43,6 +47,7 @@ const tools = [
       "Paste a blog post or transcript. Get 6 formatted social posts — X, LinkedIn, IG, TikTok, WhatsApp.",
     badge: "3 FREE RUNS",
     icon: "↻",
+    aiPending: true,
   },
   {
     href: "/tools/proposal" as const,
@@ -52,6 +57,7 @@ const tools = [
       "Fill in scope and pricing. Get a clean, shareable proposal you can send via WhatsApp or email.",
     badge: "FREE",
     icon: "◈",
+    aiPending: false,
   },
 ];
 
@@ -77,29 +83,57 @@ export default function ToolsPage() {
 
       <section className="px-6 pb-24">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool) => (
-            <Link
-              key={tool.href}
-              href={tool.href}
-              className="group block rounded-2xl bg-surface border border-line p-8 transition-all duration-200 hover:border-solar-gold/30 hover:-translate-y-0.5"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <span className="text-3xl text-warm-off-white">{tool.icon}</span>
-                <span className="font-mono text-[10px] tracking-wider text-electric-teal bg-electric-teal/10 px-2 py-1 rounded">
-                  {tool.badge}
-                </span>
-              </div>
-              <h2 className="font-display text-xl font-bold text-warm-off-white mb-1 group-hover:text-solar-gold transition-colors">
-                {tool.name}
-              </h2>
-              <p className="font-mono text-xs text-solar-gold/70 mb-3">
-                {tool.tagline}
-              </p>
-              <p className="text-mute text-sm leading-relaxed">
-                {tool.description}
-              </p>
-            </Link>
-          ))}
+          {tools.map((tool) => {
+            const comingSoon = tool.aiPending && !AI_TOOLS_ENABLED;
+
+            const inner = (
+              <>
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-3xl text-warm-off-white">{tool.icon}</span>
+                  <span
+                    className={
+                      comingSoon
+                        ? "font-mono text-[10px] tracking-wider text-mute bg-line px-2 py-1 rounded"
+                        : "font-mono text-[10px] tracking-wider text-electric-teal bg-electric-teal/10 px-2 py-1 rounded"
+                    }
+                  >
+                    {comingSoon ? "COMING SOON" : tool.badge}
+                  </span>
+                </div>
+                <h2 className="font-display text-xl font-bold text-warm-off-white mb-1 group-hover:text-solar-gold transition-colors">
+                  {tool.name}
+                </h2>
+                <p className="font-mono text-xs text-solar-gold/70 mb-3">
+                  {tool.tagline}
+                </p>
+                <p className="text-mute text-sm leading-relaxed">
+                  {tool.description}
+                </p>
+              </>
+            );
+
+            if (comingSoon) {
+              return (
+                <div
+                  key={tool.href}
+                  className="block rounded-2xl bg-surface border border-line p-8 opacity-60 cursor-default"
+                  aria-disabled
+                >
+                  {inner}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="group block rounded-2xl bg-surface border border-line p-8 transition-all duration-200 hover:border-solar-gold/30 hover:-translate-y-0.5"
+              >
+                {inner}
+              </Link>
+            );
+          })}
         </div>
       </section>
     </div>

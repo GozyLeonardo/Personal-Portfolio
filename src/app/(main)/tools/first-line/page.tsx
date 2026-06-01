@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { TurnstileBox } from "../_components/TurnstileBox";
 import { UpgradeNudge } from "../_components/UpgradeNudge";
+import { ComingSoonPanel } from "../_components/ComingSoonPanel";
+import { AI_TOOLS_ENABLED } from "@/lib/tools-config";
 
 export default function FirstLinePage() {
   const [url, setUrl] = useState("");
@@ -63,7 +65,9 @@ export default function FirstLinePage() {
 
       <section className="px-6 pb-24">
         <div className="max-w-2xl mx-auto">
-          {limitReached ? (
+          {!AI_TOOLS_ENABLED ? (
+            <ComingSoonPanel />
+          ) : limitReached ? (
             <UpgradeNudge tool="first-line" />
           ) : (
             <>
