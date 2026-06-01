@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/projects", label: "Projects" },
   { href: "/services", label: "Services" },
+  { href: "/tools", label: "Tools" },
   { href: "/writing", label: "Writing" },
   { href: "/now", label: "Now" },
   { href: "/empire", label: "Empire" },

@@ -1,0 +1,30 @@
+<h2>What triggers the animations?</h2>
+<p class="subtitle">OrbitalMark already runs ambient loops. NsibidiGlyphs are static. The uli-rule dividers are static. Which trigger model should the new animations use?</p>
+
+<div class="options">
+
+  <div class="option" data-choice="scroll" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Scroll-triggered — elements animate once as they enter the viewport</h3>
+      <p>Glyphs draw themselves when you scroll to them. Uli dividers extend left-to-right on entry. Section content fades up. Feels like the page is being revealed as you read down. <em>Most impactful on the homepage.</em></p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="ambient" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Ambient loops — elements animate continuously in the background</h3>
+      <p>Glyphs pulse with a slow heartbeat. Geometric patterns rotate or breathe. Works alongside OrbitalMark's existing loop. Feels alive and cosmic at all times.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="both" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Both — scroll reveals the element, then it loops ambientally</h3>
+      <p>On scroll enter: glyph draws itself (ceremonial, gold). After it lands: slow ambient pulse begins (teal for system elements). Most layered, most work, most alive.</p>
+    </div>
+  </div>
+
+</div>
