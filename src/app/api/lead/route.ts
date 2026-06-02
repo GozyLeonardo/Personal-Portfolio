@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { notifyTelegram } from "@/lib/notify-telegram";
 
 /* Captures an email from the "out of free runs" upgrade nudge and writes it to
    Airtable EMPIRE OS (the single CRM). Graceful no-op if Airtable env unset. */
@@ -43,6 +44,13 @@ export async function POST(req: NextRequest) {
     if (!r.ok) {
       return NextResponse.json({ error: "Could not save. Try again." }, { status: 502 });
     }
+
+    // Fire-and-forget — don't await blocking the response
+    notifyTelegram(
+      "🟢 New Lead Captured",
+      `<b>Email:</b> ${email.trim()}\n<b>Source:</b> ${source || "Signal Tools"}\n<b>Tool:</b> ${tool || "—"}`
+    );
+
     return NextResponse.json({ ok: true, stored: true });
   } catch {
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

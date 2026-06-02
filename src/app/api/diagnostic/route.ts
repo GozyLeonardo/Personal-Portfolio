@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { notifyTelegram } from "@/lib/notify-telegram";
 import { BANDS } from "@/lib/diagnostic/bands";
 import { SECTION_LABELS } from "@/lib/diagnostic/questions";
 import type { BandKey, SectionKey } from "@/lib/diagnostic/types";
@@ -98,6 +99,13 @@ export async function POST(req: NextRequest) {
     // Don't gate results on a send failure — log and move on (spec §5.4).
     console.error("[diagnostic] Resend error:", err);
   }
+
+  // Fire-and-forget — notify Lawrence on Telegram
+  const band = BANDS[body.band];
+  notifyTelegram(
+    "🧠 Diagnostic Completed",
+    `<b>Email:</b> ${body.email}\n<b>Score:</b> ${body.totalScore}/56 — ${band.label}\n<b>Weakest:</b> ${SECTION_LABELS[body.weakestSection]}\n<b>Business:</b> ${body.sectionScores.business}% | <b>AI:</b> ${body.sectionScores.aiSkills}% | <b>Ready:</b> ${body.sectionScores.readiness}%`
+  );
 
   return NextResponse.json({ success: true });
 }
