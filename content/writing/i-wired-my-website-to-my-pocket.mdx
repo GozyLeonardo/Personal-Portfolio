@@ -1,0 +1,116 @@
+---
+title: 'I Wired My Website to My Pocket'
+publishedAt: 2026-06-02
+excerpt: 'Someone submits their email on my site. I find out... eventually. Maybe. That gap between a person reaching out and me knowing about it? I closed it today with 30 lines of code and a Telegram bot.'
+coverImage: ''
+status: draft
+series: signal-and-noise
+seriesOrder: 1
+---
+
+Someone submits their email on my site. I find out... eventually. Maybe.
+
+That is the gap. A person raises their hand — says "yes, I want to hear from you" — and I am somewhere else, doing something else, with no idea it happened. The email sits in an Airtable row. The diagnostic score lands in a Resend audience. Both silent. Both invisible until I decide to go looking.
+
+I have been operating blind. Today I fixed it.
+
+## The problem
+
+My site has two places where people give me their email. A newsletter capture in the footer — "Stay in signal." And an AI Readiness Diagnostic that gates the results behind an email. Both work. Both save the data where they should. Neither one tells me anything happened.
+
+I also run n8n — a self-hosted automation engine behind a Cloudflare tunnel. Workflows fire. Emails send. Follow-ups trigger. I find out they worked by... checking manually. Or not checking. And hoping.
+
+The pattern is the same everywhere: the system works, but the system is silent. And a silent system is one you stop trusting — because you cannot tell the difference between "nothing happened" and "something happened and I missed it."
+
+## What I already had
+
+I pulled up n8n and found something I had forgotten about. Three versions of a Telegram Human-in-the-Loop bridge, built across earlier sessions. The latest one — v3 — was already active. A webhook receives a request, sends me a Telegram message with APPROVE and REJECT buttons, waits for my decision, then routes the result.
+
+The bot existed. The chat ID existed. The infrastructure was already there. I just had not connected it to the thing that needed it most — the front door of my own website.
+
+## The build
+
+Thirty lines of TypeScript. One file.
+
+```typescript
+// src/lib/notify-telegram.ts
+
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+export async function notifyTelegram(
+  title: string,
+  detail?: string
+): Promise<void> {
+  if (!BOT_TOKEN || !CHAT_ID) return;
+
+  const text = detail ? title + "\n\n" + detail : title;
+
+  try {
+    await fetch(
+      "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }
+    );
+  } catch {
+    // Swallow — notification failure must never break user flow
+  }
+}
+```
+
+That `catch` block at the end is the most important line. If Telegram is down, if the network blips, if the bot token expires — the person on my site never knows. Their experience is untouched. The notification is fire-and-forget. It either works or it does not, and either way, the user gets their result.
+
+Then I wired it into two API routes.
+
+The lead capture endpoint — when someone enters their email in the footer or hits the upgrade gate on Signal Tools:
+
+```typescript
+notifyTelegram(
+  "🟢 New Lead Captured",
+  `<b>Email:</b> ${email.trim()}
+<b>Source:</b> ${source || "Signal Tools"}
+<b>Tool:</b> ${tool || "—"}`
+);
+```
+
+The diagnostic endpoint — when someone completes the AI Readiness quiz:
+
+```typescript
+notifyTelegram(
+  "🧠 Diagnostic Completed",
+  `<b>Email:</b> ${body.email}
+<b>Score:</b> ${body.totalScore}/56 — ${band.label}
+<b>Weakest:</b> ${SECTION_LABELS[body.weakestSection]}
+<b>Business:</b> ${body.sectionScores.business}%
+<b>AI:</b> ${body.sectionScores.aiSkills}%
+<b>Ready:</b> ${body.sectionScores.readiness}%`
+);
+```
+
+Two env vars in Vercel. Push to main. Vercel auto-deploys.
+
+Total time from "I need alerts" to "alerts are live in production": under an hour.
+
+## What broke
+
+The build itself went clean — zero compilation errors across the whole site. But the build took almost eight minutes on my machine. An HP ZBook with 16 gigs of RAM, sweating through a Next.js 16 full build with no prior cache. That is not a code problem. That is an infrastructure problem I will deal with another day.
+
+One test notification failed with `Network is unreachable` — a transient WSL network hiccup that resolved in seconds. The second test, fired immediately after, went through fine. This is exactly why the catch block swallows errors. Networks are unreliable. The notification layer has to absorb that unreliability without passing it to anyone.
+
+## What I learned
+
+The gap between "the system works" and "I know the system works" is not a nice-to-have. It is the difference between trusting your infrastructure and checking your infrastructure. One compounds confidence. The other burns attention.
+
+I also learned something about building on top of prior work. That Telegram bot was sitting in n8n for weeks — already configured, already tested, already active. The hardest part of today was not writing the code. It was discovering that the code was half-written already. The infrastructure I built in a previous session became the foundation for this one.
+
+That is what a system does when it starts working. Each layer makes the next layer cheaper to build.
+
+Thirty lines. Two API routes. One bot I already had. And now when someone reaches out, I know before they close the tab.
