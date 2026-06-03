@@ -42,11 +42,15 @@ export async function POST(req: NextRequest) {
     );
 
     if (!r.ok) {
+      // Notify Lawrence that Airtable write failed
+      await notifyTelegram(
+        "⚠️ Airtable Write Failed",
+        `<b>Email:</b> ${email.trim()}\n<b>Source:</b> ${source || "Signal Tools"}\n<b>Status:</b> ${r.status}\n<b>Action:</b> Lead NOT saved to CRM`
+      );
       return NextResponse.json({ error: "Could not save. Try again." }, { status: 502 });
     }
 
-    // Fire-and-forget — don't await blocking the response
-    notifyTelegram(
+    await notifyTelegram(
       "🟢 New Lead Captured",
       `<b>Email:</b> ${email.trim()}\n<b>Source:</b> ${source || "Signal Tools"}\n<b>Tool:</b> ${tool || "—"}`
     );

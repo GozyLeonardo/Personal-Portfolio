@@ -100,9 +100,9 @@ export async function POST(req: NextRequest) {
     console.error("[diagnostic] Resend error:", err);
   }
 
-  // Fire-and-forget — notify Lawrence on Telegram
+  // Notify Lawrence with full diagnostic breakdown
   const band = BANDS[body.band];
-  notifyTelegram(
+  await notifyTelegram(
     "🧠 Diagnostic Completed",
     `<b>Email:</b> ${body.email}\n<b>Score:</b> ${body.totalScore}/56 — ${band.label}\n<b>Weakest:</b> ${SECTION_LABELS[body.weakestSection]}\n<b>Business:</b> ${body.sectionScores.business}% | <b>AI:</b> ${body.sectionScores.aiSkills}% | <b>Ready:</b> ${body.sectionScores.readiness}%`
   );
