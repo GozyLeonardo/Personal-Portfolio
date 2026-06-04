@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 
 export const metadata: Metadata = {
-  title: "Give",
-  description: "How to support the work.",
+  title: "Support the Work",
+  description:
+    "How to support Lawrence Nwuzor's mission of building digital infrastructure for Africa.",
+  alternates: { canonical: "/give" },
 };
 
 export default function GivePage() {

@@ -3,9 +3,16 @@ import Link from "next/link";
 import { AI_TOOLS_ENABLED } from "@/lib/tools-config";
 
 export const metadata: Metadata = {
-  title: "Tools",
+  title: "Free AI Tools for Founders & Freelancers",
   description:
-    "Free tools for founders, creators, and freelancers — built by Lawrence Nwuzor. Cold email openers, content repurposing, testimonial cards, mockups, and proposals.",
+    "Free AI-powered tools for founders, creators, and freelancers. Cold email opener, content repurposing, testimonial cards, mockup generator, and proposal writer. Built by Lawrence Nwuzor, Lagos Nigeria.",
+  alternates: { canonical: "/tools" },
+  openGraph: {
+    title: "Free AI Tools for Founders & Freelancers | Lawrence Nwuzor",
+    description:
+      "Free AI-powered tools: cold email opener, content repurposing, testimonial cards, mockups, proposals.",
+    url: "https://lawrencenwuzor.com/tools",
+  },
 };
 
 const tools = [

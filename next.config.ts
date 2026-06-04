@@ -18,13 +18,17 @@ const securityHeaders = [
     value: "SAMEORIGIN",
   },
   {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://us.i.posthog.com https://challenges.cloudflare.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://us.i.posthog.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https: blob:",
-      "connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://challenges.cloudflare.com",
+      "connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://challenges.cloudflare.com https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com",
       "font-src 'self' data:",
       "frame-src https://challenges.cloudflare.com",
       "object-src 'none'",

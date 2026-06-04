@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 
 export const metadata: Metadata = {
-  title: "Press",
-  description: "Press kit and bio for Lawrence Chigozie Nwuzor.",
+  title: "Press Kit — Lawrence Chigozie Nwuzor",
+  description:
+    "Press kit, bio, and media assets for Lawrence Chigozie Nwuzor — web developer and AI automation engineer from Lagos, Nigeria.",
+  alternates: { canonical: "/press" },
 };
 
 export default function PressPage() {

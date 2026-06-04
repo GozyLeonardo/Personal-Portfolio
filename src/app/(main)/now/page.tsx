@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 
 export const metadata: Metadata = {
-  title: "Now",
-  description: "What Lawrence Nwuzor is focused on right now.",
+  title: "Now — What Lawrence Nwuzor Is Building Right Now",
+  description:
+    "What Lawrence Nwuzor is currently focused on: active projects, current builds, and what's shipping next from Lagos, Nigeria.",
+  alternates: { canonical: "/now" },
 };
 
 export default function NowPage() {

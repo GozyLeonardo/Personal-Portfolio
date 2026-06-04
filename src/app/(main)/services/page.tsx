@@ -8,13 +8,23 @@ import { UliCurveDivider } from "@/components/ui/UliCurveDivider";
 import { SignalLens } from "@/components/interactive/SignalLens";
 
 export const metadata: Metadata = {
-  title: "The 7-Day Lead Engine",
+  title: "Web Development & AI Automation Services — 7-Day Delivery",
   description:
-    "Production-grade websites and systems delivered in 7 days. AI-orchestrated builds at fixed price. By Lawrence Nwuzor.",
+    "Hire a web developer in Lagos, Nigeria. Production-grade websites and AI automation systems delivered in 7 days at fixed price. Next.js, Supabase, full-stack builds by Lawrence Nwuzor.",
+  alternates: { canonical: "/services" },
   openGraph: {
-    title: "The 7-Day Lead Engine | Lawrence Nwuzor",
+    title: "Web Development & AI Automation Services — 7-Day Delivery | Lawrence Nwuzor",
     description:
-      "Production-grade websites and systems delivered in 7 days. AI-orchestrated builds at fixed price.",
+      "Production-grade websites and AI automation systems delivered in 7 days. Fixed-price builds from Lagos, Nigeria.",
+    url: "https://lawrencenwuzor.com/services",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Web Development & AI Automation Services — 7-Day Delivery",
+    description:
+      "Production-grade websites and AI systems delivered in 7 days. Fixed-price builds from Lagos.",
+    creator: "@GozyLeonardo",
   },
 };
 

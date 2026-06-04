@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 
 export const metadata: Metadata = {
-  title: "Uses",
-  description: "The tools, hardware, and stack Lawrence Nwuzor builds with from Lagos.",
+  title: "Uses — Tools, Hardware & Stack",
+  description:
+    "The tools, hardware, and tech stack Lawrence Nwuzor uses to build production-grade websites and AI systems from Lagos, Nigeria.",
+  alternates: { canonical: "/uses" },
 };
 
 const blocks = [

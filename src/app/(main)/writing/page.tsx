@@ -7,8 +7,16 @@ import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { UliRule } from "@/components/motion/UliRule";
 
 export const metadata: Metadata = {
-  title: "Writing",
-  description: "Essays and field notes from Lawrence Nwuzor — Lagos, Nigeria.",
+  title: "Writing — Essays on Tech, AI, and Building in Africa",
+  description:
+    "Essays and field notes from Lawrence Nwuzor on web development, AI automation, building tech businesses in Nigeria, and the future of African infrastructure.",
+  alternates: { canonical: "/writing" },
+  openGraph: {
+    title: "Writing — Essays on Tech, AI, and Building in Africa | Lawrence Nwuzor",
+    description:
+      "Essays on web development, AI automation, building tech in Nigeria, and African infrastructure.",
+    url: "https://lawrencenwuzor.com/writing",
+  },
 };
 
 export default async function WritingPage() {

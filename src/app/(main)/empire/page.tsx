@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { TerminalLabel } from "@/components/ui/TerminalLabel";
 
 export const metadata: Metadata = {
-  title: "Empire",
-  description: "The four directions and the long-horizon vision behind the work.",
+  title: "Empire — The Vision Behind the Work",
+  description:
+    "The long-horizon vision behind Lawrence Nwuzor's work: four products building digital infrastructure for Africa.",
+  alternates: { canonical: "/empire" },
 };
 
 export default function EmpirePage() {

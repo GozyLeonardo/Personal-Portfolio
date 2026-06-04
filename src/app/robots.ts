@@ -6,9 +6,20 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/keystatic", "/api/keystatic"],
+        disallow: ["/keystatic", "/api/"],
+      },
+      {
+        userAgent: "GPTBot",
+        allow: ["/writing/", "/tools/", "/services", "/projects/"],
+        disallow: ["/keystatic", "/api/"],
+      },
+      {
+        userAgent: "Google-Extended",
+        allow: ["/writing/", "/tools/", "/services", "/projects/"],
+        disallow: ["/keystatic", "/api/"],
       },
     ],
     sitemap: "https://lawrencenwuzor.com/sitemap.xml",
+    host: "https://lawrencenwuzor.com",
   };
 }

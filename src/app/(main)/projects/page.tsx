@@ -4,8 +4,16 @@ import { TerminalLabel } from "@/components/ui/TerminalLabel";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "Selected work by Lawrence Nwuzor.",
+  title: "Projects — Software & AI Products Built from Lagos",
+  description:
+    "Selected projects by Lawrence Nwuzor: WhatsApp-native AI systems, community infrastructure, and full-stack products built from Lagos, Nigeria.",
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    title: "Projects | Lawrence Nwuzor",
+    description:
+      "WhatsApp-native AI systems, community infrastructure, and full-stack products built from Lagos.",
+    url: "https://lawrencenwuzor.com/projects",
+  },
 };
 
 const projects = [
