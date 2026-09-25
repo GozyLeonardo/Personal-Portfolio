@@ -18,3 +18,10 @@ HASH="$(git log -1 --format=%h)"
 grep -q "\`$HASH\`" "$CHANGELOG" 2>/dev/null && exit 0
 
 printf -- "- %s — %s (\`%s\`)\n" "$DATE" "$MSG" "$HASH" >> "$CHANGELOG"
+
+# Append a short list of files changed (up to 5, then a "+N more" note).
+git diff-tree --no-commit-id --name-only -r HEAD | head -5 | sed 's/^/  · /' >> "$CHANGELOG"
+COUNT="$(git diff-tree --no-commit-id --name-only -r HEAD | wc -l | tr -d ' ')"
+if [ "$COUNT" -gt 5 ]; then
+  printf '  · …%s more\n' "$((COUNT - 5))" >> "$CHANGELOG"
+fi

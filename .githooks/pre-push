@@ -1,0 +1,43 @@
+#!/bin/sh
+# Notify Telegram when commits are pushed. Runs on `git push`.
+# Reads TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID from .env.local. Silent no-op if unset.
+
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+TOKEN="$(grep -E '^TELEGRAM_BOT_TOKEN=' "$ROOT/.env.local" 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")"
+CHAT="$(grep -E '^TELEGRAM_CHAT_ID=' "$ROOT/.env.local" 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")"
+[ -n "$TOKEN" ] && [ -n "$CHAT" ] || exit 0
+
+# Collect commits being pushed from the pre-push stdin refs.
+COMMITS=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -n "$local_ref" ] || continue
+  case "$local_sha" in
+    0000000000000000000000000000000000000000) continue ;;
+  esac
+  if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+    COMMITS="$COMMITS
+$(git log --oneline -10 "$local_sha" 2>/dev/null)"
+  else
+    COMMITS="$COMMITS
+$(git log --oneline "$remote_sha..$local_sha" 2>/dev/null | head -10)"
+  fi
+done
+
+COMMITS="$(printf '%s\n' "$COMMITS" | sed '/^$/d')"
+[ -n "$COMMITS" ] || exit 0
+
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+TEXT="📦 Pushed to *$BRANCH* — lawrencenwuzor.com"
+TEXT="$TEXT
+$COMMITS"
+
+curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+  --data-urlencode "chat_id=$CHAT" \
+  --data-urlencode "text=$TEXT" \
+  --data-urlencode "parse_mode=Markdown" >/dev/null 2>&1
+
+exit 0
