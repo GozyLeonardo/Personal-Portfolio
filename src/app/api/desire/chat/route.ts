@@ -44,10 +44,16 @@ export async function POST(req: NextRequest) {
       temperature: 0.8,
     });
 
+    const raw = text || "Tell me more.";
+    const COMPLETE_TOKEN = "<<COMPLETE>>";
+    const complete = raw.includes(COMPLETE_TOKEN);
+    const message = raw.replace(COMPLETE_TOKEN, "").trim();
+
     void bumpLifetime();
 
     return NextResponse.json({
-      message: text || "Tell me more.",
+      message: message || "Tell me more.",
+      complete,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Something went wrong";

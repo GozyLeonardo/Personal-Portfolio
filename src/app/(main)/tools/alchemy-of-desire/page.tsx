@@ -262,6 +262,7 @@ export default function AlchemyOfDesirePage() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [step, setStep] = useState(0);
+  const [complete, setComplete] = useState(false);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -292,6 +293,7 @@ export default function AlchemyOfDesirePage() {
       } else if (data.message) {
         setMessages([...seed, { role: "assistant", content: data.message }]);
         setQuestion(data.message);
+        if (data.complete) setComplete(true);
       }
     } catch {
       setError("Connection interrupted. Try again.");
@@ -323,6 +325,7 @@ export default function AlchemyOfDesirePage() {
         setMessages([...next, { role: "assistant", content: data.message }]);
         setQuestion(data.message);
         setStep((s) => s + 1);
+        if (data.complete) setComplete(true);
       }
     } catch {
       setError("Connection interrupted. Try again.");
@@ -393,6 +396,7 @@ export default function AlchemyOfDesirePage() {
     setQuestion("");
     setAnswer("");
     setStep(0);
+    setComplete(false);
     setBlueprint(null);
     setName("");
     setEmail("");
@@ -402,7 +406,6 @@ export default function AlchemyOfDesirePage() {
 
   const layerIndex = Math.min(step, LAYERS.length - 1);
   const progress = Math.min((step + 1) / LAYERS.length, 1);
-  const revealReady = step >= 6;
 
   return (
     <div className="min-h-screen pt-24">
@@ -494,42 +497,55 @@ export default function AlchemyOfDesirePage() {
                     </AnimatePresence>
 
                     {/* Answer */}
-                    <div className="mt-6">
-                      <textarea
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" && !e.shiftKey) {
-                            e.preventDefault();
-                            handleContinue();
-                          }
-                        }}
-                        rows={3}
-                        placeholder="Say it plainly…"
-                        disabled={loading}
-                        className="w-full bg-surface border border-line rounded-xl px-4 py-3 text-warm-off-white placeholder:text-mute/50 focus:outline-none focus:border-solar-gold/50 transition-colors text-sm resize-none disabled:opacity-50"
-                      />
-                    </div>
+                    {!complete ? (
+                      <>
+                        <div className="mt-6">
+                          <textarea
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" && !e.shiftKey) {
+                                e.preventDefault();
+                                handleContinue();
+                              }
+                            }}
+                            rows={3}
+                            placeholder="Say it plainly…"
+                            disabled={loading}
+                            className="w-full bg-surface border border-line rounded-xl px-4 py-3 text-warm-off-white placeholder:text-mute/50 focus:outline-none focus:border-solar-gold/50 transition-colors text-sm resize-none disabled:opacity-50"
+                          />
+                        </div>
 
-                    {error && (
-                      <p className="mt-3 text-red-400 text-xs font-mono">{error}</p>
-                    )}
+                        {error && (
+                          <p className="mt-3 text-red-400 text-xs font-mono">{error}</p>
+                        )}
 
-                    <button
-                      onClick={handleContinue}
-                      disabled={loading || !answer.trim()}
-                      className="w-full mt-5 bg-solar-gold text-foundation font-display font-bold px-6 py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      {loading ? "Listening…" : "Continue →"}
-                    </button>
-
-                    {revealReady && !loading && (
-                      <button
-                        onClick={() => setPhase("revealing")}
-                        className="w-full mt-3 text-mute hover:text-solar-gold font-mono text-xs uppercase tracking-wider transition-colors"
-                      >
-                        I&apos;ve said enough — reveal my blueprint
-                      </button>
+                        <button
+                          onClick={handleContinue}
+                          disabled={loading || !answer.trim()}
+                          className="w-full mt-5 bg-solar-gold text-foundation font-display font-bold px-6 py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                          {loading ? "Listening…" : "Continue →"}
+                        </button>
+                      </>
+                    ) : (
+                      <div className="mt-8 text-center">
+                        <p className="font-display text-lg font-bold text-warm-off-white mb-2">
+                          That&apos;s everything I need.
+                        </p>
+                        <p className="text-mute text-sm mb-6">
+                          The interview is complete. Reveal your Soul Blueprint.
+                        </p>
+                        {error && (
+                          <p className="mb-4 text-red-400 text-xs font-mono">{error}</p>
+                        )}
+                        <button
+                          onClick={() => setPhase("revealing")}
+                          className="w-full bg-solar-gold text-foundation font-display font-bold px-6 py-4 rounded-xl hover:opacity-90 transition-opacity"
+                        >
+                          Reveal my blueprint →
+                        </button>
+                      </div>
                     )}
                   </div>
                 </motion.div>
