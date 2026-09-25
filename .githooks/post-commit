@@ -1,0 +1,20 @@
+#!/bin/sh
+# Auto-append every commit to CHANGELOG.md — the portfolio's automatic memory.
+# Runs on `git commit`. Wired via `git config core.hooksPath .githooks`.
+
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+CHANGELOG="$ROOT/CHANGELOG.md"
+[ -f "$CHANGELOG" ] || exit 0
+
+DATE="$(date -u +%Y-%m-%d)"
+MSG="$(git log -1 --format=%s)"
+HASH="$(git log -1 --format=%h)"
+
+# Guard against duplicates (e.g. amend / rebase).
+grep -q "\`$HASH\`" "$CHANGELOG" 2>/dev/null && exit 0
+
+printf -- "- %s — %s (\`%s\`)\n" "$DATE" "$MSG" "$HASH" >> "$CHANGELOG"

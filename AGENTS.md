@@ -81,6 +81,16 @@ This site's copy inherits from `components/voices/founder-direct.md` v1.2.0 in t
 - `AGENTS.md` (this file)
 - `.cursor/rules/001-core.mdc` (the law)
 
+## Memory (Automatic)
+
+Every commit is automatically logged to `CHANGELOG.md` by `.githooks/post-commit`
+(a date + commit message + hash line). This is the canonical record of what
+changed and when — read it for context before starting any task.
+
+- If the hook isn't active on a fresh clone, run: `git config core.hooksPath .githooks`
+- `SESSION_LOG.md` holds longer-form session notes (what was built, why, what's next).
+- Never delete `CHANGELOG.md` or `.githooks/`.
+
 ## When In Doubt
 
 Default to: simpler, cleaner, faster, more branded. When unsure about copy — ask. When unsure about design — ask. When unsure about architecture — re-read `001-core.mdc`.
