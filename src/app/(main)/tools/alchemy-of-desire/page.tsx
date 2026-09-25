@@ -8,56 +8,18 @@ import { ComingSoonPanel } from "../_components/ComingSoonPanel";
 import { AI_TOOLS_ENABLED } from "@/lib/tools-config";
 import type { ChatMessage, SoulBlueprint } from "@/lib/desire/types";
 
-type Phase = "intro" | "chat" | "revealing" | "done";
+type Phase = "intro" | "interview" | "revealing" | "done";
 
-const OPENING =
-  "Tell me who you are. Start anywhere — where you come from, what shaped you, what's been on your mind lately. I'll follow you down.";
-
-function ChatBubble({ message }: { message: ChatMessage }) {
-  const isUser = message.role === "user";
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-      className={`flex ${isUser ? "justify-end" : "justify-start"}`}
-    >
-      <div
-        className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
-          isUser
-            ? "bg-solar-gold/15 text-warm-off-white rounded-br-sm"
-            : "bg-surface border border-line text-warm-off-white rounded-bl-sm"
-        }`}
-      >
-        {message.content}
-      </div>
-    </motion.div>
-  );
-}
-
-function TypingDots() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="flex justify-start"
-    >
-      <div className="px-4 py-3 rounded-2xl rounded-bl-sm bg-surface border border-line">
-        <div className="flex gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-1.5 h-1.5 rounded-full bg-solar-gold"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-            />
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+const LAYERS = [
+  "Who you are",
+  "Your story",
+  "The wound & gift",
+  "The compass",
+  "The feelings",
+  "The shadow",
+  "The life you refuse",
+  "The essence",
+];
 
 function BSection({
   num,
@@ -297,8 +259,10 @@ function BlueprintPreview({ bp }: { bp: SoulBlueprint }) {
 export default function AlchemyOfDesirePage() {
   const [phase, setPhase] = useState<Phase>("intro");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
-  const [sending, setSending] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
@@ -308,20 +272,42 @@ export default function AlchemyOfDesirePage() {
   const [error, setError] = useState("");
   const tsRef = useRef<TurnstileInstance>(null);
 
-  function handleStart() {
+  async function handleBegin() {
+    setPhase("interview");
+    setLoading(true);
     setError("");
-    setMessages([{ role: "assistant", content: OPENING }]);
-    setPhase("chat");
+    try {
+      const seed: ChatMessage[] = [
+        { role: "user", content: "I'm ready to begin." },
+      ];
+      const res = await fetch("/api/desire/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: seed }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Couldn't start. Try again.");
+        setPhase("intro");
+      } else if (data.message) {
+        setMessages([...seed, { role: "assistant", content: data.message }]);
+        setQuestion(data.message);
+      }
+    } catch {
+      setError("Connection interrupted. Try again.");
+      setPhase("intro");
+    } finally {
+      setLoading(false);
+    }
   }
 
-  async function handleSend(content: string) {
-    const text = content.trim();
-    if (!text || sending) return;
+  async function handleContinue() {
+    const text = answer.trim();
+    if (!text || loading) return;
 
     const next = [...messages, { role: "user", content: text } as ChatMessage];
-    setMessages(next);
-    setInput("");
-    setSending(true);
+    setAnswer("");
+    setLoading(true);
     setError("");
 
     try {
@@ -334,15 +320,14 @@ export default function AlchemyOfDesirePage() {
       if (!res.ok) {
         setError(data.error || "Connection interrupted. Try again.");
       } else if (data.message) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.message } as ChatMessage,
-        ]);
+        setMessages([...next, { role: "assistant", content: data.message }]);
+        setQuestion(data.message);
+        setStep((s) => s + 1);
       }
     } catch {
       setError("Connection interrupted. Try again.");
     } finally {
-      setSending(false);
+      setLoading(false);
     }
   }
 
@@ -360,14 +345,14 @@ export default function AlchemyOfDesirePage() {
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "Couldn't reveal your blueprint. Try again.");
-        setPhase("chat");
+        setPhase("interview");
       } else {
         setBlueprint(data.blueprint as SoulBlueprint);
         setPhase("done");
       }
     } catch {
       setError("Connection interrupted. Try again.");
-      setPhase("chat");
+      setPhase("interview");
     } finally {
       setRevealing(false);
       setToken("");
@@ -405,15 +390,19 @@ export default function AlchemyOfDesirePage() {
   function handleRestart() {
     setPhase("intro");
     setMessages([]);
+    setQuestion("");
+    setAnswer("");
+    setStep(0);
     setBlueprint(null);
-    setInput("");
     setName("");
     setEmail("");
     setToken("");
     setError("");
   }
 
-  const hasConversation = messages.some((m) => m.role === "user");
+  const layerIndex = Math.min(step, LAYERS.length - 1);
+  const progress = Math.min((step + 1) / LAYERS.length, 1);
+  const revealReady = step >= 6;
 
   return (
     <div className="min-h-screen pt-24">
@@ -448,11 +437,11 @@ export default function AlchemyOfDesirePage() {
                   className="rounded-2xl bg-surface border border-line p-10 text-center"
                 >
                   <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
-                    No forms. No goals-first interrogation. Just a conversation
-                    that goes where you point it — down to what you actually want.
+                    Eight steps. One question each. Go as deep as you let me —
+                    and leave with what you were actually after.
                   </p>
                   <button
-                    onClick={handleStart}
+                    onClick={handleBegin}
                     className="mt-8 bg-solar-gold text-foundation font-display font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-opacity"
                   >
                     Begin
@@ -460,58 +449,86 @@ export default function AlchemyOfDesirePage() {
                 </motion.div>
               )}
 
-              {phase === "chat" && (
+              {phase === "interview" && (
                 <motion.div
-                  key="chat"
+                  key="interview"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="rounded-2xl bg-foundation border border-line overflow-hidden"
                 >
-                  <div className="max-h-[420px] overflow-y-auto px-5 py-5 space-y-3">
-                    {messages.map((m, i) => (
-                      <ChatBubble key={i} message={m} />
-                    ))}
-                    <AnimatePresence>{sending && <TypingDots />}</AnimatePresence>
-                  </div>
+                  <div className="rounded-2xl bg-foundation border border-line p-6 md:p-8">
+                    {/* Progress */}
+                    <div className="mb-8">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-electric-teal">
+                          Step {step + 1}
+                        </span>
+                        <span className="font-mono text-[11px] text-mute">
+                          {LAYERS[layerIndex]}
+                        </span>
+                      </div>
+                      <div className="h-1 rounded-full bg-surface overflow-hidden">
+                        <motion.div
+                          className="h-full bg-solar-gold"
+                          initial={false}
+                          animate={{ width: `${progress * 100}%` }}
+                          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      </div>
+                    </div>
 
-                  {error && (
-                    <p className="px-5 py-2 text-red-400 text-xs font-mono">{error}</p>
-                  )}
+                    {/* Question */}
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={step}
+                        initial={{ opacity: 0, x: 24 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -24 }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <p className="font-display text-xl md:text-2xl font-bold text-warm-off-white leading-snug min-h-[3.5rem]">
+                          {question}
+                        </p>
+                      </motion.div>
+                    </AnimatePresence>
 
-                  <div className="px-5 py-4 border-t border-line space-y-3">
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                    {/* Answer */}
+                    <div className="mt-6">
+                      <textarea
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
                         onKeyDown={(e) => {
                           if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault();
-                            handleSend(input);
+                            handleContinue();
                           }
                         }}
-                        placeholder="Tell me more..."
-                        disabled={sending}
-                        className="flex-1 px-4 py-3 bg-surface border border-line rounded-xl text-sm text-warm-off-white placeholder:text-mute/50 focus:outline-none focus:border-solar-gold/50 transition-colors disabled:opacity-50"
+                        rows={3}
+                        placeholder="Say it plainly…"
+                        disabled={loading}
+                        className="w-full bg-surface border border-line rounded-xl px-4 py-3 text-warm-off-white placeholder:text-mute/50 focus:outline-none focus:border-solar-gold/50 transition-colors text-sm resize-none disabled:opacity-50"
                       />
-                      <button
-                        onClick={() => handleSend(input)}
-                        disabled={sending || !input.trim()}
-                        className="px-5 py-3 bg-solar-gold/10 border border-solar-gold/30 rounded-xl text-solar-gold font-display font-bold text-sm hover:bg-solar-gold/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        Send
-                      </button>
                     </div>
 
-                    {hasConversation && (
+                    {error && (
+                      <p className="mt-3 text-red-400 text-xs font-mono">{error}</p>
+                    )}
+
+                    <button
+                      onClick={handleContinue}
+                      disabled={loading || !answer.trim()}
+                      className="w-full mt-5 bg-solar-gold text-foundation font-display font-bold px-6 py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      {loading ? "Listening…" : "Continue →"}
+                    </button>
+
+                    {revealReady && !loading && (
                       <button
                         onClick={() => setPhase("revealing")}
-                        disabled={sending}
-                        className="w-full bg-solar-gold text-foundation font-display font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                        className="w-full mt-3 text-mute hover:text-solar-gold font-mono text-xs uppercase tracking-wider transition-colors"
                       >
-                        Reveal my blueprint →
+                        I&apos;ve said enough — reveal my blueprint
                       </button>
                     )}
                   </div>
