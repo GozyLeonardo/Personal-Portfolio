@@ -17,6 +17,16 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    href: "/tools/brief" as const,
+    name: "The Brief",
+    tagline: "AI project intake interview",
+    description:
+      "Talk through your idea with an AI interviewer. Get a full brief — every desire ranked — as a downloadable PDF.",
+    badge: "FREE",
+    icon: "◇",
+    aiPending: true,
+  },
+  {
     href: "/tools/first-line" as const,
     name: "First Line",
     tagline: "AI cold email opener",

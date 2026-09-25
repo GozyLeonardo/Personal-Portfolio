@@ -1,8 +1,6 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { gate, isSafeHttpUrl } from "@/lib/signal-tools";
-
-const anthropic = new Anthropic();
+import { deepseekChat } from "@/lib/deepseek";
 
 async function fetchSiteContent(url: string): Promise<string> {
   const controller = new AbortController();
@@ -60,9 +58,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const message = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 1024,
+    const content = await deepseekChat({
       messages: [
         {
           role: "user",
@@ -84,10 +80,9 @@ Do NOT use generic phrases like "I noticed your website could use improvement" o
 Return ONLY the 3 lines, numbered 1-3. No preamble, no explanation.`,
         },
       ],
+      maxTokens: 1024,
     });
 
-    const content =
-      message.content[0].type === "text" ? message.content[0].text : "";
     const lines = content
       .split(/\n\d+\.\s+/)
       .map((l) => l.trim())

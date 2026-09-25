@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { deepseekChat } from "@/lib/deepseek";
 
 const SYSTEM_PROMPT = `You are the Signal — Lawrence Nwuzor's AI presence on his portfolio site. You speak in Lawrence's voice: direct, specific, insight-first. No filler. No hedging. No corporate tone.
 
@@ -28,7 +29,7 @@ Voice rules:
 When you don't know something, say so directly. Never fabricate.`;
 
 export async function POST(req: NextRequest) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.DEEPSEEK_API_KEY;
 
   if (!apiKey) {
     return Response.json({
@@ -62,39 +63,26 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const pageContext = page ? `\n\nThe visitor is currently on the ${page} page.` : "";
+    const pageContext = page
+      ? `\n\nThe visitor is currently on the ${page} page.`
+      : "";
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 512,
-        system: SYSTEM_PROMPT + pageContext,
-        messages: messages.map((m: { role: string; content: string }) => ({
-          role: m.role,
+    const text = await deepseekChat({
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT + pageContext },
+        ...messages.map((m: { role: string; content: string }) => ({
+          role: m.role as "user" | "assistant",
           content: m.content,
         })),
-      }),
+      ],
+      maxTokens: 512,
+      temperature: 0.7,
     });
 
-    if (!response.ok) {
-      const errData = await response.json().catch(() => null);
-      console.error("Anthropic API error:", response.status, errData);
-      return Response.json(
-        { error: "The signal is temporarily disrupted. Try again." },
-        { status: 502 }
-      );
-    }
-
-    const data = await response.json();
-    const text = data.content?.[0]?.text ?? "No response generated.";
-
-    return Response.json({ message: text, status: "active" });
+    return Response.json({
+      message: text || "No response generated.",
+      status: "active",
+    });
   } catch (err) {
     console.error("Chat API error:", err);
     return Response.json(

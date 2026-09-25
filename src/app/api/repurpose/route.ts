@@ -1,8 +1,6 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { gate } from "@/lib/signal-tools";
-
-const anthropic = new Anthropic();
+import { deepseekChat } from "@/lib/deepseek";
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,9 +21,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const message = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 2048,
+    const text = await deepseekChat({
       messages: [
         {
           role: "user",
@@ -64,10 +60,8 @@ Return in this exact format:
 [content]`,
         },
       ],
+      maxTokens: 2048,
     });
-
-    const text =
-      message.content[0].type === "text" ? message.content[0].text : "";
 
     const platforms = [
       { key: "X POST", label: "X / Twitter", platform: "twitter" },
