@@ -1,10 +1,9 @@
 import path from "node:path";
 import { Font } from "@react-pdf/renderer";
 
-/* Server-side font registration for the brief PDF. Registers the bundled
-   font files from public/fonts (Space Grotesk, Inter, IBM Plex Mono) by
-   filesystem path — fontkit.open() reads them directly. Kept in a separate
-   module so react-pdf never leaks into the client bundle. */
+/* Server-side font registration for the Soul Blueprint PDF. Registers the
+   bundled font files from public/fonts by filesystem path (fontkit reads them
+   directly). Kept in a separate module so react-pdf stays server-only. */
 
 let registered = false;
 

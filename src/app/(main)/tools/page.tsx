@@ -17,13 +17,13 @@ export const metadata: Metadata = {
 
 const tools = [
   {
-    href: "/tools/brief" as const,
-    name: "The Brief",
-    tagline: "AI project intake interview",
+    href: "/tools/alchemy-of-desire" as const,
+    name: "Alchemy of Desire",
+    tagline: "AI self-discovery",
     description:
-      "Talk through your idea with an AI interviewer. Get a full brief — every desire ranked — as a downloadable PDF.",
+      "A guided conversation that surfaces your deepest, unspoken desires and distills them into a personal Soul Blueprint PDF.",
     badge: "FREE",
-    icon: "◇",
+    icon: "✦",
     aiPending: true,
   },
   {

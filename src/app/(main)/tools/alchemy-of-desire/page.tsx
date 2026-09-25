@@ -6,18 +6,12 @@ import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { TurnstileBox } from "../_components/TurnstileBox";
 import { ComingSoonPanel } from "../_components/ComingSoonPanel";
 import { AI_TOOLS_ENABLED } from "@/lib/tools-config";
-import type { BriefData, ChatMessage, Desire, Priority } from "@/lib/brief/types";
+import type { ChatMessage, SoulBlueprint } from "@/lib/desire/types";
 
-type Phase = "intro" | "chat" | "generating" | "done";
+type Phase = "intro" | "chat" | "revealing" | "done";
 
 const OPENING =
-  "Tell me what you want to build. Start anywhere — the idea, the problem, the feeling. I'll pull the rest out of you.";
-
-const PRIORITY_STYLE: Record<Priority, string> = {
-  must: "text-solar-gold border-solar-gold/40 bg-solar-gold/10",
-  want: "text-electric-teal border-electric-teal/40 bg-electric-teal/10",
-  nice: "text-mute border-line bg-surface",
-};
+  "Tell me who you are. Start anywhere — where you come from, what shaped you, what's been on your mind lately. I'll follow you down.";
 
 function ChatBubble({ message }: { message: ChatMessage }) {
   const isUser = message.role === "user";
@@ -65,135 +59,242 @@ function TypingDots() {
   );
 }
 
-function BriefPreview({ brief }: { brief: BriefData }) {
-  return (
-    <div className="rounded-2xl bg-surface border border-line p-6 md:p-8 text-left space-y-6">
-      <div className="border-b border-line pb-5">
-        <p className="font-mono text-electric-teal text-[10px] tracking-[0.3em] uppercase">
-          The Brief
-        </p>
-        <h2 className="font-display text-2xl md:text-3xl font-bold text-warm-off-white mt-2">
-          {brief.projectName}
-        </h2>
-        {brief.oneLiner && (
-          <p className="text-solar-gold mt-2 leading-relaxed">{brief.oneLiner}</p>
-        )}
-      </div>
-
-      {brief.clientName && (
-        <p className="text-mute text-xs font-mono">
-          PREPARED FOR {brief.clientName.toUpperCase()}
-        </p>
-      )}
-
-      {brief.vision && (
-        <Section label="The vision">
-          <p className="text-warm-off-white/90 leading-relaxed">{brief.vision}</p>
-        </Section>
-      )}
-
-      {brief.audience && (
-        <Section label="Who it's for">
-          <p className="text-warm-off-white/90 leading-relaxed">{brief.audience}</p>
-        </Section>
-      )}
-
-      {brief.desires.length > 0 && (
-        <Section label="Desires">
-          <ul className="space-y-2">
-            {brief.desires.map((d: Desire, i: number) => (
-              <li
-                key={i}
-                className="rounded-xl bg-foundation/60 border border-line px-4 py-3"
-              >
-                <div className="flex items-start gap-3">
-                  <span
-                    className={`font-mono text-[10px] uppercase tracking-wider border rounded px-2 py-0.5 shrink-0 mt-0.5 ${PRIORITY_STYLE[d.priority]}`}
-                  >
-                    {d.priority}
-                  </span>
-                  <div>
-                    <p className="text-warm-off-white font-headline font-semibold text-sm">
-                      {d.label}
-                    </p>
-                    {d.detail && (
-                      <p className="text-mute text-sm mt-0.5">{d.detail}</p>
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
-
-      {(brief.references.loves ||
-        brief.references.hates ||
-        brief.references.inspirations) && (
-        <Section label="References">
-          {brief.references.loves && (
-            <p className="text-mute text-sm">Loves: {brief.references.loves}</p>
-          )}
-          {brief.references.hates && (
-            <p className="text-mute text-sm">Hates: {brief.references.hates}</p>
-          )}
-          {brief.references.inspirations && (
-            <p className="text-mute text-sm">
-              Inspirations: {brief.references.inspirations}
-            </p>
-          )}
-        </Section>
-      )}
-
-      {(brief.constraints.budget ||
-        brief.constraints.timeline ||
-        brief.constraints.offLimits) && (
-        <Section label="Boundaries">
-          {brief.constraints.budget && (
-            <p className="text-mute text-sm">Budget: {brief.constraints.budget}</p>
-          )}
-          {brief.constraints.timeline && (
-            <p className="text-mute text-sm">
-              Timeline: {brief.constraints.timeline}
-            </p>
-          )}
-          {brief.constraints.offLimits && (
-            <p className="text-mute text-sm">
-              Off-limits: {brief.constraints.offLimits}
-            </p>
-          )}
-        </Section>
-      )}
-
-      {brief.successMetrics && (
-        <Section label="How success is measured">
-          <p className="text-warm-off-white/90 leading-relaxed">
-            {brief.successMetrics}
-          </p>
-        </Section>
-      )}
-    </div>
-  );
-}
-
-function Section({
+function BSection({
+  num,
   label,
   children,
 }: {
+  num: string;
   label: string;
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <p className="font-mono text-electric-teal text-[10px] tracking-[0.3em] uppercase mb-2">
-        {label}
-      </p>
+    <div className="mb-5">
+      <div className="flex items-baseline mb-1.5">
+        <span className="font-mono text-xs text-[color:var(--color-solar-gold)] w-7">
+          {num}
+        </span>
+        <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-[color:var(--color-electric-teal)]">
+          {label}
+        </span>
+      </div>
       {children}
     </div>
   );
 }
 
-export default function BriefPage() {
+function BHighlight({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mt-1 bg-stone-50 border-l-2 border-[color:var(--color-solar-gold)] px-4 py-3 text-neutral-800">
+      {children}
+    </div>
+  );
+}
+
+function BlueprintPreview({ bp }: { bp: SoulBlueprint }) {
+  const hasCompass = bp.admires || bp.judges || bp.envies;
+  const hasValues = bp.authenticValues.length > 0 || bp.inheritedValues.length > 0;
+  const hasDream = Object.values(bp.dreamLife).some(Boolean);
+  const hasIkigai = Object.values(bp.ikigai).some(Boolean);
+
+  return (
+    <div className="rounded-2xl bg-white border border-stone-200 p-8 md:p-10 text-left shadow-2xl shadow-black/30">
+      <div className="mb-8">
+        <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-[color:var(--color-solar-gold)]">
+          Alchemy of Desire
+        </p>
+        {bp.name && (
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 mt-2">
+            {bp.name}
+          </h2>
+        )}
+        {bp.essence && (
+          <p className="font-headline text-neutral-700 mt-3 leading-relaxed">
+            {bp.essence}
+          </p>
+        )}
+        <div className="h-0.5 w-12 bg-[color:var(--color-solar-gold)] mt-5" />
+      </div>
+
+      {bp.storyThusFar && (
+        <BSection num="01" label="Story Thus Far">
+          <p className="text-neutral-800 leading-relaxed">{bp.storyThusFar}</p>
+        </BSection>
+      )}
+
+      {(bp.wound || bp.gift) && (
+        <BSection num="02" label="The Wound & The Gift">
+          {bp.wound && <p className="text-neutral-500">{bp.wound}</p>}
+          {bp.gift && <BHighlight>{bp.gift}</BHighlight>}
+        </BSection>
+      )}
+
+      {bp.turningPoint && (
+        <BSection num="03" label="The Turning Point">
+          <p className="text-neutral-800 leading-relaxed">{bp.turningPoint}</p>
+        </BSection>
+      )}
+
+      {hasCompass && (
+        <BSection num="04" label="The Compass">
+          {bp.admires && <p className="text-neutral-500 text-sm">You admire — {bp.admires}</p>}
+          {bp.judges && <p className="text-neutral-500 text-sm">You judge — {bp.judges}</p>}
+          {bp.envies && <p className="text-neutral-500 text-sm">You secretly envy — {bp.envies}</p>}
+          {bp.trueNorth && <BHighlight>{bp.trueNorth}</BHighlight>}
+        </BSection>
+      )}
+
+      {bp.coreFeelings.length > 0 && (
+        <BSection num="05" label="Core Desired Feelings">
+          <div className="flex flex-wrap gap-2">
+            {bp.coreFeelings.map((f, i) => (
+              <span
+                key={i}
+                className="font-headline text-sm text-neutral-800 bg-stone-50 rounded px-3 py-1"
+              >
+                {f}
+              </span>
+            ))}
+          </div>
+        </BSection>
+      )}
+
+      {hasValues && (
+        <BSection num="06" label="Values — Authentic vs. Inherited">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p className="font-mono text-[11px] uppercase text-[color:var(--color-solar-gold)] mb-1">
+                Truly Yours
+              </p>
+              {bp.authenticValues.map((v, i) => (
+                <p key={i} className="text-neutral-800 text-sm">· {v}</p>
+              ))}
+            </div>
+            <div>
+              <p className="font-mono text-[11px] uppercase text-neutral-400 mb-1">
+                Inherited
+              </p>
+              {bp.inheritedValues.map((v, i) => (
+                <p key={i} className="text-neutral-500 text-sm">· {v}</p>
+              ))}
+            </div>
+          </div>
+        </BSection>
+      )}
+
+      {(bp.shadow.hiddenDesires.length > 0 || bp.shadow.gold) && (
+        <BSection num="07" label="The Shadow">
+          {bp.shadow.hiddenDesires.map((s, i) => (
+            <p key={i} className="text-neutral-500 text-sm">· {s}</p>
+          ))}
+          {bp.shadow.gold && <BHighlight>{bp.shadow.gold}</BHighlight>}
+        </BSection>
+      )}
+
+      {hasDream && (
+        <BSection num="08" label="Dream Life, Interpreted">
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+            {(
+              [
+                ["Home", bp.dreamLife.home],
+                ["Work", bp.dreamLife.work],
+                ["Body", bp.dreamLife.body],
+                ["Family", bp.dreamLife.family],
+                ["Travel", bp.dreamLife.travel],
+                ["Network", bp.dreamLife.network],
+              ] as const
+            ).map(([label, value]) =>
+              value ? (
+                <div key={label}>
+                  <span className="font-mono text-[11px] uppercase text-[color:var(--color-electric-teal)]">
+                    {label}
+                  </span>
+                  <p className="text-neutral-600 text-sm">{value}</p>
+                </div>
+              ) : null
+            )}
+          </div>
+        </BSection>
+      )}
+
+      {bp.antivision && (
+        <BSection num="09" label="The Life You Refuse">
+          <p className="text-neutral-500 leading-relaxed">{bp.antivision}</p>
+        </BSection>
+      )}
+
+      {bp.futureSelf && (
+        <BSection num="10" label="Your Future Self">
+          <p className="text-neutral-800 leading-relaxed">{bp.futureSelf}</p>
+        </BSection>
+      )}
+
+      {bp.beliefs.length > 0 && (
+        <BSection num="11" label="The Gap to Bridge">
+          {bp.beliefs.map((b, i) => (
+            <div key={i} className="flex flex-col sm:flex-row sm:gap-3 mb-2">
+              <span className="text-neutral-400 line-through text-sm">{b.belief}</span>
+              <span className="text-[color:var(--color-solar-gold)]">→</span>
+              <span className="text-neutral-800 text-sm">{b.replacement}</span>
+            </div>
+          ))}
+        </BSection>
+      )}
+
+      {(bp.mission || hasIkigai) && (
+        <BSection num="12" label="Your Mission">
+          {bp.mission && (
+            <p className="text-neutral-800 leading-relaxed">{bp.mission}</p>
+          )}
+          {hasIkigai && (
+            <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mt-2">
+              {(
+                [
+                  ["What you love", bp.ikigai.love],
+                  ["What you're good at", bp.ikigai.goodAt],
+                  ["What the world needs", bp.ikigai.worldNeeds],
+                  ["What sustains you", bp.ikigai.sustains],
+                ] as const
+              ).map(([label, value]) =>
+                value ? (
+                  <div key={label}>
+                    <span className="font-mono text-[11px] uppercase text-[color:var(--color-electric-teal)]">
+                      {label}
+                    </span>
+                    <p className="text-neutral-600 text-sm">{value}</p>
+                  </div>
+                ) : null
+              )}
+            </div>
+          )}
+        </BSection>
+      )}
+
+      {(bp.covenant.commitment || bp.covenant.dailyPractice) && (
+        <BSection num="13" label="The Covenant">
+          <div className="border border-[color:var(--color-solar-gold)] rounded p-5">
+            <p className="font-headline font-bold text-[color:var(--color-solar-gold)] mb-2">
+              A Binding Agreement with Yourself
+            </p>
+            {bp.covenant.commitment && (
+              <p className="text-neutral-800 leading-relaxed">{bp.covenant.commitment}</p>
+            )}
+            {bp.covenant.dailyPractice && (
+              <p className="text-neutral-500 text-sm mt-3">
+                <span className="font-mono uppercase text-[11px] text-neutral-400">
+                  Daily practice —{" "}
+                </span>
+                {bp.covenant.dailyPractice}
+              </p>
+            )}
+          </div>
+        </BSection>
+      )}
+    </div>
+  );
+}
+
+export default function AlchemyOfDesirePage() {
   const [phase, setPhase] = useState<Phase>("intro");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -201,8 +302,8 @@ export default function BriefPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
-  const [brief, setBrief] = useState<BriefData | null>(null);
-  const [generating, setGenerating] = useState(false);
+  const [blueprint, setBlueprint] = useState<SoulBlueprint | null>(null);
+  const [revealing, setRevealing] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState("");
   const tsRef = useRef<TurnstileInstance>(null);
@@ -224,7 +325,7 @@ export default function BriefPage() {
     setError("");
 
     try {
-      const res = await fetch("/api/brief/chat", {
+      const res = await fetch("/api/desire/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: next }),
@@ -245,56 +346,51 @@ export default function BriefPage() {
     }
   }
 
-  async function handleGenerateSubmit() {
-    if (generating) return;
-    setGenerating(true);
+  async function handleReveal() {
+    if (revealing) return;
+    setRevealing(true);
     setError("");
 
     try {
-      const res = await fetch("/api/brief/generate", {
+      const res = await fetch("/api/desire/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages,
-          name,
-          email,
-          turnstileToken: token,
-        }),
+        body: JSON.stringify({ messages, name, email, turnstileToken: token }),
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Couldn't build your brief. Try again.");
+        setError(data.error || "Couldn't reveal your blueprint. Try again.");
         setPhase("chat");
       } else {
-        setBrief(data.brief as BriefData);
+        setBlueprint(data.blueprint as SoulBlueprint);
         setPhase("done");
       }
     } catch {
       setError("Connection interrupted. Try again.");
       setPhase("chat");
     } finally {
-      setGenerating(false);
+      setRevealing(false);
       setToken("");
       tsRef.current?.reset();
     }
   }
 
   async function handleDownload() {
-    if (!brief || downloading) return;
+    if (!blueprint || downloading) return;
     setDownloading(true);
     setError("");
     try {
-      const res = await fetch("/api/brief/pdf", {
+      const res = await fetch("/api/desire/pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(brief),
+        body: JSON.stringify(blueprint),
       });
       if (!res.ok) throw new Error("pdf failed");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${brief.projectName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "project"}-brief.pdf`;
+      a.download = `${(blueprint.name || "soul").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "soul"}-blueprint.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -309,7 +405,7 @@ export default function BriefPage() {
   function handleRestart() {
     setPhase("intro");
     setMessages([]);
-    setBrief(null);
+    setBlueprint(null);
     setInput("");
     setName("");
     setEmail("");
@@ -327,17 +423,17 @@ export default function BriefPage() {
             Free Tool
           </p>
           <h1 className="font-display text-3xl md:text-5xl font-bold text-warm-off-white mb-4">
-            The Brief
+            Alchemy of Desire
           </h1>
           <p className="text-mute text-lg leading-relaxed">
-            Talk through your idea with an AI interviewer. Leave with a full brief
-            — every desire captured and ranked — ready to hand to a builder.
+            A guided conversation that draws out the desires you never named —
+            and hands them back as a Soul Blueprint.
           </p>
         </div>
       </section>
 
       <section className="px-6 pb-24">
-        <div className="max-w-2xl mx-auto">
+        <div className={blueprint ? "max-w-3xl mx-auto" : "max-w-2xl mx-auto"}>
           {!AI_TOOLS_ENABLED ? (
             <ComingSoonPanel />
           ) : (
@@ -352,14 +448,14 @@ export default function BriefPage() {
                   className="rounded-2xl bg-surface border border-line p-10 text-center"
                 >
                   <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
-                    A few minutes of conversation. No forms, no walls of fields —
-                    just tell it like you would a builder sitting across from you.
+                    No forms. No goals-first interrogation. Just a conversation
+                    that goes where you point it — down to what you actually want.
                   </p>
                   <button
                     onClick={handleStart}
                     className="mt-8 bg-solar-gold text-foundation font-display font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-opacity"
                   >
-                    Start your brief
+                    Begin
                   </button>
                 </motion.div>
               )}
@@ -396,7 +492,7 @@ export default function BriefPage() {
                             handleSend(input);
                           }
                         }}
-                        placeholder="Describe your idea..."
+                        placeholder="Tell me more..."
                         disabled={sending}
                         className="flex-1 px-4 py-3 bg-surface border border-line rounded-xl text-sm text-warm-off-white placeholder:text-mute/50 focus:outline-none focus:border-solar-gold/50 transition-colors disabled:opacity-50"
                       />
@@ -411,20 +507,20 @@ export default function BriefPage() {
 
                     {hasConversation && (
                       <button
-                        onClick={() => setPhase("generating")}
+                        onClick={() => setPhase("revealing")}
                         disabled={sending}
                         className="w-full bg-solar-gold text-foundation font-display font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
                       >
-                        Generate my brief →
+                        Reveal my blueprint →
                       </button>
                     )}
                   </div>
                 </motion.div>
               )}
 
-              {phase === "generating" && (
+              {phase === "revealing" && (
                 <motion.div
-                  key="generating"
+                  key="revealing"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
@@ -433,11 +529,11 @@ export default function BriefPage() {
                 >
                   <div>
                     <p className="font-mono text-electric-teal text-xs tracking-[0.3em] uppercase mb-3">
-                      Almost there
+                      One last thing
                     </p>
                     <p className="text-mute text-sm leading-relaxed">
-                      Where should I send the follow-up? Leave it blank if you&apos;d
-                      rather not say.
+                      Where should I send a copy? Leave it blank if you&apos;d rather
+                      not say.
                     </p>
                   </div>
 
@@ -465,16 +561,16 @@ export default function BriefPage() {
                   )}
 
                   <button
-                    onClick={handleGenerateSubmit}
-                    disabled={generating || !token}
+                    onClick={handleReveal}
+                    disabled={revealing || !token}
                     className="w-full bg-solar-gold text-foundation font-display font-bold px-6 py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    {generating ? "Writing your brief..." : "Generate brief"}
+                    {revealing ? "Distilling your blueprint..." : "Reveal blueprint"}
                   </button>
                 </motion.div>
               )}
 
-              {phase === "done" && brief && (
+              {phase === "done" && blueprint && (
                 <motion.div
                   key="done"
                   initial={{ opacity: 0, y: 16 }}
@@ -483,7 +579,7 @@ export default function BriefPage() {
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="space-y-6"
                 >
-                  <BriefPreview brief={brief} />
+                  <BlueprintPreview bp={blueprint} />
 
                   {error && (
                     <p className="text-red-400 text-xs font-mono text-center">{error}</p>
@@ -495,7 +591,7 @@ export default function BriefPage() {
                       disabled={downloading}
                       className="flex-1 bg-solar-gold text-foundation font-display font-bold px-6 py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
                     >
-                      {downloading ? "Preparing PDF..." : "Download PDF"}
+                      {downloading ? "Preparing PDF..." : "Download Soul Blueprint"}
                     </button>
                     <button
                       onClick={handleRestart}
@@ -506,8 +602,8 @@ export default function BriefPage() {
                   </div>
 
                   <p className="text-center text-mute/70 text-xs font-mono">
-                    Share the PDF with whoever&apos;s building — or reply to the
-                    follow-up and I&apos;ll take it from here.
+                    Read it in the morning and at night. It&apos;s a mirror, not a
+                    report.
                   </p>
                 </motion.div>
               )}

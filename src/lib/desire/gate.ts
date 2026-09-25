@@ -6,9 +6,8 @@ import {
   verifyTurnstile,
 } from "@/lib/signal-tools";
 
-/* Light abuse gate for The Brief. Unlike the Signal Tools gate, there is no
-   per-device run cap — every completed brief is a lead we want. We keep the
-   Cloudflare Turnstile human check and the global lifetime cost cap. */
+/* Light abuse gate for Alchemy of Desire. Turnstile human check + global
+   lifetime cost cap, no per-device run limit (every completion matters). */
 
 const LIFETIME_KEY = "signal:tools:lifetime";
 
@@ -25,14 +24,14 @@ function redis(): Redis | null {
   return _redis;
 }
 
-export type BriefGateResult =
+export type DesireGateResult =
   | { ok: true }
   | { ok: false; status: number; error: string };
 
-export async function briefGate(
+export async function desireGate(
   req: NextRequest,
   turnstileToken?: string
-): Promise<BriefGateResult> {
+): Promise<DesireGateResult> {
   const ip = getClientIp(req);
 
   if (!(await verifyTurnstile(turnstileToken, ip))) {
