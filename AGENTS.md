@@ -40,7 +40,7 @@ You are an AI agent assisting on this project. These rules are LAW. Violating th
 
 ## Voice Reference
 
-This site's copy inherits from `components/voices/founder-direct.md` v1.2.0 in the Lawrence-Empire-500M Obsidian vault. When writing new copy:
+This site's copy inherits from `components/voices/founder-direct.md` v1.2.0 in the Lawrence-Empire-500M Obsidian vault. The in-repo, always-applied rule file is `.cursor/rules/050-copy-brand.mdc` — **read it before writing any copy, every time, no exceptions.** When writing new copy:
 
 - First person throughout the site (third person ONLY on /press)
 - Diagnose the brutal truth, then state the elevation
@@ -58,6 +58,7 @@ This site's copy inherits from `components/voices/founder-direct.md` v1.2.0 in t
 6. Named exports only. No TypeScript `any`.
 7. No hardcoded hex colors — use CSS variables from `globals.css`.
 8. No lorem ipsum or placeholder copy in any committed file.
+9. Write ALL copy in the founder voice — read `.cursor/rules/050-copy-brand.mdc` before writing a single line of copy.
 
 ## When Given a Task
 
@@ -80,6 +81,7 @@ This site's copy inherits from `components/voices/founder-direct.md` v1.2.0 in t
 - `src/lib/motion.ts` (motion variants)
 - `AGENTS.md` (this file)
 - `.cursor/rules/001-core.mdc` (the law)
+- `.cursor/rules/050-copy-brand.mdc` (brand voice — the law for all copy)
 
 ## Memory (Automatic)
 

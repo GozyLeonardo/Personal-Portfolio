@@ -69,6 +69,38 @@ const ventures = [
     external: false,
     glyph: "cross" as const,
   },
+  {
+    slug: "sparknexis",
+    code: "005",
+    name: "Sparknexis Energy",
+    tagline: "Solar, sold direct from Lagos.",
+    summary:
+      "Solar equipment here is sold through markups and guesswork. I built a store that prices it, carts it, tracks it — panels, inverters, batteries, kits, Lagos to the door.",
+    role: "Founder · Engineering",
+    year: "2026 — Live",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Vercel"],
+    status: "Live",
+    statusKind: "live" as const,
+    href: "https://sparknexisenergy.com",
+    external: true,
+    glyph: "dot" as const,
+  },
+  {
+    slug: "kudi",
+    code: "006",
+    name: "KUDI",
+    tagline: "Record sales. Know your stock.",
+    summary:
+      "Shopkeepers still run their business from memory. KUDI records the sale, knows the stock, shows the number — built for millions, built from Lagos.",
+    role: "Founder · Architecture · Engineering",
+    year: "2026 — Live",
+    stack: ["Next.js", "TypeScript", "Neon PostgreSQL", "PWA"],
+    status: "Live",
+    statusKind: "live" as const,
+    href: "https://kudiapp.com.ng",
+    external: true,
+    glyph: "spiral" as const,
+  },
 ];
 
 export function Projects() {
@@ -79,7 +111,7 @@ export function Projects() {
           <NsibidiGlyph variant="cross" size={16} animate />
           <SectionIndex current={3} total={6} label="Ventures" bearing="072°" />
           <h2 className="mt-6 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
-            Four ventures.{" "}
+            Six ventures.{" "}
             <span className="text-[color:var(--color-solar-gold)]">One line.</span>
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[52ch]">
@@ -111,7 +143,7 @@ export function Projects() {
 
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-solar-gold)]">
-                      {v.code} / 004
+                      {v.code} / 006
                     </span>
                     <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-mute)]">
                       <span

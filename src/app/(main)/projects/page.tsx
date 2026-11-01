@@ -46,6 +46,22 @@ const projects = [
     glyph: "spiral" as const,
     external: true,
   },
+  {
+    name: "Sparknexis Energy",
+    tagline: "Solar, sold direct from Lagos.",
+    status: "Live",
+    href: "https://sparknexisenergy.com",
+    glyph: "dot" as const,
+    external: true,
+  },
+  {
+    name: "KUDI",
+    tagline: "Record sales. Know your stock. Understand your business.",
+    status: "Live",
+    href: "https://kudiapp.com.ng",
+    glyph: "spiral" as const,
+    external: true,
+  },
 ];
 
 export default function ProjectsPage() {
@@ -57,7 +73,7 @@ export default function ProjectsPage() {
           The build log.
         </h1>
         <p className="mt-8 text-lg text-[color:var(--color-mute)]">
-          Four ventures. Case studies ship as each one clears the next gate.
+          Six ventures. Case studies ship as each one clears the next gate.
         </p>
 
         <ul className="mt-16 space-y-4">
