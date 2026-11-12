@@ -13,8 +13,6 @@ export const BLUEPRINT_URL =
 export const CHALLENGE_URL =
   process.env.NEXT_PUBLIC_CHALLENGE_URL ?? "https://whop.com/lawrence-nwuzor";
 
-export const SERVICES_URL = "https://lawrencenwuzor.com/services";
-
 export interface BandCTA {
   primaryLabel: string;
   primaryHref: string;
@@ -141,9 +139,9 @@ export const BANDS: Record<BandKey, BandContent> = {
       primaryLabel: "Join the 14-Day Challenge",
       primaryHref: CHALLENGE_URL,
       primaryProduct: "challenge",
-      secondaryText: "Or start building — you already have what you need",
-      secondaryHref: SERVICES_URL,
-      secondaryProduct: "services",
+      secondaryText: "Or start with the Blueprint — $29",
+      secondaryHref: BLUEPRINT_URL,
+      secondaryProduct: "blueprint",
     },
   },
 };

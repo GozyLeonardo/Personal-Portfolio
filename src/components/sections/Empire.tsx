@@ -1,7 +1,7 @@
 import { SectionReveal } from "@/components/motion/SectionReveal";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { SectionIndex } from "@/components/ui/SectionIndex";
-import { FourDirectionsIcon } from "@/components/ui/FourDirectionsIcon";
+import { EmpireMap } from "@/components/ui/EmpireMap";
 
 const directions = [
   {
@@ -60,8 +60,17 @@ export function Empire() {
       <div className="mx-auto max-w-6xl">
         <SectionReveal>
           <SectionIndex current={5} total={6} label="Empire" bearing="180°" />
-          <FourDirectionsIcon size={48} className="mt-6 opacity-60" />
-          <h2 className="mt-4 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
+          <EmpireMap
+            className="mt-10 w-full h-auto"
+            directions={directions.map((d) => ({
+              n: d.n,
+              code: d.code,
+              title: d.title,
+              status: d.status,
+              active: d.statusKind === "lock",
+            }))}
+          />
+          <h2 className="mt-8 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
             Four directions.{" "}
             <span className="text-[color:var(--color-solar-gold)]">One line.</span>
           </h2>

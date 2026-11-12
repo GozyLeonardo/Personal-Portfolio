@@ -29,8 +29,10 @@ export default function NowPage() {
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">02</span>
             <span>
-              Running <strong>The 7-Day Lead Engine</strong> — production-grade
-              websites shipped in 7 days for founders. Taking clients now.
+              Running <strong>The Build Log</strong> — the public record of the
+              empire&apos;s shipped work: Benlaz, SQC Community, Sparknexis Energy,
+              KUDI, and the in-build Chi. Live builds carry URLs. The rest carry
+              lines.
             </span>
           </li>
           <li className="flex gap-4">

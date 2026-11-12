@@ -3,12 +3,12 @@ import Link from "next/link";
 import { AI_TOOLS_ENABLED } from "@/lib/tools-config";
 
 export const metadata: Metadata = {
-  title: "Free AI Tools for Founders & Freelancers",
+  title: "Free AI Tools for Builders",
   description:
-    "Free AI-powered tools for founders, creators, and freelancers. Cold email opener, content repurposing, testimonial cards, mockup generator, and proposal writer. Built by Lawrence Nwuzor, Lagos Nigeria.",
+    "Free AI-powered tools for builders, creators, and founders. Cold email opener, content repurposing, testimonial cards, mockup generator, and proposal writer. Built by Lawrence Nwuzor, Lagos Nigeria.",
   alternates: { canonical: "/tools" },
   openGraph: {
-    title: "Free AI Tools for Founders & Freelancers | Lawrence Nwuzor",
+    title: "Free AI Tools for Builders | Lawrence Nwuzor",
     description:
       "Free AI-powered tools: cold email opener, content repurposing, testimonial cards, mockups, proposals.",
     url: "https://lawrencenwuzor.com/tools",
@@ -92,7 +92,7 @@ export default function ToolsPage() {
             <span className="text-solar-gold">solve real problems</span>
           </h1>
           <p className="text-mute text-lg max-w-xl mx-auto leading-relaxed">
-            Free utilities I built for founders, creators, and freelancers.
+            Free utilities I built for builders, creators, and founders.
             Simple, fast, no account required.
           </p>
         </div>

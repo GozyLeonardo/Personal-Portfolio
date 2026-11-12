@@ -8,19 +8,19 @@ import { OrbitalMark } from "@/components/ui/OrbitalMark";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { href: "/home", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/services", label: "Services" },
-  { href: "/tools", label: "Tools" },
   { href: "/writing", label: "Writing" },
   { href: "/now", label: "Now" },
-  { href: "/empire", label: "Empire" },
+  { href: "/memo", label: "Memo" },
+  { href: "/log", label: "Log" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
     <svg width={24} height={24} viewBox="0 0 24 24" fill="none" aria-hidden>
       <motion.line
-        x1={4} x2={20}
+        x1={4} x2={20} y1={7} y2={7}
         stroke="currentColor" strokeWidth={1.5} strokeLinecap="round"
         animate={{ y1: open ? 12 : 7, y2: open ? 12 : 7, rotate: open ? 45 : 0 }}
         style={{ originX: "12px", originY: "12px" }}
@@ -33,7 +33,7 @@ function MenuIcon({ open }: { open: boolean }) {
         transition={{ duration: 0.2 }}
       />
       <motion.line
-        x1={4} x2={20}
+        x1={4} x2={20} y1={17} y2={17}
         stroke="currentColor" strokeWidth={1.5} strokeLinecap="round"
         animate={{ y1: open ? 12 : 17, y2: open ? 12 : 17, rotate: open ? -45 : 0 }}
         style={{ originX: "12px", originY: "12px" }}
@@ -81,7 +81,7 @@ export function Nav() {
         )}
       >
         <div className="mx-auto max-w-6xl px-6 lg:px-10 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/home" className="flex items-center gap-3 group">
             <OrbitalMark size={32} />
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-warm-off-white)] hidden sm:block">
               Lawrence Nwuzor
@@ -117,7 +117,7 @@ export function Nav() {
               );
             })}
             <Link
-              href="/services"
+              href="/memo"
               className={cn(
                 "ml-3 px-4 py-2 rounded-[var(--radius-tight)]",
                 "font-mono text-xs uppercase tracking-[0.14em]",
@@ -127,7 +127,7 @@ export function Nav() {
                 "hover:shadow-[0_0_20px_rgba(196,122,0,0.15)]",
               )}
             >
-              Let&apos;s work
+              The Memo
             </Link>
           </div>
 
@@ -207,7 +207,7 @@ export function Nav() {
                 transition={{ delay: 0.4, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Link
-                  href="/services"
+                  href="/memo"
                   className={cn(
                     "inline-block px-5 py-3 rounded-[var(--radius-tight)]",
                     "font-mono text-sm uppercase tracking-[0.14em]",
@@ -216,7 +216,7 @@ export function Nav() {
                     "hover:bg-[color:var(--color-solar-gold)] hover:text-[color:var(--color-foundation)]",
                   )}
                 >
-                  Let&apos;s work
+                  The Memo
                 </Link>
               </motion.div>
             </div>

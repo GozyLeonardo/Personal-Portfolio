@@ -41,13 +41,6 @@ interface DiagnosticResult {
   };
 }
 
-const WA_NUMBER = "2347017303970";
-
-function waLink(tier: string) {
-  const msg = `Hi Lawrence, I just ran a Signal Lens diagnostic on my site and it recommended the ${tier} tier. I'd like to discuss fixing the issues found.`;
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-}
-
 function ScoreRing({
   score,
   label,
@@ -234,7 +227,6 @@ export function SignalLens() {
     }
   }
 
-  const tierNames = { signal: "Signal", engine: "Engine", system: "System" };
   const securityScore = result
     ? Math.round(
         (Object.values(result.security).filter(Boolean).length /
@@ -437,11 +429,7 @@ export function SignalLens() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <SolarGoldButton
-                    href={waLink(tierNames[result.verdict.tier])}
-                  >
-                    Fix this in 7 days
-                  </SolarGoldButton>
+                  <SolarGoldButton href="/projects">See the builds</SolarGoldButton>
                   <button
                     onClick={() => {
                       setState("idle");

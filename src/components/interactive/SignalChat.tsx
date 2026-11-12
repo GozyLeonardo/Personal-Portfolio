@@ -61,10 +61,10 @@ function TypingIndicator() {
 }
 
 const STARTER_PROMPTS = [
-  "What can you build in 7 days?",
-  "How do you use AI in your work?",
-  "What's your tech stack?",
-  "I need a site for my business",
+  "How deep is the stack behind the builds?",
+  "How do you use AI in the work?",
+  "What did the first build teach you?",
+  "What is the line carrying now?",
 ];
 
 export function SignalChat() {

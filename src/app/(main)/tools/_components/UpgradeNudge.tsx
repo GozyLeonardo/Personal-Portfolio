@@ -78,8 +78,11 @@ export function UpgradeNudge({ tool }: { tool: string }) {
         >
           14-Day Challenge →
         </a>
-        <a href="/services" className="text-mute hover:text-warm-off-white transition-colors">
-          Work with me →
+        <a
+          href="/projects"
+          className="text-mute hover:text-warm-off-white transition-colors"
+        >
+          See the builds →
         </a>
       </div>
     </div>

@@ -18,33 +18,20 @@ export const metadata: Metadata = {
 
 const projects = [
   {
-    name: "Chi",
-    tagline: "Life management via WhatsApp.",
-    status: "In build",
-    href: "/projects/chi" as const,
-    glyph: "wave" as const,
-  },
-  {
-    name: "The 7-Day Lead Engine",
-    tagline: "Production-grade sites. One week.",
-    status: "Live",
-    href: "/services" as const,
-    glyph: "cross" as const,
-  },
-  {
-    name: "SQC Community",
-    tagline: "Peer infrastructure for Nigerian builders.",
-    status: "Active",
-    href: "/projects/sqc" as const,
-    glyph: "interlace" as const,
-  },
-  {
     name: "Benlaz",
     tagline: "First production proof.",
     status: "Live",
     href: "https://benlaz.com",
     glyph: "spiral" as const,
     external: true,
+  },
+  {
+    name: "SQC Community",
+    tagline: "Peer infrastructure for Nigerian builders.",
+    status: "Active",
+    href: "/projects/sqc",
+    glyph: "interlace" as const,
+    external: false,
   },
   {
     name: "Sparknexis Energy",
@@ -61,6 +48,22 @@ const projects = [
     href: "https://kudiapp.com.ng",
     glyph: "spiral" as const,
     external: true,
+  },
+  {
+    name: "Bodways Integrated Smart Services",
+    tagline: "Integrated smart services.",
+    status: "Live",
+    href: "https://bodwaysintegrated.com",
+    glyph: "cross" as const,
+    external: true,
+  },
+  {
+    name: "Chi",
+    tagline: "Life management via WhatsApp. The first product under The Signal.",
+    status: "In build",
+    href: "/projects/chi",
+    glyph: "wave" as const,
+    external: false,
   },
 ];
 

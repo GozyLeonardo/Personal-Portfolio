@@ -38,8 +38,7 @@ export function UliCurveDivider({ className }: UliCurveDividerProps) {
           <circle cx={200} cy={12} r={2.5} fill="var(--color-solar-gold)" />
         ) : (
           <motion.circle
-            r={2.5}
-            fill="var(--color-solar-gold)"
+            cx={200} cy={12} r={2.5} fill="var(--color-solar-gold)"
             animate={{ cx: xFrames, cy: yFrames }}
             transition={{
               duration: 8,

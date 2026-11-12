@@ -8,10 +8,10 @@ import { Contact } from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
   title:
-    "Lawrence Nwuzor — Web Developer & AI Automation Engineer, Lagos Nigeria",
+    "Lawrence Nwuzor — AI Orchestrator & Institution Builder, Lagos Nigeria",
   description:
-    "Lawrence Nwuzor builds production-grade websites, AI automations, and digital infrastructure from Lagos, Nigeria. Next.js, Supabase, and full-stack systems for businesses across Africa and beyond.",
-  alternates: { canonical: "/" },
+    "Lawrence Nwuzor builds the front of a long-arc empire from Lagos, Nigeria — AI systems, production-grade infrastructure, and tools that hold communities together. Built and shipped from Africa.",
+  alternates: { canonical: "/home" },
 };
 
 export default function HomePage() {

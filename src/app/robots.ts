@@ -10,12 +10,12 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "GPTBot",
-        allow: ["/writing/", "/tools/", "/services", "/projects/"],
+        allow: ["/writing/", "/tools/", "/projects/"],
         disallow: ["/keystatic", "/api/"],
       },
       {
         userAgent: "Google-Extended",
-        allow: ["/writing/", "/tools/", "/services", "/projects/"],
+        allow: ["/writing/", "/tools/", "/projects/"],
         disallow: ["/keystatic", "/api/"],
       },
     ],

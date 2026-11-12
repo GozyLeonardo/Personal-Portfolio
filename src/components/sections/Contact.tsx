@@ -4,10 +4,6 @@ import { SectionReveal } from "@/components/motion/SectionReveal";
 import { NsibidiGlyph } from "@/components/ui/NsibidiGlyph";
 import { OrbitalMark } from "@/components/ui/OrbitalMark";
 
-const WHATSAPP_HREF =
-  "https://wa.me/2347017303970?text=" +
-  encodeURIComponent("Hi Lawrence — I've got a project I'd like to talk through.");
-
 const channels = [
   {
     label: "Email",
@@ -56,7 +52,7 @@ export function Contact() {
           </p>
 
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[48ch] mx-auto">
-            If yours does — send me the answer. If it doesn&apos;t, no need.
+            If yours does — read the build log. If it doesn&apos;t, no need.
             Ala still holds the dead.
           </p>
 
@@ -65,15 +61,13 @@ export function Contact() {
             <NsibidiGlyph variant="interlace" size={24} color="gold" animate />
           </div>
 
-          {/* Primary action — WhatsApp (the fast door, same as /services) */}
+          {/* Primary action — read the build log */}
           <div className="mt-10 flex justify-center">
             <Link
-              href={WHATSAPP_HREF as never}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#projects"
               className="inline-flex items-center gap-2 rounded-[var(--radius-tight)] border border-[color:var(--color-solar-gold)] px-7 py-3.5 font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--color-solar-gold)] transition-all duration-200 hover:bg-[color:var(--color-solar-gold)] hover:text-[color:var(--color-foundation)] hover:shadow-[0_0_20px_rgba(196,122,0,0.15)]"
             >
-              Start a project →
+              See the builds &rarr;
             </Link>
           </div>
 

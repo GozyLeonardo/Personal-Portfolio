@@ -7,10 +7,12 @@ const linkGroups = [
   {
     title: "Site",
     links: [
+      { href: "/home", label: "Home" },
+      { href: "/memo", label: "Founder Memo" },
+      { href: "/log", label: "Build Log" },
       { href: "/projects", label: "Projects" },
       { href: "/writing", label: "Writing" },
       { href: "/empire", label: "Empire" },
-      { href: "/uses", label: "Uses" },
     ],
   },
   {

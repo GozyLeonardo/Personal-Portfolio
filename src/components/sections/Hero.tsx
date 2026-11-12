@@ -52,15 +52,50 @@ export function Hero() {
             </p>
 
             <p className="mt-6 text-base text-[color:var(--color-mute)] max-w-[54ch]">
-              I build platform-layer infrastructure for Africa — AI systems,
-              production-grade sites, and the tools that hold communities
-              together. Every line of code, a small act of return.
+              I build the front of a long-arc empire from Lagos — AI systems,
+              production-grade infrastructure, and the tools that hold
+              communities together. Every line of code, a small act of return.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <SolarGoldButton href="#contact">Let&apos;s work</SolarGoldButton>
-              <GhostButton href="#projects">Follow the build &rarr;</GhostButton>
+              <SolarGoldButton href="#projects">See the builds</SolarGoldButton>
+              <GhostButton href="#empire">The Signal &rarr;</GhostButton>
             </div>
+
+            {/* Live builds shipped so far — the done list */}
+            <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-mute)] flex flex-wrap items-center gap-x-5 gap-y-2">
+              <span className="text-[color:var(--color-solar-gold)]">Live builds</span>
+              <a
+                href="https://benlaz.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[color:var(--color-solar-gold)] transition-colors"
+              >
+                benlaz.com
+              </a>
+              <a
+                href="https://sparknexisenergy.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[color:var(--color-solar-gold)] transition-colors"
+              >
+                sparknexisenergy.com
+              </a>
+              <a
+                href="https://kudiapp.com.ng"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[color:var(--color-solar-gold)] transition-colors"
+              >
+                kudiapp.com.ng
+              </a>
+              <a
+                href="/projects/sqc"
+                className="hover:text-[color:var(--color-solar-gold)] transition-colors"
+              >
+                sqc.community
+              </a>
+            </p>
           </div>
 
           <div className="hidden md:flex justify-center md:justify-end">

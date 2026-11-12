@@ -36,11 +36,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: {
     default:
-      "Lawrence Nwuzor — Web Developer & AI Automation Engineer, Lagos Nigeria",
+      "Lawrence Nwuzor — AI Orchestrator & Institution Builder, Lagos Nigeria",
     template: "%s | Lawrence Nwuzor",
   },
   description:
-    "Lawrence Nwuzor builds production-grade websites, AI automations, and digital infrastructure from Lagos, Nigeria. Next.js, Supabase, and full-stack systems for businesses across Africa and beyond.",
+    "Lawrence Nwuzor builds the front of a long-arc empire from Lagos, Nigeria — AI systems, production-grade infrastructure, and tools that hold communities together. Built and shipped from Africa.",
   authors: [{ name: "Lawrence Chigozie Nwuzor" }],
   creator: "Lawrence Chigozie Nwuzor",
   publisher: "Lawrence Nwuzor",
@@ -51,9 +51,8 @@ export const metadata: Metadata = {
     "AI automation Africa",
     "Next.js developer",
     "Supabase developer",
-    "freelance web developer Nigeria",
-    "website builder Lagos",
-    "full-stack developer Africa",
+    "software engineer Lagos",
+    "full-stack builder Africa",
     "AI tools for business",
     "Nigerian software engineer",
     "tech in Africa",
@@ -65,9 +64,9 @@ export const metadata: Metadata = {
     url: "https://lawrencenwuzor.com",
     siteName: "Lawrence Nwuzor",
     title:
-      "Lawrence Nwuzor — Web Developer & AI Automation Engineer, Lagos Nigeria",
+      "Lawrence Nwuzor — AI Orchestrator & Institution Builder, Lagos Nigeria",
     description:
-      "Production-grade websites and AI automations built from Lagos. Next.js, Supabase, full-stack systems for businesses across Africa and beyond.",
+      "AI systems and production-grade infrastructure built from Lagos. The Signal, Benlaz, SQC, Sparknexis, KUDI, and the in-build Chi.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -82,9 +81,9 @@ export const metadata: Metadata = {
     site: "@GozyLeonardo",
     creator: "@GozyLeonardo",
     title:
-      "Lawrence Nwuzor — Web Developer & AI Automation Engineer, Lagos Nigeria",
+      "Lawrence Nwuzor — AI Orchestrator & Institution Builder, Lagos Nigeria",
     description:
-      "Production-grade websites and AI automations built from Lagos. Next.js, Supabase, full-stack systems for businesses across Africa and beyond.",
+      "AI systems and production-grade infrastructure built from Lagos. The Signal, Benlaz, SQC, Sparknexis, KUDI, and the in-build Chi.",
     images: ["/twitter-image.png"],
   },
   robots: {
@@ -120,7 +119,7 @@ export default function RootLayout({
     url: "https://lawrencenwuzor.com",
     jobTitle: "Software Engineer & AI Automation Specialist",
     description:
-      "Web developer and AI automation engineer from Lagos, Nigeria. Building production-grade digital infrastructure for businesses across Africa.",
+      "Software engineer and AI Orchestrator from Lagos, Nigeria. Building the front of a long-arc empire.",
     knowsAbout: [
       "Web Development",
       "AI Automation",
@@ -162,34 +161,7 @@ export default function RootLayout({
     },
   };
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "Lawrence Nwuzor — Web Development & AI Automation",
-    url: "https://lawrencenwuzor.com/services",
-    description:
-      "Production-grade websites and AI automation systems delivered in 7 days. Fixed-price builds for businesses in Nigeria, Africa, and globally.",
-    provider: { "@type": "Person", name: "Lawrence Chigozie Nwuzor" },
-    areaServed: [
-      { "@type": "Country", name: "Nigeria" },
-      { "@type": "Continent", name: "Africa" },
-      { "@type": "Place", name: "Worldwide" },
-    ],
-    serviceType: [
-      "Web Development",
-      "AI Automation",
-      "Full-Stack Engineering",
-      "Website Design",
-    ],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Lagos",
-      addressRegion: "Lagos",
-      addressCountry: "NG",
-    },
-  };
-
-  const schemas = [personSchema, websiteSchema, serviceSchema];
+  const schemas = [personSchema, websiteSchema];
 
   return (
     <html

@@ -61,6 +61,18 @@ export function About() {
           </div>
         </SectionReveal>
 
+        <SectionReveal delay={0.15}>
+          <div className="mt-12">
+            <TerminalLabel>What this is not</TerminalLabel>
+            <p className="mt-5 text-base leading-relaxed text-[color:var(--color-mute)]">
+              Not a consultancy. Not a Western SaaS clone wearing African
+              colours. Not a bid for sympathy. This is a position — the decision
+              to build for the people who are actually here, from the place
+              where the constraint is real.
+            </p>
+          </div>
+        </SectionReveal>
+
         <UliCurveDivider />
       </div>
     </section>
