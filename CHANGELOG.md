@@ -13,3 +13,10 @@ every commit by `.githooks/post-commit`. Newest entries are at the bottom.
   · AGENTS.md
   · src/app/(main)/projects/page.tsx
   · src/components/sections/Projects.tsx
+- 2026-11-12 — Reposition site as founder dossier: gate landing, founder memo, build log, empire map (`c3b1d0b`)
+  · CHANGELOG.md
+  · SESSION_LOG.md
+  · design/README.md
+  · design/tokens.json
+  · next.config.ts
+  · …29 more

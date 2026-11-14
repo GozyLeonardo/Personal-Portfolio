@@ -7,10 +7,9 @@ import { Empire } from "@/components/sections/Empire";
 import { Contact } from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
-  title:
-    "Lawrence Nwuzor — AI Orchestrator & Institution Builder, Lagos Nigeria",
+  title: "Lawrence Nwuzor — Builder, Lagos Nigeria",
   description:
-    "Lawrence Nwuzor builds the front of a long-arc empire from Lagos, Nigeria — AI systems, production-grade infrastructure, and tools that hold communities together. Built and shipped from Africa.",
+    "I am building what shouldn't work, from where it shouldn't. Ten live builds, shipped from Lagos — most African tech is cosplay, this is the real thing.",
   alternates: { canonical: "/home" },
 };
 

@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const directions = [
-  { n: "01", code: "CONSUMER", title: "Personal OS", status: "In build", active: true },
-  { n: "02", code: "FINTECH", title: "Trust Infrastructure", status: "Mapped", active: false },
-  { n: "03", code: "CIVIC", title: "Coordination OS", status: "Mapped", active: false },
-  { n: "04", code: "TOOLS", title: "Direction Engine", status: "Mapped", active: false },
+  { n: "01", code: "CONSUMER", label: "Personal OS", active: true },
+  { n: "02", code: "FINTECH", label: "Trust", active: false },
+  { n: "03", code: "CIVIC", label: "Coordination", active: false },
+  { n: "04", code: "TOOLS", label: "Direction", active: false },
 ];
 
 const directionRows = [
@@ -92,18 +92,19 @@ export default function MemoPage() {
         <SectionReveal>
           <TerminalLabel>Thesis</TerminalLabel>
           <h2 className="mt-6 font-display text-3xl text-[color:var(--color-warm-off-white)]">
-            Most software for Africans is built by people who have never had to
-            use it.
+            Most African tech is cosplay.
           </h2>
           <div className="mt-6 space-y-5 text-lg leading-relaxed text-[color:var(--color-mute)]">
             <p>
-              I am building the inverse — systems that assume the opposite. The
-              infrastructure, the direction, and the trust layer for a continent
-              that came online through a phone, not a desktop.
+              Western software wearing African colours, built by people who have
+              never had to use it. I am building the inverse — systems that
+              assume the opposite. The infrastructure, the direction, and the
+              trust layer for a continent that came online through a phone, not
+              a desktop.
             </p>
             <p className="text-[color:var(--color-warm-off-white)]">
-              Four products. One line. Each answers a question Africa is already
-              asking and cannot yet answer for itself.
+              Four products. One line. And already, ten live builds proving the
+              work ships.
             </p>
           </div>
         </SectionReveal>
@@ -212,19 +213,19 @@ export default function MemoPage() {
         <SectionReveal>
           <TerminalLabel className="mt-16">Traction signals</TerminalLabel>
           <h2 className="mt-6 font-display text-3xl text-[color:var(--color-warm-off-white)]">
-            Pre-revenue. No co-founder.
+            Ten live builds. Six in progress.
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-[color:var(--color-mute)]">
             <p>
-              I will not dress this up. Here is what exists instead of what does
-              not.
+              Pre-revenue, no co-founder — I will not dress that up. Here is what
+              is already running instead of what is not.
             </p>
             <ul className="space-y-3">
               {[
-                "Live builds shipped: Benlaz, Sparknexis Energy, KUDI, SQC Community.",
-                "The Signal — a private build, architecture locked, in progress.",
+                "Live: Benlaz, Sparknexis Energy, KUDI, Bodways, Focus Group, Indigent Care, Meskadon, CiasLuxe, The Signal, ACIM Life.",
+                "In build: Chi, Alp Solar, Bluutech, Octovia Pharmacies, Pasiey Natural Foods, SheAscends.",
+                "The Signal's four directions — one in build, three being mapped.",
                 "Public writing, published on a cadence, not an accident.",
-                "Thousands of hours at the keyboard before Lagos wakes.",
               ].map((item) => (
                 <li key={item} className="flex gap-3">
                   <span className="text-[color:var(--color-solar-gold)] mt-1.5">

@@ -46,14 +46,12 @@ export function Contact() {
           </h2>
 
           <p className="mt-8 text-lg text-[color:var(--color-warm-off-white)] max-w-[48ch] mx-auto">
-            I build with founders whose work demands something larger than
-            themselves. The line carries through them. The work serves more
-            than itself.
+            I am building with founders whose work demands something larger than
+            themselves. The work serves more than itself.
           </p>
 
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[48ch] mx-auto">
             If yours does — read the build log. If it doesn&apos;t, no need.
-            Ala still holds the dead.
           </p>
 
           {/* Ceremonial separator */}

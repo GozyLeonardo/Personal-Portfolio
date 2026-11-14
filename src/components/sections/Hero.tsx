@@ -37,7 +37,7 @@ export function Hero() {
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-solar-gold)] flex items-center gap-2 mb-8">
               <NsibidiGlyph variant="cross" size={14} animate />
-              AI Orchestrator · Lagos · The line carries
+              Builder · Lagos · Shipping live
             </p>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-[color:var(--color-warm-off-white)]">
@@ -47,14 +47,14 @@ export function Hero() {
             </h1>
 
             <p className="mt-8 text-lg md:text-xl text-[color:var(--color-warm-off-white)] max-w-[42ch] leading-relaxed">
-              Building what shouldn&apos;t work,
+              I am building what shouldn&apos;t work,
               <br className="hidden md:block" /> from where it shouldn&apos;t.
             </p>
 
             <p className="mt-6 text-base text-[color:var(--color-mute)] max-w-[54ch]">
-              I build the front of a long-arc empire from Lagos — AI systems,
-              production-grade infrastructure, and the tools that hold
-              communities together. Every line of code, a small act of return.
+              Most African tech is cosplay — Western software wearing African
+              colours. I am building the real thing and shipping it live from
+              Lagos. Ten builds are live. More are in progress.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -90,10 +90,10 @@ export function Hero() {
                 kudiapp.com.ng
               </a>
               <a
-                href="/projects/sqc"
+                href="#projects"
                 className="hover:text-[color:var(--color-solar-gold)] transition-colors"
               >
-                sqc.community
+                +7 more
               </a>
             </p>
           </div>

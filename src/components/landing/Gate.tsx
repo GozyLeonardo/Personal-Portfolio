@@ -42,7 +42,7 @@ export function Gate() {
           <SectionReveal>
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--color-solar-gold)] flex items-center gap-2 justify-center">
               <NsibidiGlyph variant="cross" size={14} animate />
-              A threshold · Lagos · The line carries
+              A threshold · Lagos · Shipping live
             </p>
           </SectionReveal>
 
@@ -61,8 +61,8 @@ export function Gate() {
           <SectionReveal delay={0.3}>
             <p className="mt-8 text-lg text-[color:var(--color-mute)] max-w-[52ch] leading-relaxed">
               Not everyone is ready to answer that. What waits beyond this door
-              is not a portfolio — it is a position. Yours is decided by how you
-              answer.
+              is not a portfolio — it is work that is live and still being
+              built. Yours is decided by how you answer.
             </p>
           </SectionReveal>
 

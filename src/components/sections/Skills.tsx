@@ -10,10 +10,10 @@ const stack = {
 };
 
 const principles = [
-  "The work serves more than itself, or it does not get built.",
+  "The work ships, or it does not get built.",
   "Specifics carry the weight. Date, place, dollar figure, named verb.",
-  "Failure carries chi the success would not. Ship the lesson.",
-  "Built from inside Lagos, not for Lagos. The ground itself remembered.",
+  "Failure is fuel. Ship the lesson.",
+  "Built from Lagos, for the people who are actually here.",
 ];
 
 export function Skills() {

@@ -7,48 +7,52 @@ const directions = [
   {
     n: "01",
     code: "CONSUMER",
+    label: "Personal OS",
     title: "Personal Operating System",
-    audience: "For those whose chi has been confused.",
-    body: "The question before the question. What the compass reveals when the noise clears. Built for those whose chi is intact but misdirected.",
+    audience: "For people who are genuinely lost.",
+    body: "I am building this first — the compass before the question. For those whose chi is intact but misdirected.",
     role: "Founder · Design · Engineering",
-    year: "2026 — In build",
-    status: "Private build",
+    year: "In build",
+    status: "In build",
     statusKind: "lock" as const,
     glyph: "spiral" as const,
   },
   {
     n: "02",
     code: "FINTECH",
+    label: "Trust",
     title: "Trust Infrastructure",
-    audience: "Structural solutions for African commerce.",
-    body: "Ala does not forget what she holds. Neither does this. The ground beneath the exchange, remembered.",
+    audience: "For African digital commerce.",
+    body: "I am mapping the ground beneath African commerce — trust that doesn't depend on knowing someone.",
     role: "Founder · Engineering",
-    year: "Mapped",
-    status: "Mapped",
+    year: "Mapping",
+    status: "Mapping",
     statusKind: "idle" as const,
     glyph: "interlace" as const,
   },
   {
     n: "03",
     code: "CIVIC",
+    label: "Coordination",
     title: "Coordination OS",
-    audience: "For informal African communities.",
-    body: "The ndichie held a village together without a board meeting. That memory is not lost. We are remembering.",
+    audience: "For African communities and organizations.",
+    body: "I am mapping how communities organize without the board meeting. That memory isn't lost — I am rebuilding it.",
     role: "Founder · Operations",
-    year: "Mapped",
-    status: "Mapped",
+    year: "Mapping",
+    status: "Mapping",
     statusKind: "idle" as const,
     glyph: "cross" as const,
   },
   {
     n: "04",
     code: "TOOLS",
+    label: "Direction",
     title: "Direction Engine",
-    audience: "Navigation for people without a clear path.",
-    body: "Not advice. Direction. The line that runs under every life, made visible to those who stop long enough to read it.",
+    audience: "For young Africans without a clear path.",
+    body: "I am mapping navigation for people without a clear path. Not advice — direction.",
     role: "Founder · Design",
-    year: "Mapped",
-    status: "Mapped",
+    year: "Mapping",
+    status: "Mapping",
     statusKind: "idle" as const,
     glyph: "wave" as const,
   },
@@ -65,8 +69,7 @@ export function Empire() {
             directions={directions.map((d) => ({
               n: d.n,
               code: d.code,
-              title: d.title,
-              status: d.status,
+              label: d.label,
               active: d.statusKind === "lock",
             }))}
           />
@@ -75,8 +78,8 @@ export function Empire() {
             <span className="text-[color:var(--color-solar-gold)]">One line.</span>
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[58ch]">
-            Four directions. One thesis. The work does not announce itself — it
-            moves beneath the surface, the way things that last always do.
+            Four products, one line. The first is in build. The rest are being
+            mapped. This is the arc the client work is funding.
           </p>
         </SectionReveal>
 

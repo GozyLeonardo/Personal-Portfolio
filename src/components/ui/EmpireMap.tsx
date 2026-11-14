@@ -1,8 +1,7 @@
 interface EmpireMapDirection {
   n: string;
   code: string;
-  title: string;
-  status: string;
+  label: string;
   active: boolean;
 }
 
@@ -11,41 +10,50 @@ interface EmpireMapProps {
   className?: string;
 }
 
-const POSITIONS = [
-  { cx: 300, cy: 96 }, // top
-  { cx: 504, cy: 300 }, // right
-  { cx: 300, cy: 504 }, // bottom
-  { cx: 96, cy: 300 }, // left
+const CENTER = { x: 320, y: 320 };
+const NODE_RADIUS = 210;
+const NODE_R = 22;
+
+const NODES = [
+  { cx: 320, cy: 110 }, // top
+  { cx: 530, cy: 320 }, // right
+  { cx: 320, cy: 530 }, // bottom
+  { cx: 110, cy: 320 }, // left
 ];
 
-const LABEL_ANCHOR = ["middle", "start", "middle", "end"] as const;
-const LABEL_DX = [0, 14, 0, -14] as const;
+const TITLE_ANCHOR = ["middle", "start", "middle", "end"] as const;
+const TITLE_DX = [0, 28, 0, -28] as const;
+const TITLE_DY = [-44, -10, 44, -10] as const;
+
+const CODE_ANCHOR = ["middle", "start", "middle", "end"] as const;
+const CODE_DX = [0, 28, 0, -28] as const;
+const CODE_DY = [-28, 6, 28, 6] as const;
 
 export function EmpireMap({ directions, className }: EmpireMapProps) {
   return (
     <svg
-      viewBox="0 0 600 600"
+      viewBox="0 0 640 640"
       className={className}
       role="img"
       aria-label="The four directions of the empire radiating from a single line"
     >
       {/* Interlacing orbital rings */}
       <circle
-        cx="300" cy="300" r="204"
+        cx={CENTER.x} cy={CENTER.y} r={NODE_RADIUS}
         fill="none" stroke="var(--color-line)" strokeWidth="1"
       />
       <circle
-        cx="300" cy="300" r="108"
+        cx={CENTER.x} cy={CENTER.y} r={104}
         fill="none" stroke="var(--color-solar-gold)" strokeWidth="1" opacity="0.5"
       />
 
       {/* Radial connectors — the line that carries each direction */}
       {directions.map((d, i) => {
-        const p = POSITIONS[i];
+        const node = NODES[i];
         return (
           <line
             key={`line-${d.n}`}
-            x1="300" y1="300" x2={p.cx} y2={p.cy}
+            x1={CENTER.x} y1={CENTER.y} x2={node.cx} y2={node.cy}
             stroke={d.active ? "var(--color-solar-gold)" : "var(--color-line)"}
             strokeWidth="1"
             strokeDasharray={d.active ? undefined : "3 5"}
@@ -54,59 +62,61 @@ export function EmpireMap({ directions, className }: EmpireMapProps) {
       })}
 
       {/* Center — chi */}
-      <circle cx="300" cy="300" r="44" fill="var(--color-foundation)" stroke="var(--color-solar-gold)" strokeWidth="1" />
-      <circle cx="300" cy="300" r="4" fill="var(--color-solar-gold)" />
+      <circle
+        cx={CENTER.x} cy={CENTER.y} r={48}
+        fill="var(--color-foundation)" stroke="var(--color-solar-gold)" strokeWidth="1"
+      />
+      <circle cx={CENTER.x} cy={CENTER.y} r={4} fill="var(--color-solar-gold)" />
       <text
-        x="300" y="296" textAnchor="middle"
+        x={CENTER.x} y={CENTER.y - 2} textAnchor="middle"
         fill="var(--color-warm-off-white)"
-        style={{ font: "600 13px var(--font-mono)", letterSpacing: "0.18em" }}
+        style={{ fontFamily: "var(--font-mono)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.18em" }}
       >
         CHI
       </text>
       <text
-        x="300" y="314" textAnchor="middle"
+        x={CENTER.x} y={CENTER.y + 16} textAnchor="middle"
         fill="var(--color-mute)"
-        style={{ font: "400 8px var(--font-mono)", letterSpacing: "0.14em" }}
+        style={{ fontFamily: "var(--font-mono)", fontSize: "8px", letterSpacing: "0.14em" }}
       >
         ONE LINE
       </text>
 
       {/* Four direction nodes */}
       {directions.map((d, i) => {
-        const p = POSITIONS[i];
-        const anchor = LABEL_ANCHOR[i];
-        const dx = LABEL_DX[i];
+        const node = NODES[i];
+        const color = d.active
+          ? "var(--color-solar-gold)"
+          : "var(--color-electric-teal)";
         return (
           <g key={d.n}>
             <circle
-              cx={p.cx} cy={p.cy} r="16"
-              fill="var(--color-foundation)"
-              stroke={d.active ? "var(--color-solar-gold)" : "var(--color-electric-teal)"}
-              strokeWidth="1.5"
+              cx={node.cx} cy={node.cy} r={NODE_R}
+              fill="var(--color-foundation)" stroke={color} strokeWidth="1.5"
             />
             <text
-              x={p.cx} y={p.cy + 3}
+              x={node.cx} y={node.cy + 4}
               textAnchor="middle"
-              fill={d.active ? "var(--color-solar-gold)" : "var(--color-electric-teal)"}
-              style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.1em" }}
+              fill={color}
+              style={{ fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em" }}
             >
               {d.n}
             </text>
             <text
-              x={p.cx + dx} y={p.cy - 26}
-              textAnchor={anchor}
+              x={node.cx + TITLE_DX[i]} y={node.cy + TITLE_DY[i]}
+              textAnchor={TITLE_ANCHOR[i]}
               fill="var(--color-warm-off-white)"
-              style={{ font: "600 14px var(--font-display)" }}
+              style={{ fontFamily: "var(--font-display)", fontSize: "15px", fontWeight: 700 }}
             >
-              {d.title}
+              {d.label}
             </text>
             <text
-              x={p.cx + dx} y={p.cy - 8}
-              textAnchor={anchor}
+              x={node.cx + CODE_DX[i]} y={node.cy + CODE_DY[i]}
+              textAnchor={CODE_ANCHOR[i]}
               fill="var(--color-mute)"
-              style={{ font: "400 9px var(--font-mono)", letterSpacing: "0.16em" }}
+              style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.16em" }}
             >
-              {d.code} · {d.status.toUpperCase()}
+              {d.code}
             </text>
           </g>
         );

@@ -28,10 +28,10 @@ export function About() {
           <TerminalLabel>About</TerminalLabel>
 
           <h2 className="mt-6 font-display text-3xl md:text-5xl leading-tight text-[color:var(--color-warm-off-white)]">
-            They say the soul of Africa is gone.
+            Most African tech is cosplay.
             <br />
             <span className="text-[color:var(--color-solar-gold)]">
-              That is not what my grandfathers carried.
+              I am building the real thing.
             </span>
           </h2>
         </SectionReveal>
@@ -39,21 +39,26 @@ export function About() {
         <SectionReveal delay={0.1}>
           <div className="mt-10 space-y-6 text-lg leading-relaxed text-[color:var(--color-warm-off-white)]">
             <p>
-              I am Lawrence Chigozie Nwuzor. Born December 2001 in Ebonyi,
-              Nigeria — an Izzi indigene of Abarigwe, Ishieke. Computer
-              Engineering graduate. Working from Lagos.
+              I am Lawrence Chigozie Nwuzor — an Izzi indigene of Abarigwe,
+              Ishieke, building from Lagos. Computer engineering, but the degree
+              is not the work.
             </p>
             <p>
-              Ala still holds the dead. Ndichie still gather at the boundary.
-              The chi that walked with my grandfather still walks with me. What
-              was buried did not die — it went underground because the ground
-              itself remembered.
+              In January 2025 I took a beating in Ikwo as a passage rite. Later,
+              men in uniform assaulted me. Fear stopped being a factor. I got
+              more calculative. The past matters for one reason only — it taught
+              me to stop asking permission.
             </p>
             <p>
-              I build the front of a long-arc empire. Trust infrastructure.
-              Direction systems. Coordination tools for Africa and humanity.
-              Spiritually grounded. Technically unassailable. Built to outlast
-              me.
+              Right now I am shipping. Ten live builds — Benlaz, Sparknexis,
+              KUDI, Bodways, Focus Group, Indigent Care, Meskadon, CiasLuxe, The
+              Signal, and ACIM Life. Six more are in build. I am not waiting for
+              a perfect portfolio to prove itself.
+            </p>
+            <p>
+              I am moving client work into owned infrastructure. The client
+              builds fund what I am building for the continent — The Signal and
+              its four directions.
             </p>
             <p className="text-[color:var(--color-solar-gold)] font-display text-2xl md:text-3xl">
               Every line of code I write is a small act of return.
