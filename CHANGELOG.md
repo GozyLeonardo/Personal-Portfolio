@@ -20,3 +20,10 @@ every commit by `.githooks/post-commit`. Newest entries are at the bottom.
   · design/tokens.json
   · next.config.ts
   · …29 more
+- 2026-11-14 — Rewrite site copy in present-continuous voice: blunt diagnosis, evidence-first inventory (`f9bb570`)
+  · CHANGELOG.md
+  · src/app/(main)/home/page.tsx
+  · src/app/(main)/memo/page.tsx
+  · src/components/landing/Gate.tsx
+  · src/components/sections/About.tsx
+  · …6 more
