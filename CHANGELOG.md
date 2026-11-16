@@ -29,3 +29,10 @@ every commit by `.githooks/post-commit`. Newest entries are at the bottom.
   · …6 more
 - 2026-11-15 — chore: log copy rewrite in changelog (`09d8cf8`)
   · CHANGELOG.md
+- 2026-11-16 — Add light/dark mode toggle, fix project links, add Athena + per-page SEO OpenGraph (`bb42003`)
+  · CHANGELOG.md
+  · src/app/(main)/empire/page.tsx
+  · src/app/(main)/give/page.tsx
+  · src/app/(main)/home/page.tsx
+  · src/app/(main)/log/page.tsx
+  · …14 more

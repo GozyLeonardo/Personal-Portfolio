@@ -1,0 +1,33 @@
+---
+title: I Mirrored an 82-Product Catalog
+publishedAt: 2026-11-05
+excerpt: "A client's catalog lived on a vendor site, 82 products deep. I mirrored it into their own storefront — every product, every image, every price — and built the admin panel to manage it."
+coverImage: /images/writing/i-mirrored-an-82-product-catalog/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 13
+---
+
+A company's entire product line should not live on someone else's website.
+
+But that is where it was — 82 products, their images, their prices, all hosted on a vendor's catalog. The company did not own its own storefront. It borrowed one. If the vendor changed a link or raised a fee, the whole catalog went with it.
+
+So I moved it. All of it.
+
+## What I built
+
+A dedicated storefront on Next.js with a Neon Postgres backend. Every one of the 82 products mirrored across — images, pricing, the works. Not a link farm pointing back at the vendor. A real catalog the client owns.
+
+Behind it, an admin panel so the products can be managed without touching code. A new product, a price change, a stock note — all through a dashboard, not a database.
+
+Then the front: a landing page at the root, the full home moved to `/home`, a futuristic preloader, and a light/dark theme toggle that defaults to light because the brand demanded it.
+
+## What broke
+
+The brand kept fighting the theme. The footer wordmark wanted to be orange to match the header, then the header wanted the wordmark the other way. A light/dark toggle is easy until the brand has a strong opinion about which color goes where, and then every element is a negotiation.
+
+## What I learned
+
+Mirroring a catalog is not a copy-paste job. It is a migration — data with owners, images with sources, prices that change weekly. The real deliverable was not the 82 products on a new page. It was the admin panel that makes the catalog the client's, not the vendor's.
+
+Own the storefront, and the products stop being borrowed.

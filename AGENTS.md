@@ -38,6 +38,37 @@ You are an AI agent assisting on this project. These rules are LAW. Violating th
 - Nsibidi-inspired glyphs — section markers
 - Foundation Black as cosmic architecture — the material of the universe
 
+### Blog posts — full standard + series classification
+
+Locked in. Every post follows this, no exceptions.
+
+**Series selection — decide BEFORE writing, every time.** Classify the post first; the series is not an afterthought.
+
+- **Signal & Noise** (`signal-and-noise`) — a build log. The subject is a *specific build/deliverable*: a client project, a product, a tool, an automation. Concrete technical work, code, real errors, real decisions. "What I built. What broke. What I learned."
+- **The Long Becoming** (`the-long-becoming`) — a personal narrative. The subject is the *self / the journey*, even when triggered by a build: ownership and the sovereignty pivot, direction changes, parking/letting go, faith, family legacy, the daily practice, seasons of becoming. "Who I am, told in parts."
+
+Rule of thumb: if the lesson is about the work → Signal & Noise. If the lesson is about Lawrence → The Long Becoming.
+
+**Voice** — founder-direct:
+- First person. Past-tense build-log narrative (the day's work, then the lesson).
+- Diagnose the brutal truth → state what was built → what broke → what was learned.
+- Specifics carry the weight: dates, numbers, named tools, named actions, real errors.
+- No banned words (utilize, leverage, delve, "game-changer", etc.). No emoji. No exclamation marks.
+- Short paragraphs. Two-clause compression.
+
+**Structure** (in order):
+1. Opening diagnosis — the problem as a brutal truth, one or two lines.
+2. What I built — concrete, with code/specifics where it serves.
+3. What broke — the honest failures, the real errors.
+4. What I learned — the elevation, one or two aphoristic lines max.
+
+**Frontmatter**: `title` (I [verb] [specific]), `publishedAt`, `excerpt` (one-sentence specific hook), `coverImage`, `status: published`, `series: signal-and-noise`, `seriesOrder` (next sequential).
+
+**Cover graphics — images only. No typography.**
+- NO text of any kind — no title, no eyebrow, no stat labels, no words.
+- Cosmic African Soul visual only: Foundation Black `#080808` field, the Okavango triangle tessellation (faint gold), Igbo-Ukwu interlacing circles, Solar Gold radial glow.
+- 1280×720 PNG. The visual carries the weight alone; the title/excerpt live in metadata, never in the image.
+
 ## Voice Reference
 
 This site's copy inherits from `components/voices/founder-direct.md` v1.2.0 in the Lawrence-Empire-500M Obsidian vault. The in-repo, always-applied rule file is `.cursor/rules/050-copy-brand.mdc` — **read it before writing any copy, every time, no exceptions.** When writing new copy:

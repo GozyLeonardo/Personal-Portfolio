@@ -1,0 +1,33 @@
+---
+title: I Built a Course in Miracles App for Myself
+publishedAt: 2026-09-20
+excerpt: 'I wanted a workbook that worked offline and did not track me. So I built a local-first PWA for the 365 lessons of A Course in Miracles — and shipped it to Android with Capacitor.'
+coverImage: /images/writing/i-built-a-course-in-miracles-app-for-myself/coverImage.png
+status: published
+series: the-long-becoming
+seriesOrder: 7
+---
+
+The tools I use to work on myself should not be working on me.
+
+A Course in Miracles is a 365-lesson workbook, one lesson a day for a year. The apps that existed wanted accounts, wanted the internet, wanted to know who I was and how often I opened them. I did not want a tracker. I wanted a book that remembered my place. So I built it.
+
+## What I built
+
+A local-first PWA. Everything lives on the device. No account. No cloud. The lessons, the review periods, the place where I left off — all stored locally, available offline, invisible to anyone but me.
+
+The review structure was the tricky part. The course has a specific rhythm — ten lessons, then a review day, then a pattern that shifts as the year unfolds. Getting that structure right meant the app had to understand the course, not just display text.
+
+Then I pushed it to Android with Capacitor, driven by a GitHub Actions workflow. Java 21, Node 22, the Android SDK pinned to a specific version. The icon I redrew until it was right — a minimal lit candle, nothing more.
+
+## What broke
+
+The lesson page kept loading placeholder content instead of the actual lesson. A loading state that never resolved. The navigation worked, the structure worked, but the text was not arriving. That one took the longest — the difference between "the app opens" and "the app actually teaches."
+
+The Capacitor build also demanded a specific Java version I did not have set. Android tooling is picky about its exact versions, and it will tell you so with an opaque error at the worst possible moment.
+
+## What I learned
+
+Build the thing you would actually use, and you will build it differently. When the user is you, the tracking feels like what it is — an intrusion. Local-first is not a technical preference. It is a stance: your practice belongs to you.
+
+A year of daily lessons, and the app sits quietly on my phone, remembering where I stopped, telling no one.

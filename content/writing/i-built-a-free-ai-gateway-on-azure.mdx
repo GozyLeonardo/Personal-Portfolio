@@ -1,0 +1,31 @@
+---
+title: I Built a Free AI Gateway on Azure
+publishedAt: 2026-11-15
+excerpt: "Model providers charge, rate-limit, and disappear. I built one OpenAI-compatible gateway on Azure's always-free tier that routes to whichever provider answers — and it costs nothing at rest."
+coverImage: /images/writing/i-built-a-free-ai-gateway-on-azure/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 18
+---
+
+Every AI call I make routes through someone else's door, and they can close it whenever they want.
+
+That was the problem. Not the cost — the dependency. Each provider was a single point of failure with its own key, its own limits, its own monthly surprise. One gateway that sits in front of all of them and routes to whichever one is healthy, on infrastructure I control, running on a free tier that costs nothing when it is idle. That was the fix.
+
+## What I built
+
+A model-router. One OpenAI-compatible endpoint that accepts a request and sends it to whichever provider is configured and working — OpenRouter, Groq, GitHub Models, whatever answers. Behind it, a health check that reports whether auth is actually configured, so a misconfigured deployment is visible instead of silent.
+
+It runs on Azure Functions, Consumption plan, the always-free tier. Node 22, Functions v4, Windows. When nothing calls it, it costs nothing. When something does, it is a penny or less.
+
+Deploying it was the real fight. Azure CLI login is broken on this machine — the device-code flow never completes. So I deployed through the browser instead, zipping the app and pushing it through the SCM endpoint. The gotcha that ate the most time: the settings API writes to the wrong place. Real app settings have to go through the portal's environment-variables blade, or the function host never sees them.
+
+## What broke
+
+A red-team pass found twelve findings. Most of them I accepted as the design working as intended — a bad key returns 401, a missing provider returns 503, bad JSON returns 400. But the health check revealed the exact gap: auth configured for the router, but no provider keys set, so every real request came back with a configuration error. By design, but it looked like a break until the health endpoint made it explicit.
+
+## What I learned
+
+A gateway is not about saving money. It is about removing the single point of failure. When one provider has an outage, the router just sends the call somewhere else. The dependency does not disappear — but it stops being one door. It becomes a hallway.
+
+And the free tier is not a trick. It is a place to own a piece of your stack for zero dollars, if you are willing to read the portal instead of trusting the CLI.

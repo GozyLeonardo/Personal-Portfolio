@@ -1,0 +1,33 @@
+---
+title: I Built a Family's Digital Home
+publishedAt: 2026-05-29
+excerpt: 'A family asked for a website. What they needed was a place their story could live without disappearing into the feed. I built it with a CMS they could hold, and hardened it like a vault.'
+coverImage: /images/writing/i-built-a-familys-digital-home/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 8
+---
+
+A family's history should not live on a platform that can delete it.
+
+That was the brief, underneath the brief. The request was a website. The need was something sturdier — a digital home where a legacy could sit for decades, owned, not rented. So I built Benlaz as a place the family controls, not a page they visit.
+
+## What I built
+
+A Next.js site backed by Sanity — a real CMS, not a static page. Three content types that map to how a family actually thinks: the people (family members), the moments (a gallery), and the words (a journal). Each one editable without touching code.
+
+On top of that, NextAuth with a proper admin dashboard. The family members who are not engineers can still log in, see the contacts, and manage what goes public. The site is not a monument. It is a living thing.
+
+Then I hardened it. Timing-safe auth so a login can't be timed. Edge middleware to guard the routes. CSP headers. CSRF protection. An XSS fix in the email notifications. I patched eight security holes in one pass, the kind of thing you do not notice until the day you are glad you did.
+
+## What broke
+
+The homepage fought me the entire way. It wanted to be a hero-only page; every navigation change pulled the family grid back in, then hid it again. I reverted the copy once, restored the nav twice, and ended up splitting the whole thing: a hero-only front door, the full navigation behind it. The logo kept flipping between "Benlaz Family" and something generic, and I had to nail it down three times.
+
+Framer Motion's type system did not like my animation variants. The ease tuples needed an explicit cast before TypeScript would stop complaining. Minor, but it stalled every build until I got it right.
+
+## What I learned
+
+A site for a family is not a portfolio piece. It is a responsibility. The security work was not optional polish — it was the point. When the thing you are building has to outlast you, you build it like a vault, not like a flyer.
+
+And a CMS is only as useful as the people who can actually use it. If the family needs a developer to write a memory, the CMS failed.

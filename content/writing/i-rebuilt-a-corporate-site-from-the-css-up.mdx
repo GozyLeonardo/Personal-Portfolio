@@ -1,0 +1,33 @@
+---
+title: I Rebuilt a Corporate Site From the CSS Up
+publishedAt: 2026-11-07
+excerpt: "A corporate ICT firm's site had a broken CSS pipeline and a stuck preloader. I rebuilt it from the stylesheet up — real brand assets, a working contact form, and a preloader that starts on first paint."
+coverImage: /images/writing/i-rebuilt-a-corporate-site-from-the-css-up/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 17
+---
+
+A corporate site where the styles do not load is worse than no site at all.
+
+That was the state of it. The CSS pipeline was broken, so the page rendered half-dressed — content there, styling gone, the whole thing looking like it had been abandoned mid-load. A stuck preloader sat on top of it, trapping visitors on a loading screen that never ended. For an ICT firm, a company that sells technology competence, this was fatal. It told every visitor the firm could not even keep its own front working.
+
+So I rebuilt it from the stylesheet up.
+
+## What I built
+
+First, the broken pipeline. I ripped it out and rebuilt it clean — real brand assets instead of placeholders, the display font swapped, the business branding brightened so it did not read like a government form.
+
+Then the contact form. The old one did not actually work — it was a decoration. I wired it to send, so a lead stopped being a hope and became a message in an inbox.
+
+The preloader was the last stubborn piece. It kept sticking, holding the page hostage. I made it CSS-driven so it starts on first paint — the moment the page begins, the loader begins, and it hands off cleanly instead of blocking the content forever.
+
+## What broke
+
+The font swap changed the whole personality of the page, and it took a minute to get right — a display font carries more weight than people think. And the preloader fix meant rewriting the entrance so it was not tied to a JavaScript event that could fire late or never. The lesson was the same in both: the page has to start on its own, without waiting for a script to give it permission.
+
+## What I learned
+
+A broken site is not a design problem. It is a credibility problem. For a firm selling competence, the front is the first and loudest piece of evidence — and a stuck loading screen says "incompetent" before a single word of copy gets read.
+
+Fix the pipeline before you touch the pixels. Everything else is decoration on a floor that has to hold first.

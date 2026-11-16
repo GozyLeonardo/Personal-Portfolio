@@ -1,0 +1,31 @@
+---
+title: I Built a Solar Store That Sells
+publishedAt: 2026-11-01
+excerpt: 'Solar equipment in Nigeria is sold through markups and guesswork. I built a store that prices it, carts it, and tracks it — panels to the door — with the SEO structured data to match.'
+coverImage: /images/writing/i-built-a-solar-store-that-sells/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 11
+---
+
+You can buy a solar panel in Lagos the way you buy anything else there — through a middleman, with a markup, trusting a guess.
+
+Nobody shows you the real price. Nobody carts it cleanly. Nobody tells you when it will arrive. The whole market runs on relationships and hope, when the product is something as concrete as a panel that turns sunlight into power. It should not feel like a gamble. So I built a store that sells it straight.
+
+## What I built
+
+A solar e-commerce platform. Storefront, cart, checkout, an admin panel behind it. The whole thing — panels, inverters, batteries, kits — priced in the open, carted like a real purchase, tracked to the door.
+
+The stack was Next.js on the app router, with the brand colors wired through CSS custom properties so the whole thing could be themed without hunting hex values across a hundred files.
+
+Then the SEO layer. This was not decoration — a solar store that does not show up when someone searches "solar panels Lagos" does not sell. I added the full structured-data set: Organization, Product, BreadcrumbList, ItemList, and Service schemas, all in JSON-LD. The store does not just exist. It is findable.
+
+## What broke
+
+The colors broke twice before they held. First the dark-mode override half-applied and left a navy badge invisible against a navy background. Then the Tailwind config was referencing variables instead of values and nothing rendered. Each fix peeled back a layer of the same mistake: the design had to survive a theme switch without leaking its own colors.
+
+## What I learned
+
+A store is not a brochure. A brochure can be beautiful and sell nothing. A store has to move a person from "I need this" to "I bought it" without a single break in the chain — price visible, cart working, checkout closing.
+
+And SEO is not a later step. It is the storefront. If the search does not surface you, the store is closed.

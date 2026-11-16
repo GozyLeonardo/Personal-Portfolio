@@ -1,0 +1,37 @@
+---
+title: I Built an AI That Tests Websites Like a Human
+publishedAt: 2026-05-07
+excerpt: 'Manual browser testing does not scale past one person. I built a framework that drives a real browser with a computer-use agent — then ran it against a live store and watched it pass in three browsers.'
+coverImage: /images/writing/i-built-an-ai-that-tests-websites-like-a-human/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 7
+---
+
+A website breaks in ways a person notices in five seconds and a test suite never will.
+
+The button that only works on the second click. The form that clears itself on submit. The checkout that dies when the user's clock is wrong. Unit tests do not catch these. Playwright scripts catch them only if a human already wrote the exact step. The gap between "the test passes" and "a person can actually use this" is where every broken launch lives.
+
+I built Passmark to close that gap.
+
+## What I built
+
+A framework that drives a real browser through a computer-use agent — the same kind of model that clicks and types instead of just predicting text. It navigates, fills forms, and asserts on what it actually sees on screen, not on a selector a developer hand-picked.
+
+The hard part was the AI gateway underneath it. One provider is never enough — OpenAI rate-limits, Anthropic changes an endpoint, a model disappears overnight. So I built the routing first: OpenAI, OpenRouter, and Cloudflare AI Gateway, all behind one interface, with the model swap happening behind the scenes. When gpt-5.4 got flaky, I locked the computer-use mode to gpt-5.5 and kept moving.
+
+Then the compatibility layer. Teams already run Playwright. A testing tool that demands you throw away Playwright is a tool nobody adopts. I wrapped it so a Playwright script and a Passmark flow can share the same browser session.
+
+The proof: I ran it against a live Vercel demo store. It passed in three browsers — Chromium, Firefox, and WebKit. Not a mocked page. A real storefront, driven by an agent, asserting on real state.
+
+## What broke
+
+The screenshots. The AI SDK kept crashing when it tried to capture them — a raw buffer getting fed to something expecting a file path. That one bug ate more time than the entire gateway layer.
+
+And the wait-for-DOM helper. It would crash the whole run if the page reloaded mid-check. A page reload is not an error. It is Tuesday on the modern web. Treating it as a fatal was wrong.
+
+## What I learned
+
+Testing the tool means testing the thing the tool assumes is stable — and the browser is never stable. Every fix came down to the same lesson: absorb the instability, do not pass it upward.
+
+A test that only works on a calm page is not a test. It is a hope.

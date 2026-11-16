@@ -17,7 +17,7 @@ export default function NowPage() {
   return (
     <section className="min-h-[80vh] pt-32 pb-24 px-6 md:px-10">
       <div className="mx-auto max-w-3xl">
-        <TerminalLabel>Now — May 2026</TerminalLabel>
+        <TerminalLabel>Now — November 2026</TerminalLabel>
         <h1 className="mt-6 font-display text-4xl md:text-6xl text-[color:var(--color-warm-off-white)]">
           Currently building.
         </h1>
@@ -26,37 +26,45 @@ export default function NowPage() {
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">01</span>
             <span>
-              Building <strong>Chi</strong> — a WhatsApp-native AI system for
-              people who feel lost. The first product under The Signal. Architecture
-              locked, build in progress.
+              Moving <strong>client work into owned infrastructure</strong>. The
+              model-router is live on Azure&apos;s free tier — one gateway that
+              routes to whichever provider answers. The client builds fund the
+              infrastructure; the infrastructure becomes the products.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">02</span>
             <span>
-              Running <strong>The Build Log</strong> — the public record of the
-              empire&apos;s shipped work: Benlaz, SQC Community, Sparknexis Energy,
-              KUDI, and the in-build Chi. Live builds carry URLs. The rest carry
-              lines.
+              Building <strong>Lagos Corps Connect</strong> — a live build for
+              corps members, running now.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">03</span>
             <span>
-              Holding the <strong>SQC community</strong> on WhatsApp — Nigerian
-              builders moving from zero to first paying client. The work speaks.
+              Building <strong>The Signal&apos;s four directions</strong>. Personal
+              OS is the active build — direction, structure, accountability for
+              one person. Trust Infrastructure, Coordination OS, and the
+              Direction Engine are being mapped.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">04</span>
             <span>
-              Writing and publishing — articles on building from Nigeria, AI
-              orchestration, and what infrastructure actually means when the
-              ground shifts.
+              Running <strong>eleven live builds</strong> — Benlaz, Sparknexis,
+              KUDI, Bodways, Focus Group, Indigent Care, Meskadon, CiasLuxe, The
+              Signal, ACIM Life, and Athena. Six more are in progress.
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">05</span>
+            <span>
+              <strong>Chi</strong> is parked — the architecture is locked, and
+              the build resumes once the infrastructure spine is stable.
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="font-mono text-sm text-[color:var(--color-solar-gold)] mt-1.5">06</span>
             <span>
               Daily — <strong>A Course in Miracles</strong>. Deep blocks. Running.
               The body and the spirit are infrastructure.
@@ -65,7 +73,7 @@ export default function NowPage() {
         </ul>
 
         <p className="mt-16 text-sm text-[color:var(--color-mute)] italic">
-          Last updated May 2026.
+          Last updated November 2026.
         </p>
       </div>
     </section>

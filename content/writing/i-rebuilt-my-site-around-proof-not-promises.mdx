@@ -1,0 +1,63 @@
+---
+title: I Rebuilt My Site Around Proof, Not Promises
+publishedAt: 2026-11-16
+excerpt: 'My site was talking about the soul of Africa while showing nothing concrete. Today I rewrote every page — eleven live builds, six in progress, one blunt thesis: most African tech is cosplay. This is what I built, what broke, and what I learned.'
+coverImage: /images/writing/i-rebuilt-my-site-around-proof-not-promises/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 6
+---
+
+My site was cosplay.
+
+Not the kind I accuse other people of — the polite kind. It talked about a $500T empire and the soul of Africa. It said "every line of code is a small act of return." It stacked aphorisms the way a cathedral stacks stone.
+
+It showed nothing that proved the work was real.
+
+That is the brutal part. I had been writing "most African tech is cosplay — Western software wearing African colours, built by people who have never had to use it." Then I looked at my own front door and realized it was doing the same thing. Cosmic language. No evidence. A talker, not a doer.
+
+Today I rebuilt it.
+
+## The rewrite
+
+I rewrote every page in present-continuous tense. Not "I build" — "I am building." Not "the work will be" — "the work is running." The past shows up in exactly one place: as a lesson, and only when it leads to now.
+
+The blunt thesis moved into the headline. "Most African tech is cosplay. I am building the real thing." No hedge. No sympathy. Name it, then show it.
+
+The vagueness went first. "Ala holds the dead" reads beautiful and says nothing. I cut it. What stayed is the line that carries weight: eleven live builds. Six in progress. Here is the URL, go look.
+
+## The inventory
+
+The copy only works if the numbers are true. So I stopped writing and started scanning — every folder and every file across client work, family lab, and the personal sandbox. Not the folder names. The files inside them.
+
+What I found was not what the site claimed. The site said six ventures. The filesystem said eleven live deployments and six in build, plus a stack of own-product work in various states of progress. Some finished. Some empty folders with a name and nothing else.
+
+Worse — six of the links I had put on the site pointed at stale hashed `.vercel.app` URLs. Per-deployment addresses that die the moment the next build goes out. The real production URLs were sitting one command away, returning 200, and I had linked to the wrong thing.
+
+I fixed all six. I verified all thirteen resolve. Athena — the AI orchestration layer running behind the builds — got added as a live build. Chi stayed parked, because parked is the truth.
+
+## The infrastructure
+
+Then the infrastructure broke my flow, which is what infrastructure does.
+
+The GitHub repo had been renamed. `lawrencenwuzor.com` became `Personal-Portfolio`. GitHub still redirects the old URL, so the pushes kept working — but Vercel's git integration went silent. Every push was landing, and nothing was auto-deploying. I had been deploying by hand and not noticing the gap.
+
+I relinked the remote, reconnected Vercel to the renamed repo, and pushed a real commit to prove it. The deployment fired on its own. That is the difference between "the system works" and "I know the system works."
+
+While I was in there, I found a stale duplicate project on Vercel — the Sparknexis site from before it had a domain, still occupying a slot and a URL. I verified the live domain was attached to the correct project, not the duplicate, and deleted it. Clean.
+
+## The polish
+
+The design is dark first. Foundation Black is the material of the universe — that is not decoration, it is the architecture. But a site needs a daylight register, so I added a light/dark toggle. Same soul on paper: Warm Off-White becomes the field, Foundation Black becomes the ink, the gold and teal darken for contrast.
+
+The one thing that had to survive the switch was the Okavango pattern — the triangle tessellation that runs behind everything. The first light-mode pass dropped it. That is a bug, not a choice. I restored it with the darkened gold so it stays visible on the light field.
+
+Then SEO. Every page had a title and a description and a canonical. Nine pages were leaning on the site-wide OpenGraph fallback — the same image and the same title on every social share. I added per-page OpenGraph to all nine. A shared post about the build log should not say "About this site."
+
+## What I learned
+
+The diagnosis I level at African tech applies to my own front door first. Cosmic language without evidence is just cosplay with better fonts. I was writing about a civilizational build while the proof sat in folders I had not opened in weeks.
+
+Proof is the only voice that carries. Not the vision. Not the aphorism. The URL that returns 200.
+
+Eleven live builds. Six in progress. One thesis. And a site that finally shows the work instead of describing it.

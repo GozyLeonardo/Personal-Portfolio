@@ -1,0 +1,35 @@
+---
+title: I Built a WhatsApp AI Before I Had to Park It
+publishedAt: 2026-05-23
+excerpt: 'The people I was building for do not open websites. They open WhatsApp. So I built Chi there — a LangGraph agent that meets people where they already live. Then the direction changed, and I parked it.'
+coverImage: /images/writing/i-built-a-whatsapp-ai-before-i-had-to-park-it/coverImage.png
+status: published
+series: the-long-becoming
+seriesOrder: 5
+---
+
+The people who need the most help are not on the platforms built to help them.
+
+They are on WhatsApp. One billion people, including most of the people I was building for, live inside that green app. A website is a place they do not go. A WhatsApp conversation is a place they already are. So I built Chi where the people already were, instead of asking them to come to me.
+
+## What I built
+
+Three phases, in order.
+
+Phase one was the WhatsApp layer — the Flow JSONs that power the native widgets, a webhook handler to receive messages, and a client library to send them back. The boring plumbing that everything else sits on.
+
+Phase two was the brain. A LangGraph agent with three sub-agents, each with a job, wrapped in its own security and served through an API. Not one big prompt — three coordinated pieces that can hold a state and carry a conversation forward.
+
+Phase three was the front — a branded landing page and the monorepo build config to ship it. Turbo workspace, lockfiles, the whole deployment shape.
+
+## What broke
+
+The monorepo fought the build. Vercel could not detect it at first — I had to add a root package.json just so the deploy would recognize the workspace. Then the packageManager field, then the lockfile, each one unblocking the next error. It was not the AI that was hard. It was the plumbing around the AI.
+
+## What I learned
+
+Then I parked it. Not because it failed — the architecture was locked and the pieces worked. Because the direction changed. I had decided to own my infrastructure, to stop renting the platform the whole thing depended on. Chi was built for a moment, and the moment moved.
+
+Parking something you built is not failure. It is the cost of seeing clearly. The work is not lost. The agents, the flow, the shape of it — all still there, waiting for the spine to be stable enough to hold it.
+
+Build where the people are. But build on ground you own.

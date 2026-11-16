@@ -1,0 +1,31 @@
+---
+title: I Built the Spine My Builds Run On
+publishedAt: 2026-11-06
+excerpt: 'Every tool I kept building needed the same invisible layer underneath it — models, routing, a dashboard. So I built that layer once, as its own thing. I called it Athena.'
+coverImage: /images/writing/i-built-the-spine-my-builds-run-on/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 16
+---
+
+I kept rebuilding the same invisible floor under every project.
+
+Every tool wanted the same thing: a way to call a model, a way to see what it was doing, a place for the data to live. And every time, I built it fresh, wired to whatever provider was convenient that week, and left it half-documented. The result was not infrastructure. It was a pile of ad-hoc glue I had to re-learn each time.
+
+So I stopped and built the spine once, as its own thing.
+
+## What I built
+
+Athena — the intelligence layer underneath everything else I build. A versioned API so the model calls have one stable surface instead of a dozen. A dashboard so I can see what the system is doing instead of guessing. Neon for the data, so it persists and scales without me babysitting a server.
+
+The point was not the features. The point was the boundary. Athena is where the models, the routing, and the state live — so the products on top do not have to care. A tool that needs a model asks Athena. It does not know or care which provider answers.
+
+## What broke
+
+This one was quiet. No dramatic failure — just the weight of building the thing nobody sees. The first commit is a scaffold that does not demo well. It does not have a hero page or a screenshot. It is the floor, and floors are only noticed when they are missing.
+
+## What I learned
+
+The work nobody sees is the work that lets everything else stand. Every layer I build on top of Athena now is cheaper because the floor already exists. That is what infrastructure means — not a server, not a dashboard, but the accumulated decisions that make the next build faster than the last.
+
+I built the spine so I could stop rebuilding it. That is the whole reason.

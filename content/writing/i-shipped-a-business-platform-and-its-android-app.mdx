@@ -1,0 +1,33 @@
+---
+title: I Shipped a Business Platform and Its Android App
+publishedAt: 2026-10-04
+excerpt: 'Shopkeepers run their whole business from memory. I built KUDI to end that — records sales, knows stock, splits payments — then compiled it to Android and put the APK on the site.'
+coverImage: /images/writing/i-shipped-a-business-platform-and-its-android-app/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 10
+---
+
+A shopkeeper should not have to remember whether they made money today.
+
+But that is how most of them run it. Sales in the head, stock a guess, profit a feeling. By the end of the month, the money is gone and the answer to "where did it go" is a shrug. The tools that could fix this were built for desks, in English, on platforms a Lagos shopkeeper has never opened. So I built KUDI where they already are.
+
+## What I built
+
+A production business-management platform. It records the sale. It knows the stock. It splits a payment when a customer pays part now and part later. It tracks credit. It shows the number — the real one, not the remembered one.
+
+The sign-in is email OTP through Resend, because asking a shopkeeper to remember a password is asking them not to use the tool. One code, one tap, in.
+
+Then the Android app. Not a web wrapper — a real APK, compiled with JDK 21, hosted on the site behind a clean download page. A PWA install prompt for the people who will not download an app but will install from the browser. Every path to the tool covered.
+
+## What broke
+
+Stock deduction. The moment a sale went through, the stock had to come down — and the path between "sale recorded" and "stock subtracted" kept getting it wrong. I audited that one path over and over, because getting stock wrong is worse than not having stock tracking at all. A shopkeeper who trusts the number and finds it wrong will never trust the number again.
+
+The APK build fought me too. The SDK manager path, the Java version, the pnpm lockfile — each one a separate wall before the APK finally compiled.
+
+## What I learned
+
+The tool is not for the people who read documentation. It is for the person who runs a shop and has never installed an app for it. Every friction point — a password, a download link, a loading screen — is a reason to go back to memory.
+
+Build for the memory that is already failing, and you build for millions.
