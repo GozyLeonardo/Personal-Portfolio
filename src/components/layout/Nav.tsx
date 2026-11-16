@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { OrbitalMark } from "@/components/ui/OrbitalMark";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -129,6 +130,7 @@ export function Nav() {
             >
               The Memo
             </Link>
+            <ThemeToggle className="ml-2" />
           </div>
 
           {/* Mobile hamburger */}
@@ -218,6 +220,7 @@ export function Nav() {
                 >
                   The Memo
                 </Link>
+                <ThemeToggle className="ml-3" />
               </motion.div>
             </div>
           </motion.div>

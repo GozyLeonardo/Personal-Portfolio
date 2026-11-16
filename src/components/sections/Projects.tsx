@@ -77,7 +77,7 @@ const live: Venture[] = [
     stack: ["Next.js", "TypeScript"],
     status: "Live",
     statusKind: "live",
-    href: "https://bodways-integrated-hc3e30yhs-gozy-leonardos-projects.vercel.app",
+    href: "https://bodways-integrated-ten.vercel.app",
     external: true,
     glyph: "cross",
   },
@@ -92,7 +92,7 @@ const live: Venture[] = [
     stack: ["Next.js", "TypeScript"],
     status: "Live",
     statusKind: "live",
-    href: "https://focus-group-lrd5k9kxk-gozy-leonardos-projects.vercel.app",
+    href: "https://focus-group-gozy-leonardos-projects.vercel.app",
     external: true,
     glyph: "wave",
   },
@@ -122,7 +122,7 @@ const live: Venture[] = [
     stack: ["Next.js", "TypeScript"],
     status: "Live",
     statusKind: "live",
-    href: "https://meskadon-engineering-services-g6b77ts8s-gozy-leonardos-projects.vercel.app",
+    href: "https://meskadon-engineering-services-gozy-leonardos-projects.vercel.app",
     external: true,
     glyph: "cross",
   },
@@ -137,7 +137,7 @@ const live: Venture[] = [
     stack: ["Astro", "TypeScript"],
     status: "Live",
     statusKind: "live",
-    href: "https://ciasluxe-events-mb3olrmji-gozy-leonardos-projects.vercel.app",
+    href: "https://ciasluxe-events.vercel.app",
     external: true,
     glyph: "wave",
   },
@@ -152,7 +152,7 @@ const live: Venture[] = [
     stack: ["Next.js", "TypeScript"],
     status: "Live",
     statusKind: "live",
-    href: "https://the-signal-site-pbn0uze15-gozy-leonardos-projects.vercel.app",
+    href: "https://the-signal-site-five.vercel.app",
     external: true,
     glyph: "spiral",
   },
@@ -167,16 +167,31 @@ const live: Venture[] = [
     stack: ["React", "Capacitor"],
     status: "Live",
     statusKind: "live",
-    href: "https://acim-life-ntf7bo5hh-gozy-leonardos-projects.vercel.app",
+    href: "https://acim-life.vercel.app",
     external: true,
     glyph: "dot",
+  },
+  {
+    slug: "athena",
+    code: "011",
+    name: "Athena",
+    tagline: "Autonomous intelligence infrastructure.",
+    summary: "The AI orchestration layer behind the builds. Live.",
+    role: "Founder · Engineering",
+    year: "Live",
+    stack: ["AI", "Infrastructure"],
+    status: "Live",
+    statusKind: "live",
+    href: "https://athena-nine-tau.vercel.app",
+    external: true,
+    glyph: "cross",
   },
 ];
 
 const inBuild: Venture[] = [
   {
     slug: "chi",
-    code: "011",
+    code: "012",
     name: "Chi",
     tagline: "Life management via WhatsApp.",
     summary: "For people who feel lost. A WhatsApp-native system that holds the line. The first product under The Signal.",
@@ -190,7 +205,7 @@ const inBuild: Venture[] = [
   },
   {
     slug: "alp-solar",
-    code: "012",
+    code: "013",
     name: "Alp Solar Nigeria",
     tagline: "Solar.",
     summary: "In build.",
@@ -203,7 +218,7 @@ const inBuild: Venture[] = [
   },
   {
     slug: "bluutech",
-    code: "013",
+    code: "014",
     name: "Bluutech Integrated Services",
     tagline: "Integrated services.",
     summary: "In build.",
@@ -216,7 +231,7 @@ const inBuild: Venture[] = [
   },
   {
     slug: "octovia",
-    code: "014",
+    code: "015",
     name: "Octovia Pharmacies",
     tagline: "Pharmacy front.",
     summary: "In build.",
@@ -229,7 +244,7 @@ const inBuild: Venture[] = [
   },
   {
     slug: "pasiey",
-    code: "015",
+    code: "016",
     name: "Pasiey Natural Foods",
     tagline: "Natural foods.",
     summary: "In build.",
@@ -242,7 +257,7 @@ const inBuild: Venture[] = [
   },
   {
     slug: "sheascends",
-    code: "016",
+    code: "017",
     name: "SheAscends",
     tagline: "Women's initiative.",
     summary: "In build.",
@@ -271,7 +286,7 @@ function VentureCard({ v, idx }: { v: Venture; idx: number }) {
 
       <div className="flex items-center justify-between mb-6">
         <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-solar-gold)]">
-          {v.code} / 016
+          {v.code} / 017
         </span>
         <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--color-mute)]">
           <span
@@ -347,7 +362,7 @@ export function Projects() {
           <NsibidiGlyph variant="cross" size={16} animate />
           <SectionIndex current={3} total={6} label="Builds" bearing="072°" />
           <h2 className="mt-6 font-display text-3xl md:text-5xl text-[color:var(--color-warm-off-white)]">
-            Ten live.{" "}
+            Eleven live.{" "}
             <span className="text-[color:var(--color-solar-gold)]">Six in build.</span>
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-mute)] max-w-[52ch]">

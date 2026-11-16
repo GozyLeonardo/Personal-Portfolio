@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   description:
     "The investment thesis: building what shouldn't work, from where it shouldn't. Four directions, one line, drawn from Lagos.",
   alternates: { canonical: "/memo" },
+  openGraph: {
+    title: "The Founder Memo",
+    description: "A four-product empire for the next billion people, drawn from Lagos.",
+    url: "https://lawrencenwuzor.com/memo",
+  },
 };
 
 const directions = [
@@ -213,7 +218,7 @@ export default function MemoPage() {
         <SectionReveal>
           <TerminalLabel className="mt-16">Traction signals</TerminalLabel>
           <h2 className="mt-6 font-display text-3xl text-[color:var(--color-warm-off-white)]">
-            Ten live builds. Six in progress.
+            Eleven live builds. Six in progress.
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-[color:var(--color-mute)]">
             <p>
@@ -222,7 +227,7 @@ export default function MemoPage() {
             </p>
             <ul className="space-y-3">
               {[
-                "Live: Benlaz, Sparknexis Energy, KUDI, Bodways, Focus Group, Indigent Care, Meskadon, CiasLuxe, The Signal, ACIM Life.",
+                "Live: Benlaz, Sparknexis Energy, KUDI, Bodways, Focus Group, Indigent Care, Meskadon, CiasLuxe, The Signal, ACIM Life, Athena.",
                 "In build: Chi, Alp Solar, Bluutech, Octovia Pharmacies, Pasiey Natural Foods, SheAscends.",
                 "The Signal's four directions — one in build, three being mapped.",
                 "Public writing, published on a cadence, not an accident.",

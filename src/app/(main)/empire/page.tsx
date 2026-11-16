@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "The long-horizon vision behind Lawrence Nwuzor's work: four products building digital infrastructure for Africa.",
   alternates: { canonical: "/empire" },
+  openGraph: {
+    title: "Empire",
+    description: "The four directions — one line. The arc the client work is funding.",
+    url: "https://lawrencenwuzor.com/empire",
+  },
 };
 
 export default function EmpirePage() {

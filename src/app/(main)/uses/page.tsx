@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "The tools, hardware, and tech stack Lawrence Nwuzor uses to build production-grade websites and AI systems from Lagos, Nigeria.",
   alternates: { canonical: "/uses" },
+  openGraph: {
+    title: "Uses",
+    description: "The tools, hardware, and stack Lawrence builds with.",
+    url: "https://lawrencenwuzor.com/uses",
+  },
 };
 
 const blocks = [

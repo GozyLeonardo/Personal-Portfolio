@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   description:
     "The living record of what Lawrence Nwuzor has shipped from Lagos. Every commit, logged. No fake case studies.",
   alternates: { canonical: "/log" },
+  openGraph: {
+    title: "The Build Log",
+    description: "Proof of velocity — every commit, logged. No fake case studies.",
+    url: "https://lawrencenwuzor.com/log",
+  },
 };
 
 export default function LogPage() {

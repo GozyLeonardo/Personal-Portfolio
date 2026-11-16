@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "How to support Lawrence Nwuzor's mission of building digital infrastructure for Africa.",
   alternates: { canonical: "/give" },
+  openGraph: {
+    title: "Support the Work",
+    description: "Give toward the builds. Support what Lawrence is building from Lagos.",
+    url: "https://lawrencenwuzor.com/give",
+  },
 };
 
 export default function GivePage() {

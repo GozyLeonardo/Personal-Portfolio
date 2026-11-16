@@ -6,6 +6,7 @@ import { TelemetryStrip } from "@/components/ui/TelemetryStrip";
 import { IgboUkwuGrid } from "@/components/ui/IgboUkwuGrid";
 import { AnimatedHairline } from "@/components/motion/AnimatedHairline";
 import { SectionReveal } from "@/components/motion/SectionReveal";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Gate() {
   return (
@@ -25,15 +26,18 @@ export function Gate() {
             Lawrence Nwuzor
           </span>
         </div>
-        <TelemetryStrip
-          align="start"
-          className="hidden md:flex w-auto"
-          readouts={[
-            { label: "Station", value: "Lagos · NG", status: "lock" },
-            { label: "Chi", value: "Intact", status: "lock" },
-            { label: "Gate", value: "Sealed", status: "lock" },
-          ]}
-        />
+        <div className="flex items-center gap-4">
+          <TelemetryStrip
+            align="start"
+            className="hidden md:flex w-auto"
+            readouts={[
+              { label: "Station", value: "Lagos · NG", status: "lock" },
+              { label: "Chi", value: "Intact", status: "lock" },
+              { label: "Gate", value: "Sealed", status: "lock" },
+            ]}
+          />
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* The threshold */}

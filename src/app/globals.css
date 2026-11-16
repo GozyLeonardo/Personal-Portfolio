@@ -50,6 +50,31 @@
 }
 
 /* ========================================================================
+   LIGHT MODE — COSMIC AFRICAN SOUL, daylight register
+   Dark is canonical (the cosmic field). Light is the same soul on paper:
+   Warm Off-White becomes the field, Foundation Black becomes the ink.
+   ======================================================================== */
+[data-theme="light"] {
+  --color-foundation: #F2EDE4;       /* warm off-white — the soul surface, now the field */
+  --color-surface: #FFFFFF;          /* cards step up to clean white */
+  --color-surface-2: #EAE4D8;       /* hover surface */
+  --color-solar-gold: #9E6200;       /* darkened gold for contrast on light */
+  --color-solar-gold-soft: #C47A00;
+  --color-electric-teal: #007C6B;    /* darkened teal for contrast */
+  --color-warm-off-white: #080808;   /* foundation black becomes the ink */
+  --color-mute: #5A5550;             /* earth-warm grey, readable on light */
+  --color-line: #DAD3C6;             /* hairline borders, warm */
+}
+
+[data-theme="light"] body {
+  background-image: radial-gradient(
+    ellipse 1200px 800px at 50% -200px,
+    color-mix(in oklab, var(--color-solar-gold) 6%, transparent) 0%,
+    transparent 60%
+  );
+}
+
+/* ========================================================================
    BASE
    ======================================================================== */
 

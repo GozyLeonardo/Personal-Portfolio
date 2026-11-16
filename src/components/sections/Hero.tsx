@@ -54,7 +54,7 @@ export function Hero() {
             <p className="mt-6 text-base text-[color:var(--color-mute)] max-w-[54ch]">
               Most African tech is cosplay — Western software wearing African
               colours. I am building the real thing and shipping it live from
-              Lagos. Ten builds are live. More are in progress.
+              Lagos. Eleven builds are live. More are in progress.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -93,7 +93,7 @@ export function Hero() {
                 href="#projects"
                 className="hover:text-[color:var(--color-solar-gold)] transition-colors"
               >
-                +7 more
+                +7 more live
               </a>
             </p>
           </div>

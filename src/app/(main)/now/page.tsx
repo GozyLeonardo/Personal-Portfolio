@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "What Lawrence Nwuzor is currently focused on: active projects, current builds, and what's shipping next from Lagos, Nigeria.",
   alternates: { canonical: "/now" },
+  openGraph: {
+    title: "Now",
+    description: "What Lawrence Nwuzor is building right now, from Lagos.",
+    url: "https://lawrencenwuzor.com/now",
+  },
 };
 
 export default function NowPage() {

@@ -27,3 +27,5 @@ every commit by `.githooks/post-commit`. Newest entries are at the bottom.
   · src/components/landing/Gate.tsx
   · src/components/sections/About.tsx
   · …6 more
+- 2026-11-15 — chore: log copy rewrite in changelog (`09d8cf8`)
+  · CHANGELOG.md

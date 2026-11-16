@@ -50,7 +50,7 @@ export function About() {
               me to stop asking permission.
             </p>
             <p>
-              Right now I am shipping. Ten live builds — Benlaz, Sparknexis,
+              Right now I am shipping. Eleven live builds — Benlaz, Sparknexis,
               KUDI, Bodways, Focus Group, Indigent Care, Meskadon, CiasLuxe, The
               Signal, and ACIM Life. Six more are in build. I am not waiting for
               a perfect portfolio to prove itself.

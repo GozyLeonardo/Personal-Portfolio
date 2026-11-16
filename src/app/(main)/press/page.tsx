@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "Press kit, bio, and media assets for Lawrence Chigozie Nwuzor — web developer and AI automation engineer from Lagos, Nigeria.",
   alternates: { canonical: "/press" },
+  openGraph: {
+    title: "Press Kit",
+    description: "Lawrence Chigozie Nwuzor — press materials and bio.",
+    url: "https://lawrencenwuzor.com/press",
+  },
 };
 
 export default function PressPage() {
