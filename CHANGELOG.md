@@ -36,3 +36,10 @@ every commit by `.githooks/post-commit`. Newest entries are at the bottom.
   · src/app/(main)/home/page.tsx
   · src/app/(main)/log/page.tsx
   · …14 more
+- 2026-11-16 — Add 15 build-log posts across Signal & Noise and The Long Becoming series (`8622040`)
+  · AGENTS.md
+  · CHANGELOG.md
+  · content/writing/i-built-a-course-in-miracles-app-for-myself.mdx
+  · content/writing/i-built-a-familys-digital-home.mdx
+  · content/writing/i-built-a-foundations-digital-front.mdx
+  · …31 more

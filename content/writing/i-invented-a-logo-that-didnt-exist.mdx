@@ -1,0 +1,62 @@
+---
+title: I Invented a Logo That Didn't Exist
+publishedAt: 2026-11-18
+excerpt: "I designed a logo for an engineering firm that was never theirs. The real mark was in the folder the whole time."
+status: published
+series: signal-and-noise
+seriesOrder: 19
+---
+
+A client's brand is not a thing you design. It is a thing you find.
+
+I spent two days building a website for an engineering firm and put a logo on it that I made up. A hexagon. Cyan bleeding into gold. Geometric, futuristic, convincing.
+
+It was not theirs.
+
+Their real mark — an orange gear with white construction silhouettes on black — had been sitting in the project folder the entire time.
+
+## What I got wrong
+
+I did not look. That is the whole failure, and it is not a design failure.
+
+I had a strong idea of what a modern engineering site should look like, and I built toward that idea instead of toward the company in front of me. The site came out beautiful and wrong. Every page carried a logo that belonged to nobody. The gradients and glow said startup demo, not firm you trust with a road.
+
+A prospect would have looked at it and felt nothing. Worse — they would have felt that this firm was pretending.
+
+## What the real mark taught me
+
+I pulled the actual logo and sampled it. Three colours: orange, white, black. No gradient among them. The brand was already decided. My job was to read it.
+
+Then the mark refused to cooperate, and that is where it got interesting.
+
+The gear is drawn for black. Its interior is not a black disc — it is background, transparent, meant to sit on black. Put it on white and the silhouette collapses into a blob.
+
+I tried three ways to force it onto white. Flood-fill the exterior. Mask it by silhouette. Close the gaps and retry. All three failed, and a debug mask proved why: the interior connects to the edge. There is no disc to preserve.
+
+So I stopped fighting it. The nav, the footer, the preloader stay black in both themes. The mark gets the ground it was drawn for, and only the content canvas flips between light and dark. The choice persists across visits, applied before the first paint, so there is no flash of the wrong theme on load.
+
+<Verdict>
+The constraint was the brand. Once I stopped trying to make the mark work on white, the design decided itself.
+</Verdict>
+
+## What the rebuild exposed
+
+Two problems that had nothing to do with colour.
+
+The mobile navigation did not exist. Below 860 pixels the horizontal nav was hidden with nothing in its place. A phone visitor could not reach a single page. The site was live and unusable on the device most people would actually use.
+
+And the deploys had been failing. Every push for twelve days built nothing.
+
+<Signal type="risk">
+The project was pointed at the repository root. The application lived two folders down. Vercel cloned, found no app directory, and stopped. It failed quietly, and the site kept loading, so nobody looked — including me.
+</Signal>
+
+The site only looked healthy because it had been deployed by hand once. Every push after that was a no-op. Twelve days of commits that reached nobody.
+
+## What I learned
+
+The logo was not the bug. Assuming was.
+
+I assumed the brand was mine to decide. I assumed the build worked because the URL loaded. Both cost more than the rebuild, and neither would have survived five minutes of looking.
+
+A brand is not a palette you pick. It is a fact about a company. You either find it or you overwrite it — and overwriting it is not a redesign. It is a lie with good typography.

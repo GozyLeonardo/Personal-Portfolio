@@ -64,10 +64,11 @@ Rule of thumb: if the lesson is about the work → Signal & Noise. If the lesson
 
 **Frontmatter**: `title` (I [verb] [specific]), `publishedAt`, `excerpt` (one-sentence specific hook), `coverImage`, `status: published`, `series: signal-and-noise`, `seriesOrder` (next sequential).
 
-**Cover graphics — images only. No typography.**
+**Cover graphics — images only, no typography, NEVER repeated.**
 - NO text of any kind — no title, no eyebrow, no stat labels, no words.
-- Cosmic African Soul visual only: Foundation Black `#080808` field, the Okavango triangle tessellation (faint gold), Igbo-Ukwu interlacing circles, Solar Gold radial glow.
-- 1280×720 PNG. The visual carries the weight alone; the title/excerpt live in metadata, never in the image.
+- **Every cover must be a UNIQUE composition. Never repeat a design or fall back to a default layout across posts.** Two posts must never share the same visual.
+- Vary the concept per post — different geometry, motif, composition, negative space, palette emphasis — while staying inside Cosmic African Soul (Foundation Black, Solar Gold, Electric Teal, Warm Off-White; Igbo-Ukwu / Uli / Nsibidi grammar). Do not re-use the same "circles + Okavango" default every time.
+- 1280×720 PNG. The visual carries the weight alone; title/excerpt live in metadata, never in the image.
 
 ## Voice Reference
 
