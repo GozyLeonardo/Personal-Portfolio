@@ -41,15 +41,16 @@ export async function generateMetadata({
       url: `https://lawrencenwuzor.com/writing/${slug}`,
       publishedTime: post.publishedAt,
       authors: ["Lawrence Chigozie Nwuzor"],
-      ...(post.coverImage
-        ? { images: [{ url: post.coverImage, width: 1200, height: 630 }] }
-        : {}),
+      images: post.coverImage
+        ? [{ url: post.coverImage, width: 1200, height: 630 }]
+        : [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
       creator: "@GozyLeonardo",
+      images: post.coverImage ? [post.coverImage] : ["/twitter-image.png"],
     },
   };
 }
