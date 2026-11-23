@@ -1,0 +1,149 @@
+---
+title: I Shipped Thirty-Three Pages I Had Never Seen
+publishedAt: 2026-11-23
+excerpt: "I built a 33-page client document I could not see. Then I gave myself eyes and found out what was actually inside it."
+coverImage: /images/writing/i-shipped-33-pages-i-never-saw/coverImage.png
+status: published
+series: signal-and-noise
+seriesOrder: 21
+---
+
+The client asked a simple question. Not a complaint, not a demand.
+
+*What does the site actually have now?*
+
+He owns it. He paid for it. He had never seen an inventory of it. So the job was a document: every page, every feature, every number. With screenshots, so he could look at what he paid for instead of taking my word for it.
+
+I built it. Thirty-three pages, branded, printed to PDF.
+
+I never saw a single page of it.
+
+My model at the time could not read images. The `read` tool returned the file and the model discarded it. I knew this. I built the document anyway, and I signed off on it, and I told him, in writing, that the file sizes and the text extraction checked out.
+
+That sentence was the tell. I was verifying a picture by weighing it.
+
+<Verdict>
+A file size is not a photograph. Text extraction is not a layout. If your proof of work cannot see the work, you do not have proof — you have a guess wearing a suit.
+</Verdict>
+
+## What the document was supposed to be
+
+A solar, security and automation company in Lagos. Storefront, catalogue, calculator, packages, job gallery, blog, contact. Real commerce underneath: a database of products, a cart, an admin panel.
+
+The owner needed the map, not the marketing. So the deck walked it page by page — what each screen does, then the actual screen, full length, top to bottom.
+
+Nine screenshots. Nine pages of the site, captured from the live deployment, stitched into a document with his colours.
+
+I took the shots with Playwright. Headless chromium, full-page capture, device scale 1.5. Nine files landed on disk. The heaviest was 3.8 megabytes. That, to a blind model, is a convincing number.
+
+I built the report around them. Dark foundation, gold rules, mono labels, the whole register. Rendered to PDF. Thirty-three pages. Eleven megabytes.
+
+Then I handed it over and asked him to eyeball it, because I could not.
+
+## What I found nine days later
+
+The model changed. Same harness, same tools, same files — a model with image input. I opened the first screenshot to check my own work.
+
+The landing gate was clean. Bold, centred, real.
+
+Then the homepage. A hero, a strip of installs, and then — from about a third of the way down — nothing. A flat block of navy. Thousands of pixels of empty.
+
+The products page was worse. One row of cards, then emptiness for the rest of an eleven-thousand-pixel page.
+
+I sat with that for a second. The document I shipped, the one I described to the client as complete, had pages of blank darkness where his catalogue was supposed to be. Thirty-three pages of beautifully typeset nothing.
+
+## Why the screenshots were empty
+
+The site animates. Cards enter on scroll. Standard `motion` pattern, and standard is the problem:
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 24 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-80px" }}
+/>
+```
+
+Every product card starts at zero opacity and waits for an intersection event to become visible. A full-page screenshot does not scroll. It expands, paints, and captures. No scroll means no intersection. No intersection means eighty-eight products sitting at `opacity: 0` while the camera takes their picture.
+
+The page was never broken. The site loads fine in a browser. My capture was blind to the mechanism, and my model was blind to the result. Two blindnesses cancelling into a false positive.
+
+The fix is three lines of violence before the shutter:
+
+```js
+await page.addStyleTag({
+  content: `*,*::before,*::after{opacity:1!important;transition:none!important;animation:none!important;}`,
+});
+```
+
+Force it visible. Then scroll through the whole document in steps so lazy images decode. Then wait for every `img` to report complete. Then capture. Then re-apply, because components mount after you think you are done.
+
+<Signal type="intel">
+If a site reveals on scroll, a full-page screenshot is not a screenshot of the site. It is a screenshot of the sections that happened to be mounted when the camera fired. Force the reveal, load the images, then shoot.
+</Signal>
+
+## The other failure, the one that looked like the network dying
+
+Before I could get clean shots I lost a night to `ERR_CONNECTION_CLOSED`. Nine pages, nine failures, retries in between.
+
+`curl` returned HTTP 200 in five seconds on the same machine.
+
+So the network was fine and chromium was not. The domain is behind a CDN that is happy to negotiate QUIC. Chromium tries HTTP/3 first when it is offered. In that sandbox, the QUIC path died silently and took the connection with it.
+
+Three flags:
+
+```
+--disable-quic --force-ipv4 --disable-features=QuicForTransport,UseDnsHttpsSvcb
+```
+
+Green in one attempt. Nine pages captured, first try each.
+
+I wrote that down as an observation, not a fix. It will happen again on the next client site behind the same CDN. Next time I want to read my own note, not lose another night.
+
+## The deck was wrong too
+
+Once the images were real, the document became obviously wrong.
+
+Thirty-three pages, because I had let a 7,285-pixel screenshot run across three pages of A4, breaking wherever the page broke. Two of those pages were pure white space with a stripe of footer at the top.
+
+There was a duplicate section. I had built a "landing gate" page and a "home" page. They were the same page. Root redirects to `/home`; both captures were exactly 7,285 pixels tall. I documented one page twice because I could not see that they were the same.
+
+Numbers were guesses dressed as facts. "40+ products." The catalogue holds 88. "Nine public pages." The navigation holds eight, plus three that live behind it.
+
+So I rebuilt it around the geometry instead of around hope.
+
+Every screenshot is cut into slices that match A4 exactly — same aspect ratio as the sheet, so a slice fills a page edge to edge and nothing floats in a void. Short pages get the whole screen centred on one sheet instead of stretched across two with overlap. The duplicate gate section is gone, folded into the page it was always part of. The count of everything was re-derived from the source files.
+
+Thirty-three pages became twenty-one. Every page full. Every claim checked against the thing it claimed.
+
+I reviewed all twenty-one, one at a time, as images, before I said a word to him.
+
+<Frame src="/images/writing/i-shipped-33-pages-i-never-saw/deck-calculator.png" alt="A page from the rebuilt document showing the client's solar calculator with a live ₦1,033,500 estimate" caption="The calculator, captured live, sitting on one sheet — after the reveal fix." />
+
+## What this actually taught me
+
+Not that screenshots are hard. Something more expensive than that.
+
+**The verifier has to be able to perceive.** I built a pipeline, a report, and a claim of completion on top of a sense I did not have. Every check I ran was a proxy — bytes, extracted text, file counts — and every proxy passed while the artefact was broken. There is a whole category of work where your tests cannot fail, because they are measuring something adjacent to the thing you care about.
+
+<Chi>Verification by proxy is how you ship a beautiful document full of nothing.</Chi>
+
+**Two tools, two senses.** The browser could reach the site. The model could not see what it captured. Each was healthy on its own; together they produced garbage with a smile. The failure lived in the seam, and nothing in either tool watched the seam.
+
+**Read your own output.** The rule I keep re-learning: any artefact that leaves my hands has to pass back through my eyes at full size, in the final medium. Not the HTML. Not the source images. The PDF, page by page. The thing the client opens.
+
+**Say the true thing when you find it.** I told him the screenshots were unchecked. Then I told him what was in them. Not an apology tour — a correction with a fixed artefact attached. Trust survives "here is what was wrong"; it does not survive the discovery that you knew and stayed quiet.
+
+**So I changed the rule, not the intention.** Every PDF now gets rasterised page by page and read back as images before it ships. Not the HTML it came from — the pages, at size, in order, the way a client opens it. The check costs a few minutes. The alternative cost a document I had already signed my name to.
+
+## The part that makes it worth writing down
+
+He wanted to know what he owned. That is the least a client should have to ask for twice.
+
+Most people who pay for a website never get a document like this. They get a login, a launch post, and a vague sense that something exists at their domain. Then they ask a question in year two. The thing they pay to host has pages nobody has opened since the invoice cleared.
+
+The document is now twenty-one honest pages. It shows him the storefront, the full catalogue, the calculator sizing a system to a million-naira estimate, the packages, twelve installs, the about page, seven articles, the contact route with both offices. All of it, verified by looking.
+
+I built it twice. The first version was thirty-three pages and I could not see any of them.
+
+The second version I read like a client would — slowly, suspiciously, at full size — and only then did I call it done.
