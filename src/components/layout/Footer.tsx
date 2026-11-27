@@ -13,6 +13,7 @@ const linkGroups = [
       { href: "/projects", label: "Projects" },
       { href: "/writing", label: "Writing" },
       { href: "/empire", label: "Empire" },
+      { href: "/privacy", label: "Privacy" },
     ],
   },
   {
