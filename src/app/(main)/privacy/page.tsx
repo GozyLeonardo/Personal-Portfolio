@@ -185,9 +185,10 @@ const sections = [
           All scheduler data is stored on a private server we administer.
           Content and account records live in a PostgreSQL database, background
           job state in Redis and Temporal, and search indexes in Elasticsearch.
-          Tokens and credentials are encrypted at rest and the server&apos;s
-          configuration files are restricted to the operating-system user that
-          runs the application.
+          OAuth access and refresh tokens are encrypted at rest with
+          AES-256-GCM. The encryption key stays on the same server, in a
+          configuration file restricted to the operating-system user that runs
+          the application.
         </p>
         <p>
           Data is transmitted over HTTPS. We do not store data on third-party
